@@ -1,0 +1,308 @@
+﻿@using BTC.Model.View
+@using BTC.Common.Session;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Bitcoin Finans</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/css/toastr")
+    @{
+        CurrentUserModel currentUser = SessionVariables.User;
+        if (ViewBag.SelectPage == null)
+        {
+              ViewBag.SelectPage = "ana-sayfa";
+        }
+    }
+</head>
+<body>
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="select-page" value="@ViewBag.SelectPage">
+
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href="~/ana-sayfa">
+                    <h3 class="logo"><img src="/assets/images/logo.png" alt="logo" />BTC Finans</h3>
+                </a>
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="box-account">
+                <div class="row m-0">
+                    <div class="col-md-3 p-0 box-avatar">
+                        <img src="/assets/images/avatar.png" alt="avatar" />
+                    </div>
+                    <div class="box-txt-account col-md-9 p-0">
+                        @if (currentUser != null)
+                        {
+                        <div>
+                            <p> Hoşgeldiniz - @currentUser.FullName </p>
+
+                            @if (currentUser.IsAdmin)
+                            {
+                                <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git - </a>
+                            }
+                            <a href="~/cikis-yap"> Çıkış</a>
+
+                        </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <p>Üyeliğiniz var mı?</p>
+                                <a href="~/giris-yap">Giriş Yap</a> yada <a target="_blank" href="~/yeni-uyelik-olustur">Kayıt Ol</a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="box-list">
+                <p class="sub-title">Dashboard</p>
+                <ul class="list-unstyled components">
+                    <li class="ana-sayfa">
+                        <a href="~/ana-sayfa"><i class="fas fa-file-archive"></i> Ana Sayfa</a>
+                    </li>
+                    <li class="makaleler">
+                        <a href="~/blog"><i class="fas fa-pen-nib"></i>Blog</a>
+                    </li>
+                    @if (currentUser != null && (currentUser.IsWriter || currentUser.IsAdmin))
+                    {
+                        <li class="makalelerim">
+                            <a href="~/makalelerim"><i class="fas fa-pen"></i>Makalelerim</a>
+                        </li>
+                        <li class="yeni-makale">
+                            <a href="~/yeni-makale-ekle"><i class="fas fa-plus"></i>Yeni Makale Ekle</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+
+            @if (currentUser != null && (currentUser.IsSupplier || currentUser.IsAdmin))
+            {
+                <div class="box-list">
+                    <p class="sub-title">Tedarik</p>
+                    <ul class="list-unstyled components">
+                        <li class="urunler">
+                            <a href="~/urunler"><i class="fas fa-arrow-right"></i>Ürünler</a>
+                        </li>
+                        @if (currentUser != null && (currentUser.IsWriter || currentUser.IsAdmin))
+                        {
+                    <li class="urunlerim">
+                        <a href="~/urunlerim"><i class="fas fa-server"></i>Ürünlerim</a>
+                    </li>
+                    <li class="yeni-urun">
+                        <a href="~/yeni-urun-ekle"><i class="fas fa-plus"></i>Yeni Ürün Ekle</a>
+                    </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <div class="box-list">
+                <p class="sub-title">Biz Kimiz</p>
+                <ul class="list-unstyled components">
+                    <li class="hakkimizda">
+                        <a href="~/hakkimizda"><i class="fas fa-user-friends"></i>Hakkımızda</a>
+                    </li>
+                    <li class="iletisim">
+                        <a href="~/iletisim"><i class="far fa-envelope"></i>İletişim</a>
+                    </li>
+                </ul>
+            </div>
+
+            @if (currentUser != null)
+            {
+                <div class="box-sign-up">
+                    <label class="label control-label" onclick="logoutUser()">Çıkış Yap</label>
+                </div>
+            }
+            else
+            {
+                <div class="box-sign-up">
+                    <a target="_blank" href="~/yeni-uyelik-olustur">Kayıt Ol</a>
+                </div>
+            }
+
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid top-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                </button>
+            </div>
+
+            <div id="root">
+
+            </div>
+        </nav>
+
+        <div class="box-slideshow">
+
+            <div id="content">
+                @RenderBody()
+
+                <footer>
+                    <div class="back-img"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3>BTC Finans</h3>
+                                <p>
+                                    Criptoso ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore agna aliquam erat .
+                                    wisi enim ad minim veniam, quis tation. sit amet, consec tetuer. ipsum dolor sit amet, consectetuer adipiscing.ipsum dolor sit .
+                                </p>
+                            </div>
+                            <div class="col-lg-3">
+                                <h3>Recent Post</h3>
+
+                                <div class="footer-post">
+                                    <span>14/06/2016</span>
+                                    <h4>Crisis Bitcoi Down</h4>
+                                    <p><i class="fas fa-user"></i> by Admin <i class="fas fa-comments"></i>28</p>
+                                </div>
+
+                                <div class="footer-post">
+                                    <span>14/06/2016</span>
+                                    <h4>Why Buy Crypto</h4>
+                                    <p><i class="fas fa-user"></i> by Admin <i class="fas fa-comments"></i>28</p>
+                                </div>
+
+                                <div class="footer-post">
+                                    <span>14/06/2016</span>
+                                    <h4>Crypto New Entry</h4>
+                                    <p><i class="fas fa-user"></i> by Admin <i class="fas fa-comments"></i>28</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 links">
+                                <h3>Useful Links</h3>
+                                <ul>
+                                    <li>About</li>
+                                    <li>FAQ</li>
+                                    <li>Our Team</li>
+                                    <li>Services</li>
+                                    <li>Contact Us</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3">
+                                <h3>Newsletter</h3>
+                                <div class="newsletter-bx">
+                                    <form role="search" method="post">
+                                        <div class="input-group">
+                                            <input name="news-letter" class="form-control" placeholder="ENTER YOUR EMAIL" type="text">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="site-button"><i class="far fa-paper-plane"></i></button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="social">
+                                    <ul>
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-box-info">
+                            <div class="col-md-3 block-info">
+                                <div class="box-info-footer">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="col-md-8 p-0">
+                                            <h3>Address</h3>
+                                            <p>No.123 Chalingt Gates, New York</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 block-info">
+                                <div class="box-info-footer">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="fas fa-mobile-alt"></i>
+                                        </div>
+                                        <div class="col-md-8 p-0">
+                                            <h3>Phone</h3>
+                                            <p>+41 555 844 9585 <br />+41 555 844 9585</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 block-info">
+                                <div class="box-info-footer">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="fas fa-fax"></i>
+                                        </div>
+                                        <div class="col-md-8 p-0">
+                                            <h3>Fax</h3>
+                                            <p>(123) 123-4567 <br />(123) 123-4567 </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 block-info">
+                                <div class="box-info-footer">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="fas fa-at"></i>
+                                        </div>
+                                        <div class="col-md-8 p-0">
+                                            <h3>Email</h3>
+                                            <p>info@support.com <br /> info@support.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-copyright">
+                        <p class="copy">
+                            © @DateTime.Now.Year Bitcoin Finans - ALL RIGHTS RESERVED
+                        </p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div id="back-to-top">
+            <a class="top arrow" href="#top">
+                <i class="fa fa-angle-up"></i>
+                <span>TOP</span>
+            </a>
+        </div>
+        <div class="md-overlay"></div>
+        <hr />
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js/toastr")
+    @Scripts.Render("~/bundles/theme")
+    @Scripts.Render("~/bundles/js/global")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,14 @@
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\BTC.Core.dll.config
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\BTC.Core.dll
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\BTC.Core.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\Dapper.dll
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\EntityFramework.dll
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\Dapper.xml
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\EntityFramework.xml
+C:\WorkSpaces\BTC\BTC\BTC.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.csproj.CoreCompileInputs.cache
+C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.csproj.CopyComplete
+C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.dll
+C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.csprojAssemblyReference.cache

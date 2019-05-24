@@ -1,0 +1,63 @@
+﻿
+
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BTC Finans Panel - Giriş Yap</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    @*@Styles.Render("~/Content/css")*@
+    @Styles.Render("~/Content/css/vendor")
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/css/toastr")
+</head>
+<body class="bg-dark">
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="index.html">
+                        <img class="align-content" src="~/Content/images/logo.png" alt="">
+                    </a>
+                </div>
+                <div class="login-form">
+                    <form>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="UserName" name="UserName" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Şifre</label>
+                            <input type="password"  id="Password" name="Password"class="form-control" placeholder="Şifre">
+                        </div>
+                        <div class="checkbox">
+                            <label class="pull-right">
+                                <a href="#">Şifreni mi unuttun?</a>
+                            </label>
+                        </div>
+                        <button type="button" onclick="loginUser()" class="btn btn-success btn-flat m-b-30 m-t-30">Giriş</button>
+                        <div class="register-link m-t-15 text-center">
+                            <p>Hesabınız yok mu? <a href="#">Kayı Olun!</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js/toastr")
+    @Scripts.Render("~/bundles/js/global")
+    @Scripts.Render("~/bundles/js/user-operation")
+</body>
+</html>

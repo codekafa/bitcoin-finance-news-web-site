@@ -1,0 +1,53 @@
+﻿@using BTC.Model.Entity;
+@{
+    ViewBag.Title = "Site Ayarları";
+}
+
+@model SiteSettings
+
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <form id="siteSettingForm" name="siteSettingForm" method="POST" novalidate="">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Site Bilgileri</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <input type="hidden" id="ID" name="ID" value="@Model.ID">
+                        <div class="form-group">
+                            <label class=" form-control-label">Site Başlığı</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-header"></i></div>
+                                <input type="text" id="SiteTitle" name="SiteTitle" placeholder="Text" value="@Model.SiteTitle" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Anahtar Kelimeler</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                                <input type="text" id="SiteKeywords" name="SiteKeywords" placeholder="Text" value="@Model.SiteKeywords" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Site Açıklaması</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
+                                <textarea class="form-control" rows="5" id="SiteDescription" name="SiteDescription">@Model.SiteDescription</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="updateSiteSettings()">
+                            <i class="fa fa-dot-circle-o"></i> Kaydet
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/js/site-setting")
+}

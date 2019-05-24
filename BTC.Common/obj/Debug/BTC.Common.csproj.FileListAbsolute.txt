@@ -1,0 +1,16 @@
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Common.dll
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Common.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Core.dll
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Model.dll
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\Dapper.dll
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Core.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Core.dll.config
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Model.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\Dapper.xml
+C:\WorkSpaces\BTC\BTC\BTC.Common\obj\Debug\BTC.Common.csprojAssemblyReference.cache
+C:\WorkSpaces\BTC\BTC\BTC.Common\obj\Debug\BTC.Common.csproj.CoreCompileInputs.cache
+C:\WorkSpaces\BTC\BTC\BTC.Common\obj\Debug\BTC.Common.csproj.CopyComplete
+C:\WorkSpaces\BTC\BTC\BTC.Common\obj\Debug\BTC.Common.dll
+C:\WorkSpaces\BTC\BTC\BTC.Common\obj\Debug\BTC.Common.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Repository.dll
+C:\WorkSpaces\BTC\BTC\BTC.Common\bin\Debug\BTC.Repository.pdb

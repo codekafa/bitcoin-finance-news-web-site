@@ -1,0 +1,14 @@
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\BTC.Repository.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\BTC.Repository.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\BTC.Core.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\BTC.Model.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\Dapper.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\BTC.Core.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\BTC.Core.dll.config
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\BTC.Model.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\Dapper.xml
+C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.csprojAssemblyReference.cache
+C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.csproj.CoreCompileInputs.cache
+C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.csproj.CopyComplete
+C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.pdb

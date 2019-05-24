@@ -1,0 +1,14 @@
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\BTC.Model.dll
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\BTC.Model.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\BTC.Core.dll
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\Dapper.dll
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\BTC.Core.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\BTC.Core.dll.config
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\Dapper.xml
+C:\WorkSpaces\BTC\BTC\BTC.Model\obj\Debug\BTC.Model.csprojAssemblyReference.cache
+C:\WorkSpaces\BTC\BTC\BTC.Model\obj\Debug\BTC.Model.csproj.CoreCompileInputs.cache
+C:\WorkSpaces\BTC\BTC\BTC.Model\obj\Debug\BTC.Model.csproj.CopyComplete
+C:\WorkSpaces\BTC\BTC\BTC.Model\obj\Debug\BTC.Model.dll
+C:\WorkSpaces\BTC\BTC\BTC.Model\obj\Debug\BTC.Model.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\BTC.Setting.dll
+C:\WorkSpaces\BTC\BTC\BTC.Model\bin\Debug\BTC.Setting.pdb

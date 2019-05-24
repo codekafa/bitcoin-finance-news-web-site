@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Üyelik Oluştur - Bitcoin Finans</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/css/toastr")
+</head>
+<body class="login-body">
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="content-logo-lgi">
+                <a href="~/ana-sayfa">
+                    <h3 class="logo"><img src="assets/images/logo.png" alt="logo" /><span>BTC Finans</span></h3>
+                </a>
+            </div>
+            <div class="container-fluid">
+                <!-- Generate Crypto Value Dinamicaly -->
+
+                <div id="root" class="box-log-reg"></div>
+            </div>
+        </nav>
+        <!-- Page Content  -->
+        <div id="login" class="register-form d-flex flex-row justify-content-center align-items-center">
+            <div class="box-info-reg col-4 col-lg-4 align-self-center">
+                <div class="sign-up-info mobile-off">
+                    <div class="sign-info-page">
+                        <h3>Neden VİP üye olmalıyım?</h3>
+
+                        <ul class="seperator">
+                            <li>
+                                <img src="assets/images/news.png" alt="" />
+                                <p> VİP üyeler sitemizin sunacağı avantajlardan direk olarak yararlanma hakkına sahiptir.</p>
+                            </li>
+                            <li>
+                                <img src="assets/images/user.png" alt="" />
+                                <p> VİP üyeler sistemimi içerisinde hesaplama yöntemlerini kullanabilir.</p>
+                            </li>
+                            <li>
+                                <img src="assets/images/privacy.png" alt="" />
+                                <p> VİP üyeler kendi tedarik malzemeleri ile ilgili ilanlar yayınlayabilir.</p>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-login registration col-4 col-lg-4 align-self-center">
+
+                <div class="title-form"><h3 class="reg-title">Bitcoin Finans' a Üye Ol</h3></div>
+
+                <form name="loginForm" method="POST" autocomplete="off">
+
+                    <div class="login-main-form">
+                        <div class="row">
+                            <div class="col-6 col-lg-6">
+                                <input id="FirstName" class="input-stl" autocomplete="off" name="FirstName" placeholder="Ad" type="text" required="">
+                            </div>
+                            <div class="col-6 col-lg-6">
+                                <input id="LastName" class="input-stl" autocomplete="off" name="LastName" placeholder="Soy Ad" type="text" required="">
+                            </div>
+                        </div>
+
+                        <input id="Phone" class="input-stl phoneMask" autocomplete="off" name="Phone" placeholder="Telefon" type="tel" required="">
+
+                        <input id="Email" class="input-stl" autocomplete="off" name="Email" placeholder="Email" type="email" required="">
+
+                        <input id="Password" class="input-stl" autocomplete="off" name="Password" placeholder="Şifre" type="password" required="">
+
+                        <input id="PasswordAgain" class="input-stl" autocomplete="off" name="PasswordAgain" placeholder="Şifre Tekrar" type="password" required="" maxlength="20">
+
+                        <div class="login-more row">
+                            <div class="login-more-forgot register-policy">
+                                <input type="checkbox" class="e-cb-input policy" id="IsVip" name="IsVip">
+                                <label class="policy-terms" id="lbl-IsVip" name="lbl-IsVip" for="IsVip">
+                                    VİP üyelik avantajlarından yararlanmak istiyorum.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="login-btn-wrapp">
+                            <button automation-id="login-sts-btn-sign-in" type="button" onclick="registerUser()">Kayıt Ol</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="login"  style="display:none" class="register-form sms-approve d-flex flex-row justify-content-center align-items-center">
+            <div class="box-info-reg col-4 col-lg-4 align-self-center">
+
+            </div>
+
+            <div class="box-login registration col-4 col-lg-4 align-self-center">
+
+                <div class="title-form"><h3 class="reg-title">Bitcoin Finans' a Üye Olmana Çok Az Kaldı.</h3></div>
+
+                <form name="smsForm" method="POST" autocomplete="off">
+
+                    <div class="login-main-form">
+                        <input id="SmsCode" class="input-stl" autocomplete="off" name="SmsCode" placeholder="Doğrulama Kodu" type="text" required="">
+                        <div class="login-btn-wrapp">
+                            <button automation-id="login-sts-btn-sign-in" type="button" onclick="sendSmsAgain()">Tekrar Gönder</button>
+                            <button automation-id="login-sts-btn-sign-in" type="button" onclick="approveSms()">Doğrula</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="login" style="display:none" class="register-form email-approve d-flex flex-row justify-content-center align-items-center">
+            <div class="box-info-reg col-4 col-lg-4 align-self-center">
+
+            </div>
+
+            <div class="box-login registration col-4 col-lg-4 align-self-center">
+
+                <div class="title-form"><h3 class="reg-title">Bitcoin Finans' a Üye Olmana Çok Az Kaldı.</h3></div>
+
+                <form name="smsForm" method="POST" autocomplete="off">
+
+                    <div class="login-main-form">
+                        <label class="policy-terms" id="lbl" name="lbl" for="">
+                            Mail adresine gönderilen doğrulama linki üzerinden hesabınızı doğrulayabilirsiniz.
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/theme")
+    @Scripts.Render("~/bundles/js/toastr")
+    @Scripts.Render("~/bundles/js/global")
+    @Scripts.Render("~/bundles/js/user-operation")
+
+</body>
+</html>
