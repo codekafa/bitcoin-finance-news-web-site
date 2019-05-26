@@ -47,7 +47,8 @@ namespace BTC
            "~/Scripts/Application/UserOperation/user-operation.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/global").Include(
-         "~/Scripts/Application/Global/app-global.js"));
+         "~/Scripts/Application/Global/app-global.js",
+         "~/Scripts/jquery.mask.min.js"));
 
 
             bundles.Add(new StyleBundle("~/bundles/css/toastr").Include(

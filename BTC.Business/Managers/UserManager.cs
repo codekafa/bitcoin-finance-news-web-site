@@ -3,6 +3,7 @@ using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Repository;
+using BTC.Setting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,11 +59,11 @@ namespace BTC.Business.Managers
         {
             CurrentUserModel result = new CurrentUserModel();
             result.CurrentUser = user;
-            result.Roles = _userRoleRepo.GetByCustomQuery("select * from UserRoleRels where UserID = UserID", new { UserID = user.ID }).ToList();
+            result.Roles = _userRoleRepo.GetByCustomQuery("select * from UserRoleRels where UserID = @UserID", new { UserID = user.ID }).ToList();
             return result;
         }
 
-        public ResponseModel ValidateUpdateProfileUser(Users user)
+        public ResponseModel ValidateUpdateProfileUser(UpdateUserModel user)
         {
             ResponseModel result = new ResponseModel();
 
@@ -74,10 +75,15 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             return result;
         }
-        public ResponseModel UpdateProfileUser(Users user, HttpPostedFileBase profile_photo)
+        public ResponseModel UpdateProfileUser(UpdateUserModel user, HttpPostedFile profile_photo)
         {
             ResponseModel result = ValidateUpdateProfileUser(user);
+
+            if (!result.IsSuccess)
+                return result;
+
             var db_user = _userRepo.GetByID(user.ID);
+
             //image operations
             string profile_path = null;
             if (profile_photo != null)
@@ -99,6 +105,20 @@ namespace BTC.Business.Managers
             else
                 result.Message = "Profil bilgileri başarı ile güncellenmiştir.";
 
+            return result;
+        }
+
+        public UserRoleRels CreateUserRoleRel(EnumVariables.Roles roleType, int user_id)
+        {
+            UserRoleRels result = new UserRoleRels();
+            result.ID = _userRoleRepo.Insert(new UserRoleRels() { RoleID = (int)roleType, UserID = user_id });
+            return result;
+        }
+
+        public ResponseModel RemoveUserRoleRel(UserRoleRels rel)
+        {
+            ResponseModel result = new ResponseModel();
+            result.IsSuccess = _userRoleRepo.Delete(rel); ;
             return result;
         }
 

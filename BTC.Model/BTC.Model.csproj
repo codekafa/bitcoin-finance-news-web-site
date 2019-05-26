@@ -62,6 +62,7 @@
     <Compile Include="View\PasswordChangeModel.cs" />
     <Compile Include="View\PostModel.cs" />
     <Compile Include="View\RegisterUserModel.cs" />
+    <Compile Include="View\UpdateUserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Core\BTC.Core.csproj">

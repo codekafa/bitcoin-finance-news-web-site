@@ -87,3 +87,5 @@ C:\WorkSpaces\BTC\BTC\BTC\bin\BTC.Common.dll
 C:\WorkSpaces\BTC\BTC\BTC\bin\BTC.Business.pdb
 C:\WorkSpaces\BTC\BTC\BTC\bin\BTC.Repository.pdb
 C:\WorkSpaces\BTC\BTC\BTC\bin\BTC.Common.pdb
+C:\WorkSpaces\BTC\BTC\BTC\bin\BTC.Setting.dll
+C:\WorkSpaces\BTC\BTC\BTC\bin\BTC.Setting.pdb

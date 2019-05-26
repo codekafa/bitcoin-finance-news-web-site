@@ -1,0 +1,94 @@
+﻿@using BTC.Model.View
+@model UpdateUserModel
+
+@{
+    ViewBag.Title = "Profilim";
+}
+
+<div class="container box-content-info">
+    <div class="container-fluid container-top-padding">
+        <div class="col-md-12">
+            <form name="profile-form" class="profile-form" method="POST" enctype="multipart/form-data">
+                <div class=" form-group col-6 col-lg-6">
+                    <label for="FirstName">Ad *</label>
+                    <input id="FirstName" class="form-control" name="FirstName" placeholder="Ad" type="text" value="@Model.FirstName" required="">
+                </div>
+
+                <div class=" form-group  col-6 col-lg-6">
+                    <label for="LastName">Soyad *</label>
+                    <input id="LastName" class="form-control" name="LastName" placeholder="Soy Ad" type="text" value="@Model.LastName" required="">
+                </div>
+
+                <div class="form-group col-6 col-lg-6">
+                    <label for="Phone">Telefon</label>
+                    <input id="Phone" class="form-control phoneMask" name="Phone" disabled="disabled" value="@Model.Phone" placeholder="Telefon" type="tel">
+                </div>
+
+                <div class="form-group col-6 col-lg-6">
+                    <label for="Email">Email</label>
+                    <input id="Email" class="form-control" disabled="disabled" name="Email" placeholder="Email" type="email" value="@Model.Email">
+                </div>
+
+                <div class="form-group col-6 col-lg-6">
+                    <label for="Facebook">Facebook</label>
+                    <input id="Facebook" class="form-control" name="Facebook" placeholder="Facebook Adres" value="@Model.Facebook" type="text">
+                </div>
+
+                <div class="form-group col-6 col-lg-6">
+                    <label for="Instagram">Instagram</label>
+                    <input id="Instagram" class="form-control" name="Instagram" placeholder="Facebook Adres" value="@Model.Instagram" type="text">
+                </div>
+
+                <div class="form-group col-6 col-lg-6">
+                    <label for="Linkedin">Linkedin</label>
+                    <input id="Linkedin" class="form-control" name="Linkedin" placeholder="Linkedin Adres" value="@Model.Linkedin" type="text">
+                </div>
+
+                <div class="form-group col-6 col-lg-6">
+                    <label for="ProfilePhotoUrl">Profil Fotoğrafı</label>
+                    <input id="ProfilePhotoUrl" class="form-control" name="ProfilePhotoUrl" placeholder="" type="file">
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <label for="Summary">Profil özeti</label>
+                    <textarea id="Summary" class="form-control" name="Summary"> @Model.Summary  </textarea>
+                </div>
+
+                <div class="">
+                    <button class="btn btn-primary" type="button" onclick="updateUser()">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/js/user-operation")
+
+
+@section scripts{
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#profile-form').on('submit', function (e) {
+                var dat = new FormData($('#profile-form').get(0));
+                e.preventDefault();
+                $.ajax({
+                    data: dat,
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    url: '/Profile/updateProfile',
+                    success: function (d) {
+                        alertResponse(data);
+                    }
+                });
+            });
+        });
+
+
+
+    </script>
+}

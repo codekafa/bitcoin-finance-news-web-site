@@ -15,7 +15,7 @@
         CurrentUserModel currentUser = SessionVariables.User;
         if (ViewBag.SelectPage == null)
         {
-              ViewBag.SelectPage = "ana-sayfa";
+            ViewBag.SelectPage = "ana-sayfa";
         }
     }
 </head>
@@ -48,16 +48,16 @@
                     <div class="box-txt-account col-md-9 p-0">
                         @if (currentUser != null)
                         {
-                        <div>
-                            <p> Hoşgeldiniz - @currentUser.FullName </p>
+                            <div>
+                                <p> Hoşgeldiniz - @currentUser.FullName </p>
 
-                            @if (currentUser.IsAdmin)
-                            {
-                                <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git - </a>
-                            }
-                            <a href="~/cikis-yap"> Çıkış</a>
+                                @if (currentUser.IsAdmin)
+                                {
+                                    <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git - </a>
+                                }
+                                <a href="~/cikis-yap"> Çıkış</a>
 
-                        </div>
+                            </div>
                         }
                         else
                         {
@@ -102,12 +102,12 @@
                         </li>
                         @if (currentUser != null && (currentUser.IsWriter || currentUser.IsAdmin))
                         {
-                    <li class="urunlerim">
-                        <a href="~/urunlerim"><i class="fas fa-server"></i>Ürünlerim</a>
-                    </li>
-                    <li class="yeni-urun">
-                        <a href="~/yeni-urun-ekle"><i class="fas fa-plus"></i>Yeni Ürün Ekle</a>
-                    </li>
+                            <li class="urunlerim">
+                                <a href="~/urunlerim"><i class="fas fa-server"></i>Ürünlerim</a>
+                            </li>
+                            <li class="yeni-urun">
+                                <a href="~/yeni-urun-ekle"><i class="fas fa-plus"></i>Yeni Ürün Ekle</a>
+                            </li>
                         }
                     </ul>
                 </div>
@@ -127,9 +127,22 @@
 
             @if (currentUser != null)
             {
-                <div class="box-sign-up">
-                    <label class="label control-label" onclick="logoutUser()">Çıkış Yap</label>
+
+                <div class="box-list">
+                    <p class="sub-title">Profilm</p>
+                    <ul class="list-unstyled components">
+                        <li class="urunler">
+                            <a href="~/profilim"><i class="fas fa-user "></i>Profilim</a>
+                        </li>
+                        <li class="urunlerim">
+                            <a href="~/sifre-degistir"><i class="fas fa-user-circle"></i>Şifre İşlemleri</a>
+                        </li>
+                        <li class="yeni-urun">
+                            <a href="~/cikis-yap"><i class="fas fa-arrow-right"></i>Çıkış</a>
+                        </li>
+                    </ul>
                 </div>
+
             }
             else
             {

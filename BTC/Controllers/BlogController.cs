@@ -2,6 +2,7 @@
 using BTC.Business.Managers;
 using BTC.Model.Response;
 using BTC.Model.View;
+using BTC.Setting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace BTC.Controllers
         [Route("~/blog/kategori/{category_name}")]
         [Route("~/blog/etiket/{tag}")]
         [Route("~/blog/search/{search_key}")]
-        public ActionResult Blog(string category_name, string search_key,string tag)
+        public ActionResult Blog(string category_name, string search_key, string tag)
         {
             return View();
         }
@@ -34,12 +35,22 @@ namespace BTC.Controllers
             return View(result);
         }
 
+        [AuthAttribute(new int[] {
+            (int)EnumVariables.Roles.Admin,
+            (int)EnumVariables.Roles.Writer
+        })
+        ]
         [Route("~/makalelerim")]
         public ActionResult GetMyPosts()
         {
             return View();
         }
 
+        [AuthAttribute(new int[] {
+            (int)EnumVariables.Roles.Admin,
+            (int)EnumVariables.Roles.Writer
+        })
+     ]
         [HttpGet]
         public JsonResult getMyPosts()
         {
@@ -47,7 +58,11 @@ namespace BTC.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-
+        [AuthAttribute(new int[] {
+            (int)EnumVariables.Roles.Admin,
+            (int)EnumVariables.Roles.Writer
+        })
+        ]
         [Route("yeni-makale-ekle")]
         public ActionResult AddNewPost()
         {
@@ -55,6 +70,11 @@ namespace BTC.Controllers
         }
 
         [HttpPost]
+        [AuthAttribute(new int[] {
+            (int)EnumVariables.Roles.Admin,
+            (int)EnumVariables.Roles.Writer
+        })
+        ]
         public JsonResult addOrEditNewPost(PostModel postModel)
         {
             ResponseModel result = new ResponseModel();

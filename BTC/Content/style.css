@@ -4239,3 +4239,41 @@ perspective effects (not including the modals and the overlay).
     transform: rotateX(0deg);
     opacity: 1;
 }
+
+
+.profile-form {
+    padding-bottom: 70px;
+    border-bottom: 1px solid #ddd;
+}
+
+    .profile-form .form-control {
+        font-size: 13px;
+        height: auto !important;
+        padding: 16px 20px;
+        background: #ddd;
+    }
+
+    .profile-form .form-group {
+        margin-bottom: 40px;
+    }
+
+        .profile-form .form-group.btn-send {
+            margin-bottom: 0;
+        }
+
+    .profile-form .success {
+        display: none;
+    }
+
+    .profile-form .error {
+        display: none;
+    }
+
+    .profile-form .bt-contact-submit {
+        background: #101825;
+    }
+
+
+.container-top-padding {
+   padding-top: 50px;
+}

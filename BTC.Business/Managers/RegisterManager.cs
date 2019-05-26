@@ -4,10 +4,8 @@ using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Repository;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Transactions;
 
 namespace BTC.Business.Managers
 {
@@ -42,6 +40,21 @@ namespace BTC.Business.Managers
                 result.Message = "Şifre ve  şifre tekrar bilgileri aynı olmalıdır!";
                 return result;
             }
+
+
+            if (string.IsNullOrWhiteSpace(registerUser.Phone))
+            {
+                result.IsSuccess = false;
+                result.Message = "Telefon numarası zorunlu alandır!";
+                return result;
+            }
+            if (registerUser.Phone.Length != 14)
+            {
+                result.IsSuccess = false;
+                result.Message = "Eksik yada hatalı bir telefon numarası girdiniz.Lütfen bilgilerinizi kontrol edin!";
+                return result;
+            }
+
             if (userEmail != null)
             {
                 result.IsSuccess = false;
@@ -64,38 +77,65 @@ namespace BTC.Business.Managers
         {
 
             ResponseModel result = new ResponseModel();
-            result = ValidateRegisterModel(registerUser);
-            if (!result.IsSuccess)
-                return result;
 
-            Users new_user = new Users();
-            new_user.CreateDate = DateTime.Now;
-            new_user.Email = registerUser.Email;
-            new_user.FirstName = registerUser.FirstName;
-            new_user.IsActive = true;
-            new_user.IsApproved = false;
-            new_user.IsVip = registerUser.IsVip;
-            new_user.LastName = registerUser.LastName;
-            new_user.Password = Encryption.GenerateMD5(registerUser.Password);
-            new_user.Phone = registerUser.Phone;
-            new_user = _userM.CreateUser(new_user);
-
-            //email yada sms gönderimi ve approve sayfasına yönlendirme
-
-            if (_smsM.IsRequiredRegisterSmsSendClient())
+            using (TransactionScope transaction = new TransactionScope())
             {
-                // sms gönderimi
 
-                result.IsSuccess = true;
-                result.Message = "sms-approve";
-            }
+                try
+                {
+                    result = ValidateRegisterModel(registerUser);
+                    if (!result.IsSuccess)
+                        return result;
 
-            if (_emailM.IsApproveSendMailNewUser())
-            {
-                // mail gönderimi
-                _emailM.CreateRegisterEmail(new_user.ID);
-                result.IsSuccess = true;
-                result.Message = "email-approve";
+                    Users new_user = new Users();
+                    new_user.CreateDate = DateTime.Now;
+                    new_user.Email = registerUser.Email;
+                    new_user.FirstName = registerUser.FirstName;
+                    new_user.IsActive = true;
+                    new_user.IsApproved = false;
+                    new_user.IsVip = registerUser.IsVip;
+                    new_user.LastName = registerUser.LastName;
+                    new_user.Password = Encryption.GenerateMD5(registerUser.Password);
+                    new_user.Phone = registerUser.Phone;
+                    new_user = _userM.CreateUser(new_user);
+
+                    var user_role_rel = _userM.CreateUserRoleRel(Setting.EnumVariables.Roles.Member, new_user.ID);
+
+                    //email yada sms gönderimi ve approve sayfasına yönlendirme
+
+                    if (_smsM.IsRequiredRegisterSmsSendClient())
+                    {
+                        // sms gönderimi
+
+                        result.IsSuccess = true;
+                        result.Message = "sms-approve";
+                    }
+
+                    if (_emailM.IsApproveSendMailNewUser())
+                    {
+                        // mail gönderimi
+                        result = _emailM.SendRegisterApproveMail(new_user.ID);
+
+                        if (result.IsSuccess)
+                        {
+                            result.IsSuccess = true;
+                            result.Message = "email-approve";
+                        }
+                    }
+
+                    if (result.IsSuccess)
+                        transaction.Complete();
+                    else
+                        transaction.Dispose();
+
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccess = false;
+                    result.Message = ex.Message;
+                    transaction.Dispose();
+
+                }
             }
 
             return result;
@@ -147,6 +187,12 @@ namespace BTC.Business.Managers
                 return result;
             }
 
+            if (!user.IsActive || !user.IsApproved)
+            {
+                result.Message = "Kullanıcınız pasif yada henüz doğrulanmamış!";
+                return result;
+            }
+
             var mail = _passRepo.GetByCustomQuery("select  top 1 * from PasswordChangeMails where UserID = @UserID order by ID desc", new { UserID = user.ID }).FirstOrDefault();
 
             if (mail == null)
@@ -170,7 +216,7 @@ namespace BTC.Business.Managers
                     }
                     else
                     {
-                        result.Message = "Gün içerisinde size daha önce mail sıfırlama linki gönderilmiş.Lütfen posta kutunuu kontrol ediniz!";
+                        result.Message = "Gün içerisinde size daha önce mail sıfırlama linki gönderilmiş.Lütfen posta kutunuzu kontrol ediniz!";
                         return result;
                     }
                 }
@@ -221,6 +267,11 @@ namespace BTC.Business.Managers
             var user = _userM.GetUserByEmail(email);
 
             result = _emailM.SendPasswordChangeMail(user.ID);
+
+            if (result.IsSuccess)
+            {
+                result.Message = "Mail adresinize şifre sıfırlama linki gönderdik.Lütfen mail adresinizi kontrol edin!";
+            }
 
             return result;
         }

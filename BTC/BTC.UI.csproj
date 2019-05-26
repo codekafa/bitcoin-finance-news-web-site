@@ -124,6 +124,7 @@
     <Compile Include="Base\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1877,6 +1878,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1926,6 +1928,8 @@
     <Content Include="Views\Home\NotAuthority.cshtml" />
     <Content Include="Views\Security\ForgatPassword.cshtml" />
     <Content Include="Views\Security\ChangePassword.cshtml" />
+    <Content Include="Views\Profile\MyProfile.cshtml" />
+    <Content Include="Views\Profile\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1967,6 +1971,10 @@
     <ProjectReference Include="..\BTC.Model\BTC.Model.csproj">
       <Project>{46EF0CA8-04BB-4BCE-A046-F94C34B4CAF1}</Project>
       <Name>BTC.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTC.Setting\BTC.Setting.csproj">
+      <Project>{8E672C3F-F8B9-40A9-B586-6D8166E0BEB1}</Project>
+      <Name>BTC.Setting</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

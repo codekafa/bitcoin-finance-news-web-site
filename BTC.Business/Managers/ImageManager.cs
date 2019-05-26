@@ -11,7 +11,7 @@ namespace BTC.Business.Managers
     public class ImageManager
     {
 
-        public string SaveProfileImageOrigin(HttpPostedFileBase file)
+        public string SaveProfileImageOrigin(HttpPostedFile file)
         {
             string newFileName = Guid.NewGuid().ToString().Replace("-", "");
             string ext = System.IO.Path.GetExtension(file.FileName);

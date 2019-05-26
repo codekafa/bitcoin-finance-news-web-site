@@ -10,8 +10,8 @@ namespace BTC.Base
 {
     public class AuthAttribute : ActionFilterAttribute, IActionFilter
     {
-        private string[] r;
-        public AuthAttribute(string[] roleList)
+        private int[] r;
+        public AuthAttribute(int[] roleList)
         {
             r = roleList;
         }
@@ -42,8 +42,7 @@ namespace BTC.Base
             {
                 foreach (var role in r)
                 {
-                    int r_id = Convert.ToInt32(role);
-                    auth = SessionVariables.User.Roles.Where(x => x.RoleID == r_id).Count() > 0;
+                    auth = SessionVariables.User.Roles.Where(x => x.RoleID == role).Count() > 0;
                     if (auth)
                     {
                         break;

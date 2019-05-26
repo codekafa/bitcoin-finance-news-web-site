@@ -63,7 +63,7 @@ namespace BTC.Business.Managers
             var emailSetting = _mailRepo.GetAll().FirstOrDefault();
 
             MailMessage email = new MailMessage();
-            email.From = new MailAddress(emailSetting.Mail);
+            email.From = new MailAddress(emailSetting.Mail,"Bitcoin Finans");
 
             foreach (var item in to)
             {
@@ -79,10 +79,10 @@ namespace BTC.Business.Managers
 
             try
             {
-                smtp.SendAsync(email, (object)email);
+                smtp.Send(email);
                 result.IsSuccess = true;
             }
-            catch (SmtpException)
+            catch (Exception  ex)
             {
                 result.IsSuccess = false;
                 result.Message = "Email gönderilirken bir sorun oluştu.";

@@ -37,5 +37,8 @@ namespace BTC.Panel.Controllers
                 return Json(new ResponseModel { IsSuccess = false, Message = "Bilgileri kontrol ediniz!" });
             }            
         }
+
+
+
     }
 }

@@ -1,56 +1,61 @@
-﻿using BTC.Business.Managers;
+﻿using BTC.Base;
+using BTC.Business.Managers;
 using BTC.Common.Session;
 using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Model.View;
-using BTC.Panel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BTC.Panel.Controllers
+namespace BTC.Controllers
 {
     [AuthAttribute(null)]
     public class ProfileController : BaseController
     {
-
         RegisterManager _regM;
         UserManager _userM;
-        LoginManager _loginM;
         public ProfileController()
         {
             _regM = new RegisterManager();
             _userM = new UserManager();
-            _loginM = new LoginManager();
         }
 
         [Route("~/profilim")]
         public ActionResult MyProfile()
         {
-            var userModel = SessionVariables.User;
-            return View(userModel);
+            UpdateUserModel result = new UpdateUserModel();
+
+            result.ID = SessionVariables.User.CurrentUser.ID;
+            result.Email = SessionVariables.User.CurrentUser.Email;
+            result.Facebook = SessionVariables.User.CurrentUser.Facebook;
+            result.FirstName = SessionVariables.User.CurrentUser.FirstName;
+            result.Instagram = SessionVariables.User.CurrentUser.Instagram;
+            result.LastName = SessionVariables.User.CurrentUser.LastName;
+            result.Linkedin = SessionVariables.User.CurrentUser.Linkedin;
+            result.Phone = SessionVariables.User.CurrentUser.Phone;
+            result.ProfilePhotoUrl = SessionVariables.User.CurrentUser.ProfilePhotoUrl;
+            result.Summary = SessionVariables.User.CurrentUser.Summary;
+            return View(result);
         }
 
+        [AuthAttribute(null)]
         [HttpPost]
         public JsonResult updateProfile(UpdateUserModel userModel)
         {
             ResponseModel result = new ResponseModel();
+            userModel.ID = SessionVariables.User.CurrentUser.ID;
             result = _userM.UpdateProfileUser(userModel, null);
-
-            if (result.IsSuccess)
-                _loginM.ResetSessionUser(userModel.ID);
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(result);
         }
-
 
         [Route("~/sifre-degistir")]
         public ActionResult ChangePassword()
         {
-            var userModel = SessionVariables.User;
-            return View(userModel);
+            PasswordChangeModel result = new PasswordChangeModel();
+            return View(result);
         }
 
         [HttpPost]
@@ -62,17 +67,6 @@ namespace BTC.Panel.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [Route("~/cikis-yap")]
-        public ActionResult Logout()
-        {
-            if (SessionVariables.User == null)
-                return RedirectToAction("Login", "Security");
-
-            LoginManager _loginM = new LoginManager();
-            var result = _loginM.LogoutUser();
-
-            return RedirectToAction("Login", "Security");
-        }
 
     }
 }

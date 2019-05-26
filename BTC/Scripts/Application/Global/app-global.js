@@ -30,6 +30,15 @@ function dangerAlertList(messages) {
     });
 }
 
+function alertResponse(responseModel) {
+
+    if (responseModel.IsSuccess == true) {
+        successAlert(responseModel.Message);
+    } else {
+        dangerAlert(responseModel.Message);
+    }
+
+}
 
 function selectPage() {
     var s_p = $('#select-page').val();
@@ -37,12 +46,10 @@ function selectPage() {
 }
 
 $(document).ready(function () {
-    $('.phoneMask').usPhoneFormat({
-        format: '(xxx) xxx-xxxx',
-    });
+    $('.phoneMask').mask('(000) 000-0000');
     selectPage();
 });
 
-$(window).on('load', function () {
-    $("#loading").delay(1000).fadeOut(800);
-})
+//$(window).on('load', function () {
+//    $("#loading").delay(100).fadeOut(100);
+//})

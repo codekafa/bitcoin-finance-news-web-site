@@ -110,3 +110,40 @@ function changePasswordUrl() {
     });
 
 }
+
+function updateUser() {
+
+    var dat = new FormData($('#profile-form').get(0));
+
+    $.ajax({
+        url: "/Profile/updateProfile",
+        type: 'POST',
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        data: dat,
+        success: function (data) {
+            alertResponse(data);
+        }
+    });
+}
+
+function changePassword() {
+
+    var obj = new Object();
+    obj.OldPassword = $('#OldPassword').val();
+    obj.Password = $('#Password').val();
+    obj.PasswordAgain = $('#PasswordAgain').val();
+    $.ajax({
+        url: "/Profile/changePassword",
+        dataType: "json",
+        type: 'POST',
+        data: {
+            changeModel: obj
+        },
+        success: function (data) {
+            alertResponse(data);
+        }
+    });
+
+}
