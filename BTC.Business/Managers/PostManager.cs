@@ -5,9 +5,15 @@ using BTC.Repository;
 using BTC.Repository.ViewRepository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Transactions;
+using System.Web;
+using System.Web.Configuration;
 
 namespace BTC.Business.Managers
 {
@@ -16,11 +22,12 @@ namespace BTC.Business.Managers
 
         UserPostRepository _postRepo;
         PostModelRepository _postModelRepo;
-
-        public PostManager()
+        ImageManager _imgM;
+        public PostManager(HttpContextBase context = null)
         {
             _postRepo = new UserPostRepository();
             _postModelRepo = new PostModelRepository();
+            _imgM = new ImageManager();
         }
         public ResponseModel AddNewPostValidate(PostModel postModel)
         {
@@ -32,7 +39,7 @@ namespace BTC.Business.Managers
                 return result;
             }
 
-            if (postModel.CategoryID > 0)
+            if (postModel.CategoryID <= 0)
             {
                 result.Message = "Kategori alanını doldurunuz!";
                 return result;
@@ -44,44 +51,98 @@ namespace BTC.Business.Managers
                 return result;
             }
 
+
+            if (postModel.ID <= 0 || postModel.IsChangeMainImage)
+            {
+                if (postModel.MainImage == null)
+                {
+                    result.Message = "Kapak fotoğrafı alanı zorunludur!";
+                    return result;
+                }
+
+                /* it means 5.242.880 bytes (5 mb) */
+                if (postModel.MainImage.ContentLength > ((1024 * 1024) * 5))
+                {
+                    result.Message = "Kapak fotoğrafı 5 MB ' tan büyük olamaz!";
+                    return result;
+                }
+
+                string ext = System.IO.Path.GetExtension(postModel.MainImage.FileName);
+
+                if (!_imgM.CheckImageType(ext))
+                {
+                    result.Message = "Kapak fotoğrafı formatı jpg , jpeg  yada png olmalıdır!";
+                    return result;
+                }
+            }
+
+            var isExistItem = _postRepo.GetByCustomQuery("select * from UserPosts where Uri = @Uri and ID != @ID", new { Uri = postModel.Uri, ID = postModel.ID }).FirstOrDefault();
+
+            if (isExistItem != null)
+            {
+                result.Message = "Aynı url adresine sahip bir makale mevcuttur!";
+                return result;
+            }
+
             result.IsSuccess = true;
             return result;
 
         }
+
+        public void UpdateViewCount(int iD)
+        {
+            _postRepo.ExecuteQuery("update UserPosts set ViewCount = ViewCount + 1 where ID = @ID", new { ID = iD });
+        }
+
         public ResponseModel AddNewPost(PostModel postModel)
         {
             ResponseModel result = new ResponseModel();
-
             result = AddNewPostValidate(postModel);
 
             if (!result.IsSuccess)
                 return result;
 
-            try
+            using (TransactionScope tran = new TransactionScope())
             {
-                UserPosts post = new UserPosts();
-                post.Body = postModel.Body;
-                post.CategoryID = postModel.CategoryID;
-                post.CreateDate = DateTime.Now;
-                post.IsActive = true;
-                post.IsPublish = postModel.IsPublish;
-                post.MetaKeywords = postModel.MetaKeywords;
-                post.MetaTitle = postModel.MetaTitle;
-                post.Summary = postModel.Summary;
-                post.Tags = postModel.Tags;
-                post.TopPhotoUrl = postModel.TopPhotoUrl;
-                post.Uri = postModel.Uri;
-                post.UserID = postModel.UserID;
-                post.ID = _postRepo.Insert(post);
-                result.IsSuccess = true;
-                result.Message = "Makale başarı ile kaydedilmiştir.";
-                return result;
+                try
+                {
+                    UserPosts post = new UserPosts();
+                    post.Body = postModel.Body;
+                    post.CategoryID = postModel.CategoryID;
+                    post.CreateDate = DateTime.Now;
+                    post.IsActive = true;
+                    post.IsPublish = postModel.IsPublish;
+                    post.MetaKeywords = postModel.MetaKeywords;
+                    post.MetaTitle = postModel.MetaTitle;
+                    post.Summary = postModel.Summary;
+                    post.Tags = postModel.Tags;
+                    post.Uri = postModel.Uri;
+                    post.UserID = postModel.UserID;
+                    post.TopPhotoUrl = postModel.TopPhotoUrl;
+                    post.Title = postModel.Title;
+                    if (postModel.MainImage != null)
+                    {
+                        _imgM.SavePostMainPage(postModel.MainImage, postModel.FileSaveMap);
+                    }
+
+                    post.ID = _postRepo.Insert(post);
+
+                    result.IsSuccess = true;
+                    result.Message = "Makale başarı ile kaydedilmiştir.";
+                    tran.Complete();
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    tran.Dispose();
+                    result.Message = ex.Message;
+                    return result;
+                }
             }
-            catch (Exception ex)
-            {
-                result.Message = ex.Message;
-                return result;
-            }
+
+
+
+
         }
         public UserPosts GetById(int post_id)
         {
@@ -96,48 +157,63 @@ namespace BTC.Business.Managers
             if (!result.IsSuccess)
                 return result;
 
-            try
+            using (TransactionScope tran = new TransactionScope())
             {
-                UserPosts post = new UserPosts();
-                post = _postRepo.GetByID(postModel.ID);
-                if (post == null || post.ID <= 0)
+
+                try
                 {
-                    result.Message = "Post bulunamadı!";
+                    UserPosts post = new UserPosts();
+                    post = _postRepo.GetByID(postModel.ID);
+                    if (post == null || post.ID <= 0)
+                    {
+                        result.Message = "Post bulunamadı!";
+                        return result;
+                    }
+
+                    post.Body = postModel.Body;
+                    post.CategoryID = postModel.CategoryID;
+                    post.CreateDate = DateTime.Now;
+                    post.IsPublish = postModel.IsPublish;
+                    post.MetaKeywords = postModel.MetaKeywords;
+                    post.MetaTitle = postModel.MetaTitle;
+                    post.Summary = postModel.Summary;
+                    post.Tags = postModel.Tags;
+
+                    if (postModel.MainImage != null)
+                    {
+                        _imgM.SavePostMainPage(postModel.MainImage, postModel.FileSaveMap);
+                        _imgM.RemoveOldPostImages(post.TopPhotoUrl);
+                    }
+
+                    post.Uri = postModel.Uri;
+                    post.TopPhotoUrl = postModel.TopPhotoUrl;
+                    bool upd_val = _postRepo.Update(post);
+
+                    result.IsSuccess = upd_val;
+
+                    if (upd_val)
+                    {
+                        tran.Complete();
+                        result.IsSuccess = true;
+                        result.Message = "Makale başarı ile güncellemiştir!";
+                        return result;
+                    }
+                    else
+                    {
+                        tran.Dispose();
+                        result.Message = "Makale güncellenirken hata oluştu!";
+                        return result;
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    tran.Dispose();
+                    result.Message = ex.Message;
                     return result;
                 }
 
-                post.Body = postModel.Body;
-                post.CategoryID = postModel.CategoryID;
-                post.CreateDate = DateTime.Now;
-                post.IsPublish = postModel.IsPublish;
-                post.MetaKeywords = postModel.MetaKeywords;
-                post.MetaTitle = postModel.MetaTitle;
-                post.Summary = postModel.Summary;
-                post.Tags = postModel.Tags;
-                post.TopPhotoUrl = postModel.TopPhotoUrl;
-                post.Uri = postModel.Uri;
-                bool upd_val = _postRepo.Update(post);
-
-                result.IsSuccess = upd_val;
-
-                if (upd_val)
-                {
-                    result.IsSuccess = true;
-                    result.Message = "Makale başarı ile güncellemiştir!";
-                    return result;
-                }
-                else
-                {
-                    result.Message = "Makale güncellenirken hata oluştu!";
-                    return result;
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                result.Message = ex.Message;
-                return result;
             }
         }
 
@@ -151,7 +227,7 @@ namespace BTC.Business.Managers
                                 from UserPosts us
                                 inner join Categories c on c.ID = us.CategoryID
                                 inner join Users u on u.ID = us.UserID
-                                where u.ID = @UserID", new { UserID = user_id }).ToList();
+                                where u.ID = @UserID and us.IsActive = 1", new { UserID = user_id }).ToList();
             return list;
 
         }
@@ -166,8 +242,65 @@ namespace BTC.Business.Managers
                                 from UserPosts us
                                 inner join Categories c on c.ID = us.CategoryID
                                 inner join Users u on u.ID = us.UserID
-                                where us.Uri = @Uri", new { UserID = uri }).FirstOrDefault();
+                                where us.Uri = @Uri", new { Uri = uri }).FirstOrDefault();
             return post;
+        }
+
+        public List<PostModel> GetPostsByFilterModel(PostFilterModel filter)
+        {
+            filter.CategoryName = GenerateUriFormat(filter.CategoryName);
+            List<PostModel> postList = new List<PostModel>();
+            postList = _postModelRepo.GetByCustomQuery(@"select  TOP 20
+                                u.FirstName + ' ' + u.LastName as [Writer],
+                                c.Name as [Category],
+                                us.*
+                                from UserPosts us
+                                inner join Categories c on c.ID = us.CategoryID
+                                inner join Users u on u.ID = us.UserID
+                                where   us.IsPublish = 1 and us.IsActive = 1 and 
+								(@CategoryName is null or c.Uri = @CategoryName)
+								and 
+								(@SearchKey is null or us.Title like '%'+ @SearchKey +'%')
+								and 
+								(@TagName is null or us.Tags like '%' +@TagName+ '%')", filter).ToList();
+            return postList;
+        }
+
+        public List<PostModel> GetBestViewTop3Post()
+        {
+
+            List<PostModel> postList = new List<PostModel>();
+            postList = _postModelRepo.GetByCustomQuery(@"select  TOP 3
+                                u.FirstName + ' ' + u.LastName as [Writer],
+                                c.Name as [Category],
+                                us.*
+                                from UserPosts us
+                                inner join Categories c on c.ID = us.CategoryID
+                                inner join Users u on u.ID = us.UserID
+                                where   us.IsPublish = 1 and us.IsActive = 1 Order by  us.ViewCount desc", null).ToList();
+            return postList;
+        }
+
+        public void UpdatePublishFiledPost(int post_id, bool value)
+        {
+            _postRepo.ExecuteQuery("update UserPosts set IsPublish = @P where ID = @ID", new { p = value, ID = post_id });
+        }
+        public string GenerateUriFormat(string uri)
+        {
+
+            if (string.IsNullOrWhiteSpace(uri))
+                return null;
+
+            string url = String.Join("", uri.Normalize(NormalizationForm.FormD)
+     .Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark));
+            url = Regex.Replace(url, @"^\W+|\W+$", "");
+            //url = Regex.Replace(url, @"'\"", "");
+            url = Regex.Replace(url, @"_", " - ");
+            url = Regex.Replace(url, @"\W+", "-");
+            var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures).ToLookup(x => x.EnglishName);
+            var en_culture = cultures["English"].FirstOrDefault();
+            url = url.ToLower(en_culture);
+            return url;
         }
     }
 }

@@ -8,8 +8,21 @@ using System.Threading.Tasks;
 
 namespace BTC.Business.Managers
 {
-    public  class MemoryCacheManager : BaseMemoryCacheManger
+    public sealed class MemoryCacheManager : BaseMemoryCacheManger
     {
-
+        private static readonly MemoryCacheManager instance = new MemoryCacheManager();
+        static MemoryCacheManager()
+        {
+        }
+        private MemoryCacheManager()
+        {
+        }
+        public static MemoryCacheManager Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
     }
 }

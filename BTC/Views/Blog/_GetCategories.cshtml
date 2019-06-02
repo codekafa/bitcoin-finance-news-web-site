@@ -1,0 +1,12 @@
+﻿@using BTC.Model.Entity
+
+
+@model List<Categories>
+
+<h3>Kategoriler</h3>
+@foreach (var item in Model)
+{
+    <h3><a href="/blog/kategori/@item.Uri" class="btn btn-more btn-xs" target="_blank">@item.Name</a></h3>
+}
+
+

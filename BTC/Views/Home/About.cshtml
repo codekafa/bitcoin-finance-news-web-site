@@ -1,8 +1,64 @@
 ﻿@{
     ViewBag.Title = "Hakkımızda";
-     ViewBag.SelectPage = "hakkimizda";
+    ViewBag.SelectPage = "hakkimizda";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+
+    <div class="container box-content-info">
+        <div class="row contact-title">
+            <div class="col-md-12 box-header-clients">
+                <h3 class="title">Leave us a <span>Message</span></h3>
+                <div class="line-centered-circolar"></div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem voluptatem obcaecati!
+                    <br />
+                    ipsum dolor sit Rem autem voluptatem obcaecati
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form id="contact-form" role="form" method="POST" action="#">
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label for="input1">Name *</label>
+                            <input type="text" name="contact_name" placeholder="e.g. Jhon Smith" class="form-control" id="name">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="input1">Company Name</label>
+                            <input type="text" name="contact_name" placeholder="e.g. Angu Studio" class="form-control" id="company">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-6">
+                            <label for="input2">Email Address *</label>
+                            <input type="email" name="contact_email" placeholder="e.g. mail@example.com" class="form-control" id="email">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="input3">Phone Number</label>
+                            <input type="text" name="contact_phone" placeholder="+004 123 23 456" class="form-control" id="phone">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-12">
+                            <label for="input4">Message</label>
+                            <textarea name="contact_message" class="form-control" rows="6" cols="10" id="message"></textarea>
+                        </div>
+                        <div class="form-group btn-send col-lg-12">
+                            <input type="hidden" name="save" value="contact">
+                            <button type="submit" class="btn btn-more bt-contact-submit">Send Message</button>
+                            <p class="success">Your message has been sent successfully.</p>
+
+                            <p class="error">E-mail must be valid or message must be longer than 20 characters.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+@section scripts{
+    
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeOh_Qw6A5V_xZ9LIrU3ipWoTL827SwUg&v=3.exp" type="text/javascript"></script>
+    }

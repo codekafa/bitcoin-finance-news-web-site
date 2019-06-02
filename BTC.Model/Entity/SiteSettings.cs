@@ -15,6 +15,8 @@ namespace BTC.Model.Entity
         [Required]
         public string SiteKeywords { get; set; }
 
+        [Required]
+        public string ComtactEmail { get; set; }
         public bool RegisterApproveMethod { get; set; }
     }
 }

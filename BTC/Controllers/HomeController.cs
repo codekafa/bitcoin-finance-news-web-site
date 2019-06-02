@@ -1,5 +1,8 @@
 ﻿using BTC.Base;
+using BTC.Business.Managers;
+using BTC.Common.Constants;
 using BTC.Model.Response;
+using BTC.Model.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +13,12 @@ namespace BTC.Controllers
 {
     public class HomeController : BaseController
     {
+      
+        public HomeController()
+        {
+    
+        }
+
         [Route("~/")]
         [Route("~/ana-sayfa")]
         public ActionResult Index()
@@ -54,6 +63,20 @@ namespace BTC.Controllers
             result.IsSuccess = false;
             result.Message = "Bu işlem için yetkiniz bulunmamaktadır!";
             return View(result);
+        }
+
+        [HttpPost]
+        public JsonResult sendContactMessage(ContactModel msj)
+        {
+            ResponseModel result = new ResponseModel();
+            result = msj.IsValid();
+            if (result.IsSuccess)
+            {
+                EmailManager _emailM = new EmailManager();
+                result = _emailM.SendMail("İletişim Talebi", new string[] { StaticSettings.SiteSettings.ComtactEmail }, msj.ToString());
+            }
+            return Json(result);
+           
         }
     }
 }

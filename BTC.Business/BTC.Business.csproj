@@ -34,6 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\CategoryManager.cs" />
     <Compile Include="Managers\MemoryCacheManager.cs" />
     <Compile Include="Managers\EmailManager.cs" />
     <Compile Include="Managers\ImageManager.cs" />

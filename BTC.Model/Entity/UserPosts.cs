@@ -24,11 +24,14 @@ namespace BTC.Model.Entity
 
         public string Uri { get; set; }
 
+        public string MetaDescription { get; set; }
         public string MetaTitle { get; set; }
 
         public string MetaKeywords { get; set; }
 
         public string Summary { get; set; }
+
+        public int ViewCount { get; set; }
         public DateTime CreateDate { get; set; }
 
         public DateTime? PublishDate { get; set; }

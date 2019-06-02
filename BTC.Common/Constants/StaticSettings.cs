@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BTC.Common.Constants
 {
@@ -62,5 +63,6 @@ namespace BTC.Common.Constants
                 return instance;
             }
         }
+
     }
 }

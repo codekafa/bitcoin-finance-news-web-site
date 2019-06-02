@@ -81,8 +81,9 @@ namespace BTC.Business.Managers
             {
                 smtp.Send(email);
                 result.IsSuccess = true;
+                result.Message = "Email başarı le gönderildi.";
             }
-            catch (Exception  ex)
+            catch (Exception)
             {
                 result.IsSuccess = false;
                 result.Message = "Email gönderilirken bir sorun oluştu.";

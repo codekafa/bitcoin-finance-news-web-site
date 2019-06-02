@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Makalelerim";
+}
+
+<div class="row">
+    <div class="container box-content-info">
+        <div class="container-fluid container-top-padding">
+            <div class="col-md-12">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">Makale Listesi</h5>
+                        </div>
+                        <div class="panel-body fixed-margin">
+                            <table class="table table-bordered">
+
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Kapak Fotoğrafı
+                                        </th>
+                                        <th>
+                                            Başlık
+                                        </th>
+                                        <th>
+                                            Yayında Mı?
+                                        </th>
+                                        <th>
+                                            Görüntülenme Sayısı
+                                        </th>
+                                        <th>
+                                            İşlemler
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="postListTableBody">
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+   
+    <script src="~/Scripts/Application/Blog/my-post-list.js"></script>
+    }
+
+
+
+
+
+
+

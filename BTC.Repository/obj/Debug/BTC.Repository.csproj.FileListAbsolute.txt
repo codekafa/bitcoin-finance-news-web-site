@@ -12,3 +12,14 @@ C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.csproj.CoreCompile
 C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.csproj.CopyComplete
 C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.dll
 C:\WorkSpaces\BTC\BTC\BTC.Repository\obj\Debug\BTC.Repository.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.Mvc.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.WebPages.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.WebPages.Razor.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.Razor.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.Mvc.xml
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.WebPages.xml
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.WebPages.Razor.xml
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.Razor.xml
+C:\WorkSpaces\BTC\BTC\BTC.Repository\bin\Debug\System.Web.WebPages.Deployment.xml

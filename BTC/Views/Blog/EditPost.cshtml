@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Makale Düzenle";
+      ViewBag.SelectPage = "makale";
+}
+
+@section styles{
+    <link href="~/Content/Plugins/editor/css/quill.css" rel="stylesheet" />
+}
+
+
+<div class="row">
+    <div class="container box-content-info">
+        <div class="container-fluid container-top-padding">
+            <div class="col-md-12">
+                <div class="col-lg-12">
+                    <form id="form-editBlogPost" method="post" enctype="multipart/form-data">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Makale Detayları</h5>
+                            </div>
+                            <div class="panel-body fixed-margin">
+                                <div class="row">
+                                    <input type="hidden" name="Id" id="Id" value="@ViewBag.PostId" />
+                                    <input type="hidden" name="TopPhotoUrl" id="TopPhotoUrl" value="" />
+                                    <div class="col-md-2">
+                                        Kategori: <span style="color:red">*</span>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select id="CategoryID" name="CategoryID" class="form-control" data-placeholder="Kategori Seçiniz"></select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Başlık: <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="Title" id="Title" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">İçerik: <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="Body" name="Body" />
+                                        <div name="BodyEditor" id="BodyEditor" style="height: 400px;" class=""></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">İçerik Özet : (Listeleme ekranında gözükecek olan içerik) <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <textarea name="Summary" maxlength="400" rows="4" id="Summary" class="form-control"> </textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Kapak Fotoğrafı : <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="IsChangeMainImage" name="IsChangeMainImage" value="false" />
+                                        <input id="MainImage" type="file" class="file will-disable"
+                                               name="MainImage" data-show-upload="false">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="IsPublish" name="IsPublish" value="false" />
+                                        <input type="checkbox" name="IsPublished" id="IsPublished" value="">Makaleyi Yayınla<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">SEO Ayarları</h5>
+                            </div>
+                            <div class="panel-body fixed-margin">
+                                <div class="row">
+                                    <div class="col-md-2">Url : <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="Uri" id="Uri" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Meta Açıklaması : <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="MetaDescription" id="MetaDescription" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Meta Başlığı : <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="MetaTitle" id="MetaTitle" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Anahtar Kelimeler (Virgül ile ayırın.) : <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="MetaKeywords" id="MetaKeywords" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Etiketler (Virgül ile ayırın.): <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="Tags" id="Tags" class="form-control" placeholder="Finans, Bitcoin vs.." />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer" style="text-align:right;">
+                            <button id="btnSave" class="btn btn-primary will-disable">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/Plugins/editor/js/quill.js"></script>
+    <script src="~/Scripts/Application/Editor/edit-post.js"></script>
+}
+
+
+

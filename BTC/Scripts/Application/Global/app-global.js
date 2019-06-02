@@ -30,12 +30,15 @@ function dangerAlertList(messages) {
     });
 }
 
-function alertResponse(responseModel) {
+function alertResponse(rm,r) {
 
-    if (responseModel.IsSuccess == true) {
-        successAlert(responseModel.Message);
+    if (rm.IsSuccess == true) {
+        successAlert(rm.Message);
     } else {
-        dangerAlert(responseModel.Message);
+        dangerAlert(rm.Message);
+    }
+    if (r == true) {
+        location.reload();
     }
 
 }

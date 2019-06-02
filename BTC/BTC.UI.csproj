@@ -1772,6 +1772,8 @@
     <Content Include="Content\jquery.mCustomScrollbar.min.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.theme.default.css" />
+    <Content Include="Content\Plugins\editor\css\quill.css" />
+    <Content Include="Content\Plugins\editor\js\quill.js" />
     <Content Include="Content\Plugins\phoneFormat\jquery-input-mask-phone-number.min.js" />
     <Content Include="Content\Plugins\toastr\css\toastr.min.css" />
     <Content Include="Content\Plugins\toastr\js\toastr.min.js" />
@@ -1780,7 +1782,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Application\Blog\my-post-list.js" />
+    <Content Include="Scripts\Application\Editor\add-post.js" />
+    <Content Include="Scripts\Application\Editor\edit-post.js" />
     <Content Include="Scripts\Application\Global\app-global.js" />
+    <Content Include="Scripts\Application\UserOperation\contact.js" />
     <Content Include="Scripts\Application\UserOperation\user-operation.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1930,6 +1936,12 @@
     <Content Include="Views\Security\ChangePassword.cshtml" />
     <Content Include="Views\Profile\MyProfile.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
+    <Content Include="Views\Blog\AddNewPost.cshtml" />
+    <Content Include="Views\Blog\GetMyPosts.cshtml" />
+    <Content Include="Views\Blog\EditPost.cshtml" />
+    <Content Include="Views\Blog\_GetPartialViewPosts.cshtml" />
+    <Content Include="Views\Blog\_GetPartialViewBestViewPosts.cshtml" />
+    <Content Include="Views\Blog\_GetCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

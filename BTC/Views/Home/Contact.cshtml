@@ -1,18 +1,56 @@
 ﻿@{
     ViewBag.Title = "İletişim";
-     ViewBag.SelectPage = "iletisim";
+    ViewBag.SelectPage = "iletisim";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="contact" style="margin-top:50px;"> 
+    <div class="container box-content-info">
+        <div class="row contact-title">
+            <div class="col-md-12 box-header-clients">
+                <h3 class="title">İletişim için bize <span>mesaj</span> gönderin.</h3>
+                <div class="line-centered-circolar"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form id="contact-form" role="form" method="POST" >
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label for="input1">Ad *</label>
+                            <input type="text" name="Name"  placeholder="" class="form-control" id="Name">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="input1">Firma</label>
+                            <input type="text" name="CompanyName" placeholder="" class="form-control" id="CompanyName">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-6">
+                            <label for="input2">Email  *</label>
+                            <input type="email" name="Email" placeholder="" class="form-control" id="Email">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="input3">Tel</label>
+                            <input type="text" name="Phone" placeholder="" class="form-control phoneMask" id="Phone">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-12">
+                            <label for="input4">Mesaj</label>
+                            <textarea name="Message" class="form-control" rows="6" cols="10" id="Message"></textarea>
+                        </div>
+                        <div class="form-group btn-send col-lg-12">
+                            <input type="hidden" name="save" value="contact">
+                            <button type="submit" class="btn btn-more">Gönder</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@section scripts
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+{
+    
+    <script src="~/Scripts/Application/UserOperation/contact.js"></script>
+    }
+

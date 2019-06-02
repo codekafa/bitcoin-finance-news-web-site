@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BTC.Common.Util.Extension
 {
@@ -228,7 +230,21 @@ namespace BTC.Common.Util.Extension
             return result;
         }
 
+        public static byte[] ToByteArray(this HttpPostedFileBase value)
+        {
+            if (value != null)
+            {
+                HttpPostedFileWrapper img = value as HttpPostedFileWrapper;
+                byte[] imgByteArr = new BinaryReader(img.InputStream)
+                               .ReadBytes((int)img.InputStream.Length);
+                return imgByteArr;
+            }
+            else
+            {
+                return null;
+            }
 
+        }
         public static string ToDescription<TEnum>(this TEnum value)
             where TEnum : struct, IComparable, IFormattable, IConvertible
         {

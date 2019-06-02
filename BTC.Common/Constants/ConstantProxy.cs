@@ -13,5 +13,8 @@ namespace BTC.Common.Constants
 
         public static string BaseImagePath { get { return WebConfigurationManager.AppSettings["BaseImagePath"].ToString(); } }
 
+
+        public static string CategoryCacheName { get { return "categories"; } }
+
     }
 }
