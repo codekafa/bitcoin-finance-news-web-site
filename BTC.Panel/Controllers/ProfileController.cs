@@ -37,7 +37,7 @@ namespace BTC.Panel.Controllers
         public JsonResult updateProfile(UpdateUserModel userModel)
         {
             ResponseModel result = new ResponseModel();
-            result = _userM.UpdateProfileUser(userModel, null);
+            result = _userM.UpdateProfileUser(userModel);
 
             if (result.IsSuccess)
                 _loginM.ResetSessionUser(userModel.ID);

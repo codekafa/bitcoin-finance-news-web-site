@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BTC.Model.View
 {
@@ -18,9 +19,12 @@ namespace BTC.Model.View
 
         public string Phone { get; set; }
 
+        public HttpPostedFileBase ProfilePhotoUrl { get; set; }
 
-        public string ProfilePhotoUrl { get; set; }
+        public bool IsChangeProfilePhoto { get; set; }
+        public string PhotoName { get; set; }
 
+        public string PhotoSaveBaseUrl { get; set; }
         public string Facebook { get; set; }
 
         public string Instagram { get; set; }

@@ -16,6 +16,8 @@ namespace BTC.Model.View
     {
         public string Writer { get; set; }
         public string Category { get; set; }
+
+        public string WriterPhoto { get; set; }
         public int ID { get; set; }
         public HttpPostedFileBase MainImage { get; set; }
 
@@ -54,5 +56,7 @@ namespace BTC.Model.View
         public bool IsActive { get; set; }
 
         public string FileSaveMap { get; set; }
+
+        public List<Comments> PostComments { get; set; }
     }
 }

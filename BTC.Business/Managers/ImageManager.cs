@@ -18,14 +18,30 @@ namespace BTC.Business.Managers
         {
 
         }
-        public string SaveProfileImageOrigin(HttpPostedFile file)
+        public Task SaveProfileImageOrigin(HttpPostedFileBase file, string savedBaseFilePath)
         {
-            string newFileName = Guid.NewGuid().ToString().Replace("-", "");
-            string ext = System.IO.Path.GetExtension(file.FileName);
-            newFileName = newFileName + ".png";
-            string savedBaseFilePath = Path.Combine(@"\Images\_userfiles\profile\origin\", newFileName);
-            file.SaveAs(savedBaseFilePath);
-            return savedBaseFilePath;
+
+            return Task.Run(() =>
+            {
+                byte[] imgByteArr = new BinaryReader(file.InputStream)
+                      .ReadBytes((int)file.InputStream.Length);
+                Image new_img = ByteArrayToImage(imgByteArr);
+                new_img.Save(savedBaseFilePath);
+                var medium_img = ResiveImage(new_img, 800, 400);
+                savedBaseFilePath = savedBaseFilePath.Replace("origin", "medium");
+                medium_img.Save(savedBaseFilePath);
+                var small_img = ResiveImage(new_img, 300, 150);
+                savedBaseFilePath = savedBaseFilePath.Replace("medium", "small");
+                medium_img.Save(savedBaseFilePath);
+
+            });
+
+            ////string newFileName = Guid.NewGuid().ToString().Replace("-", "");
+            ////string ext = System.IO.Path.GetExtension(file.FileName);
+            ////newFileName = newFileName + ".png";
+            ////string savedBaseFilePath = Path.Combine(@"\Images\_userfiles\profile\origin\", newFileName);
+            //file.SaveAs(savedBaseFilePath);
+            //return savedBaseFilePath;
         }
 
         public Task SavePostMainPage(HttpPostedFileBase file, string savedBaseFilePath)
@@ -39,7 +55,7 @@ namespace BTC.Business.Managers
                var medium_img = ResiveImage(new_img, 800, 400);
                savedBaseFilePath = savedBaseFilePath.Replace("large", "medium");
                medium_img.Save(savedBaseFilePath);
-               var small_img = ResiveImage(new_img, 500, 200);
+               var small_img = ResiveImage(new_img, 300, 150);
                savedBaseFilePath = savedBaseFilePath.Replace("medium", "small");
                medium_img.Save(savedBaseFilePath);
 
@@ -99,27 +115,59 @@ namespace BTC.Business.Managers
 
             return Task.Run(() =>
             {
-                string file_path = Path.Combine(@"\Images\_post\large\", file_name);
-                if (File.Exists(file_path))
+                if (!string.IsNullOrWhiteSpace(file_name))
                 {
-                    File.Delete(file_path);
+                    string file_path = Path.Combine(@"\Images\_post\large\", file_name);
+                    if (File.Exists(file_path))
+                    {
+                        File.Delete(file_path);
+                    }
+
+                    file_path = file_path.Replace("large", "medium");
+
+                    if (File.Exists(file_path))
+                    {
+                        File.Delete(file_path);
+                    }
+
+                    file_path = file_path.Replace("medium", "small");
+
+                    if (File.Exists(file_path))
+                    {
+                        File.Delete(file_path);
+                    }
                 }
+            });
 
-                file_path = file_path.Replace("large", "medium");
+        }
 
-                if (File.Exists(file_path))
+        public Task RemoveOldUserProfileImages(string file_name)
+        {
+
+            return Task.Run(() =>
+            {
+                if (!string.IsNullOrWhiteSpace(file_name))
                 {
-                    File.Delete(file_path);
+                    string file_path = Path.Combine(@"\Images\_userfiles\profile\origin\", file_name);
+                    if (File.Exists(file_path))
+                    {
+                        File.Delete(file_path);
+                    }
+
+                    file_path = file_path.Replace("origin", "medium");
+
+                    if (File.Exists(file_path))
+                    {
+                        File.Delete(file_path);
+                    }
+
+                    file_path = file_path.Replace("medium", "small");
+
+                    if (File.Exists(file_path))
+                    {
+                        File.Delete(file_path);
+                    }
                 }
-
-                file_path = file_path.Replace("medium", "small");
-
-                if (File.Exists(file_path))
-                {
-                    File.Delete(file_path);
-                }
-
-
             });
 
         }

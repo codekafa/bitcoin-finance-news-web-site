@@ -28,80 +28,61 @@
             <div class="col-md-8 box-blog-single">
                 <div class="box-article">
 
-                   @Html.Raw(Model.Body)
+                    @Html.Raw(Model.Body)
                 </div>
 
                 <div class="box-comment">
                     <div class="comments-author">
-                        <img src="assets/images/avatar.png" />
+                        <img src="~/Images/_userfiles/profile/small/@Model.WriterPhoto" alt="@Model.Writer" />
                     </div>
                     <div class="author">
                         <h3>@Model.Writer</h3>
-                        <p>
-                           @Model.Writer
-                        </p>
                     </div>
                     <div class="response">
                         <p class="txt-response">Yorumlar</p>
 
-                        <div class="row comment">
-                            <div class="col-md-2">
-                                <img src="assets/images/avatar.png" />
-                            </div>
-                            <div class="col-md-10">
-                                <h3>Richard Boe</h3>
-                                <a href="#">
-                                    <time datetime="2016-11-26T15:04:44+00:00"> November 26, 2016 at 3:04 pm </time>
-                                </a>
-                                <p class="response-art">
-                                    Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus,
-                                    tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-                                    sit amet risus.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="row comment">
-                            <div class="col-md-2">
-                                <img src="assets/images/avatar.png" />
-                            </div>
-                            <div class="col-md-10">
-                                <h3>Susy Low</h3>
-                                <a href="#">
-                                    <time datetime="2016-11-26T15:04:44+00:00"> April 16, 2016 at 3:04 pm </time>
-                                </a>
-                                <p class="response-art">
-                                    Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus,
-                                    tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-                                    sit amet risus.
-                                </p>
-                            </div>
-                        </div>
+                        @if (Model.PostComments != null)
+                        {
+                            foreach (var item in Model.PostComments)
+                            {
+                                <div class="row comment">
+                                    <div class="col-md-2">
+                                        <img src="~/assets/images/avatar.png" />
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h3>@item.Name</h3>
+                                        <p>@item.CreateDate.ToLongDateString()</p>
+                                        <p class="response-art">
+                                            @item.Description
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        }
 
                         <div class="row leave-comment">
                             <div class="col-md-12">
                                 <h3>Yorum Ekle</h3>
-
                                 <form id="contact-form" role="form" method="POST" action="#">
+                                    <input type="hidden" value="1" name="TypeID" class="form-control" id="TypeID">
+                                    <input type="hidden" value="@Model.ID" name="PostID" class="form-control" id="PostID">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
-                                            <label for="input1">Name *</label>
-                                            <input type="text" name="contact_name" placeholder="e.g. Jhon Smith" class="form-control" id="name">
+                                            <label for="input1">Ad *</label>
+                                            <input type="text" name="Name" placeholder="" class="form-control" id="Name">
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="form-group col-lg-6">
-                                            <label for="input2">Email Address *</label>
-                                            <input type="email" name="contact_email" placeholder="e.g. mail@example.com" class="form-control" id="email">
+                                            <label for="input2">Email  *</label>
+                                            <input type="email" name="Email" placeholder="e.g. mail@example.com" class="form-control" id="Email">
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="form-group col-lg-12">
-                                            <label for="input4">Comment</label>
-                                            <textarea name="contact_message" class="form-control" rows="7" cols="30" id="message"></textarea>
+                                            <label for="input4">Yorum</label>
+                                            <textarea name="Description" class="form-control" rows="7" cols="30" id="Description"></textarea>
                                         </div>
                                         <div class="form-group btn-send col-lg-12">
-                                            <input type="hidden" name="save" value="contact">
-                                            <button type="submit" class="btn btn-more">Post Comment</button>
-
+                                            <button type="submit" class="btn btn-more">Yorum Ekle</button>
                                         </div>
                                     </div>
                                 </form>
@@ -113,103 +94,8 @@
 
             <div class="col-md-4 box-right-feed">
                 <div class="right-column">
-
                     @Html.Action("_GetPartialViewBestViewPosts")
                     @Html.Action("_GetCategories")
-
-                    @*<div class="component-1">
-            <div class="title-right-component">
-                <h3>Text Widget</h3>
-            </div>
-            <div class="body-right-component">
-                <p>
-                    Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.
-                    Nulla vitae elit libero, a pharetra augue. Donec sed odio dui. Etiam porta sem malesuada.
-                </p>
-                <ul>
-                    <li><p class="title-faq">faq:</p></li>
-                    <li><p>It is normal that my portfolio is empty for a couple of days. Usually I trade 1 - 2 trades</p></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="component-2">
-            <div class="row">
-                <div class="col followers">
-                    <h3>56,500</h3>
-                    <p>Followers</p>
-                </div>
-                <div class="col copiers">
-                    <h3>3,100</h3>
-                    <p>Copiers</p>
-                </div>
-                <p class="num-day">
-                    <i class="fas fa-arrow-down"></i>129 <span>Last 7 Day</span>
-                </p>
-            </div>
-        </div>
-
-        <div class="component-3">
-            <h3>Top traded</h3>
-            <div class="row">
-                <div class="col-3 box-flag">
-                    <img src="assets/images/usd-jpy-70x70.png" alt="" />
-                </div>
-                <div class="col-3 box-name">
-                    <p>usd-jpy</p>
-                </div>
-                <div class="col-3 box-value-1">
-                    <p>112.67</p>
-                </div>
-                <div class="col-3 box-value-2">
-                    <p>112.69</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-3 box-flag">
-                    <img src="assets/images/eur-usd-70x70.png" alt="" />
-                </div>
-                <div class="col-3 box-name">
-                    <p>eur-usd</p>
-                </div>
-                <div class="col-3 box-value-1">
-                    <p>1.140</p>
-                </div>
-                <div class="col-3 box-value-2">
-                    <p>1.141</p>
-                </div>
-            </div>
-            <p class="view-more">View More</p>
-        </div>
-
-        <div class="component-4">
-            <h3>Similar traders</h3>
-            <div class="row row-traders">
-                <div class="col-3 avatar">
-                    <img src="assets/images/avatar.png" />
-                </div>
-                <div class="col-4 box-name">
-                    <p>bomba22</p>
-                </div>
-                <div class="col-5 button-cpy">
-                    <button type="button" class="btn btn-more">Copy</button>
-                </div>
-            </div>
-
-            <div class="row row-traders">
-                <div class="col-3 avatar">
-                    <img src="assets/images/avatar.png" />
-                </div>
-                <div class="col-4 box-name">
-                    <p>spy635</p>
-                </div>
-                <div class="col-5 button-cpy">
-                    <button type="button" class="btn btn-more">Copy</button>
-                </div>
-            </div>
-        </div>*@
-
                 </div>
             </div>
 
@@ -219,4 +105,9 @@
 
 </div>
 
+
+@section scripts
+{
+    <script src="~/Scripts/Application/Blog/blog-detail.js"></script>
+}
 

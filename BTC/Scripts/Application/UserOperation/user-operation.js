@@ -112,19 +112,20 @@ function changePasswordUrl() {
 }
 
 function updateUser() {
-
-    var dat = new FormData($('#profile-form').get(0));
-
-    $.ajax({
-        url: "/Profile/updateProfile",
-        type: 'POST',
-        dataType: 'json',
-        contentType: false,
-        processData: false,
-        data: dat,
-        success: function (data) {
-            alertResponse(data);
-        }
+    $('#profileForm').on('submit', function (e) {
+        var dat = new FormData($('#profileForm').get(0));
+        e.preventDefault();
+        $.ajax({
+            data: dat,
+            type: 'post',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            url: '/Profile/updateProfile',
+            success: function (d) {
+                alertResponse(d);
+            }
+        });
     });
 }
 
@@ -147,3 +148,12 @@ function changePassword() {
     });
 
 }
+
+
+function photoChange() {
+    $('#ProfilePhotoUrl').on('change', function () {
+        $('#IsChangeProfilePhoto').val(true);
+    });
+}
+
+

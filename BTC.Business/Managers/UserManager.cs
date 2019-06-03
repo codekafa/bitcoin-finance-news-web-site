@@ -75,7 +75,7 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             return result;
         }
-        public ResponseModel UpdateProfileUser(UpdateUserModel user, HttpPostedFile profile_photo)
+        public ResponseModel UpdateProfileUser(UpdateUserModel user)
         {
             ResponseModel result = ValidateUpdateProfileUser(user);
 
@@ -85,18 +85,18 @@ namespace BTC.Business.Managers
             var db_user = _userRepo.GetByID(user.ID);
 
             //image operations
-            string profile_path = null;
-            if (profile_photo != null)
-                profile_path = _imageM.SaveProfileImageOrigin(profile_photo);
-            else
-                profile_path = db_user.ProfilePhotoUrl;
+            if (user.ProfilePhotoUrl != null)
+            {
+                _imageM.SaveProfileImageOrigin(user.ProfilePhotoUrl, user.PhotoSaveBaseUrl);
+                _imageM.RemoveOldUserProfileImages(db_user.ProfilePhotoUrl);
+            }
 
             db_user.FirstName = user.FirstName;
             db_user.LastName = user.LastName;
             db_user.Facebook = user.Facebook;
             db_user.Instagram = user.Instagram;
             db_user.Linkedin = user.Linkedin;
-            db_user.ProfilePhotoUrl = profile_path;
+            db_user.ProfilePhotoUrl = user.PhotoName;
             db_user.Summary = user.Summary;
             result.IsSuccess = _userRepo.Update(db_user);
 

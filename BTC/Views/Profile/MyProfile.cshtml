@@ -3,12 +3,15 @@
 
 @{
     ViewBag.Title = "Profilim";
+    ViewBag.SelectPage = "profilim";
 }
 
 <div class="container box-content-info">
     <div class="container-fluid container-top-padding">
         <div class="col-md-12">
-            <form name="profile-form" class="profile-form" method="POST" enctype="multipart/form-data">
+            <form id="profileForm" class="profile-form" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="ID" name="ID" value="@Model.ID">
+                <input type="hidden" id="PhotoName" name="PhotoName" value="@Model.PhotoName">
                 <div class=" form-group col-6 col-lg-6">
                     <label for="FirstName">Ad *</label>
                     <input id="FirstName" class="form-control" name="FirstName" placeholder="Ad" type="text" value="@Model.FirstName" required="">
@@ -46,16 +49,17 @@
 
                 <div class="form-group col-6 col-lg-6">
                     <label for="ProfilePhotoUrl">Profil Fotoğrafı</label>
+                    <input type="hidden" id="IsChangeProfilePhoto" value="">
                     <input id="ProfilePhotoUrl" class="form-control" name="ProfilePhotoUrl" placeholder="" type="file">
                 </div>
 
                 <div class="form-group col-lg-12">
                     <label for="Summary">Profil özeti</label>
-                    <textarea id="Summary" class="form-control" name="Summary"> @Model.Summary  </textarea>
+                    <textarea id="Summary" class="form-control" rows="7" name="Summary"> @Model.Summary  </textarea>
                 </div>
 
                 <div class="">
-                    <button class="btn btn-primary" type="button" onclick="updateUser()">Kaydet</button>
+                    <button class="btn btn-primary" type="submit">Kaydet</button>
                 </div>
             </form>
         </div>
@@ -68,27 +72,9 @@
 @section scripts{
 
     <script>
-
-
         $(document).ready(function () {
-            $('#profile-form').on('submit', function (e) {
-                var dat = new FormData($('#profile-form').get(0));
-                e.preventDefault();
-                $.ajax({
-                    data: dat,
-                    type: 'post',
-                    dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    url: '/Profile/updateProfile',
-                    success: function (d) {
-                        alertResponse(data);
-                    }
-                });
-            });
+            updateUser();
+            photoChange();
         });
-
-
-
     </script>
 }

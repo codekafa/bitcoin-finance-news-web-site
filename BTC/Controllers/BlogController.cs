@@ -1,6 +1,8 @@
 ﻿using BTC.Base;
 using BTC.Business.Managers;
+using BTC.Common.Session;
 using BTC.Common.Util.Extension;
+using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Setting;
@@ -68,7 +70,7 @@ namespace BTC.Controllers
 
         public PartialViewResult _GetCategories()
         {
-            var cateList = _catRepo.GetCategories().Where(x=> x.IsActive==true).ToList();
+            var cateList = _catRepo.GetCategories().Where(x => x.IsActive == true).ToList();
             return PartialView(cateList);
         }
 
@@ -181,6 +183,20 @@ namespace BTC.Controllers
         {
             string value = _postM.GenerateUriFormat(uri);
             return Json(value, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult addComment(Comments addComment)
+        {
+            ResponseModel result = new ResponseModel();
+            addComment.IsPublish = false;
+            addComment.CreateDate = DateTime.Now;
+            if (SessionVariables.User != null)
+            {
+                addComment.UserID = SessionVariables.User.CurrentUser.ID;
+            }
+            result = _postM.AddComment(addComment);
+            return Json(result);
         }
     }
 }

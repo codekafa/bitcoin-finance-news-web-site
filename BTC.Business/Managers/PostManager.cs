@@ -22,12 +22,14 @@ namespace BTC.Business.Managers
 
         UserPostRepository _postRepo;
         PostModelRepository _postModelRepo;
+        CommentRepository _cRepo;
         ImageManager _imgM;
-        public PostManager(HttpContextBase context = null)
+        public PostManager()
         {
             _postRepo = new UserPostRepository();
             _postModelRepo = new PostModelRepository();
             _imgM = new ImageManager();
+            _cRepo = new CommentRepository();
         }
         public ResponseModel AddNewPostValidate(PostModel postModel)
         {
@@ -113,6 +115,7 @@ namespace BTC.Business.Managers
                     post.IsActive = true;
                     post.IsPublish = postModel.IsPublish;
                     post.MetaKeywords = postModel.MetaKeywords;
+                    post.MetaDescription = postModel.MetaDescription;
                     post.MetaTitle = postModel.MetaTitle;
                     post.Summary = postModel.Summary;
                     post.Tags = postModel.Tags;
@@ -175,6 +178,7 @@ namespace BTC.Business.Managers
                     post.CreateDate = DateTime.Now;
                     post.IsPublish = postModel.IsPublish;
                     post.MetaKeywords = postModel.MetaKeywords;
+                    post.MetaDescription = postModel.MetaDescription;
                     post.MetaTitle = postModel.MetaTitle;
                     post.Summary = postModel.Summary;
                     post.Tags = postModel.Tags;
@@ -236,6 +240,7 @@ namespace BTC.Business.Managers
         {
             PostModel post = new PostModel();
             post = _postModelRepo.GetByCustomQuery(@"select 
+                                u.ProfilePhotoUrl as [WriterPhoto],
                                 u.FirstName + ' ' + u.LastName as [Writer],
                                 c.Name as [Category],
                                 us.*
@@ -243,6 +248,9 @@ namespace BTC.Business.Managers
                                 inner join Categories c on c.ID = us.CategoryID
                                 inner join Users u on u.ID = us.UserID
                                 where us.Uri = @Uri", new { Uri = uri }).FirstOrDefault();
+
+            post.PostComments = _cRepo.GetByCustomQuery("select * from  Comments where PostID = @PostID and IsPublish = 1", new { PostID = post.ID }).ToList();
+
             return post;
         }
 
@@ -301,6 +309,51 @@ namespace BTC.Business.Managers
             var en_culture = cultures["English"].FirstOrDefault();
             url = url.ToLower(en_culture);
             return url;
+        }
+
+
+        public ResponseModel ValidateAddComment(Comments comment)
+        {
+            ResponseModel result = new ResponseModel();
+
+            if (string.IsNullOrWhiteSpace(comment.Name))
+            {
+                result.Message = "Ad alanı zorunludur!";
+                return result;
+            }
+            if (string.IsNullOrWhiteSpace(comment.Email))
+            {
+                result.Message = "Email alanı zorunludur!";
+                return result;
+            }
+            if (string.IsNullOrWhiteSpace(comment.Description))
+            {
+                result.Message = "MEsaj alanı zorunludur!";
+                return result;
+            }
+            if (comment.TypeID <= 0)
+            {
+                result.Message = "Tip alanı zorunludur!";
+                return result;
+            }
+            result.IsSuccess = true;
+            return result;
+
+
+        }
+
+        public ResponseModel AddComment(Comments addComment)
+        {
+            ResponseModel result = new ResponseModel();
+            result = ValidateAddComment(addComment);
+            if (!result.IsSuccess)
+            {
+                return result;
+            }
+            addComment.ID = _cRepo.Insert(addComment);
+            result.IsSuccess = true;
+            result.Message = "Yorumunuz başarı ile eklenmiştir.Onaylandıktan sonra yayınlanacaktır.";
+            return result;
         }
     }
 }

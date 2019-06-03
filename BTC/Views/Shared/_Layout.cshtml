@@ -46,7 +46,16 @@
             <div class="box-account">
                 <div class="row m-0">
                     <div class="col-md-3 p-0 box-avatar">
-                        <img src="/assets/images/avatar.png" alt="avatar" />
+
+                        @if (currentUser != null && !string.IsNullOrWhiteSpace(currentUser.CurrentUser.ProfilePhotoUrl))
+                        {
+                            <img src="~/Images/_userfiles/profile/small/@currentUser.CurrentUser.ProfilePhotoUrl" alt="avatar" />
+                        }
+                        else
+                        {
+                            <img src="/assets/images/avatar.png" alt="avatar" />
+                        }
+
                     </div>
                     <div class="box-txt-account col-md-9 p-0">
                         @if (currentUser != null)
@@ -56,9 +65,9 @@
 
                                 @if (currentUser.IsAdmin)
                                 {
-                                    <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git - </a>
+                                    <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git</a>
                                 }
-                                <a href="~/cikis-yap"> Çıkış</a>
+                                @*<a href="~/cikis-yap"> Çıkış</a>*@
 
                             </div>
                         }
@@ -134,13 +143,13 @@
                 <div class="box-list">
                     <p class="sub-title">Profilm</p>
                     <ul class="list-unstyled components">
-                        <li class="urunler">
+                        <li class="profilim">
                             <a href="~/profilim"><i class="fas fa-user "></i>Profilim</a>
                         </li>
-                        <li class="urunlerim">
+                        <li class="sifre">
                             <a href="~/sifre-degistir"><i class="fas fa-user-circle"></i>Şifre İşlemleri</a>
                         </li>
-                        <li class="yeni-urun">
+                        <li class="cikis">
                             <a href="~/cikis-yap"><i class="fas fa-arrow-right"></i>Çıkış</a>
                         </li>
                     </ul>

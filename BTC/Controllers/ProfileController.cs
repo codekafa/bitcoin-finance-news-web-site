@@ -6,8 +6,10 @@ using BTC.Model.Response;
 using BTC.Model.View;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace BTC.Controllers
@@ -27,7 +29,6 @@ namespace BTC.Controllers
         public ActionResult MyProfile()
         {
             UpdateUserModel result = new UpdateUserModel();
-
             result.ID = SessionVariables.User.CurrentUser.ID;
             result.Email = SessionVariables.User.CurrentUser.Email;
             result.Facebook = SessionVariables.User.CurrentUser.Facebook;
@@ -36,18 +37,28 @@ namespace BTC.Controllers
             result.LastName = SessionVariables.User.CurrentUser.LastName;
             result.Linkedin = SessionVariables.User.CurrentUser.Linkedin;
             result.Phone = SessionVariables.User.CurrentUser.Phone;
-            result.ProfilePhotoUrl = SessionVariables.User.CurrentUser.ProfilePhotoUrl;
             result.Summary = SessionVariables.User.CurrentUser.Summary;
+            result.PhotoName = SessionVariables.User.CurrentUser.ProfilePhotoUrl;
             return View(result);
         }
 
-        [AuthAttribute(null)]
         [HttpPost]
         public JsonResult updateProfile(UpdateUserModel userModel)
         {
             ResponseModel result = new ResponseModel();
             userModel.ID = SessionVariables.User.CurrentUser.ID;
-            result = _userM.UpdateProfileUser(userModel, null);
+
+            if (userModel.ProfilePhotoUrl != null)
+            {
+                string file_name = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
+                string base_file_path = WebConfigurationManager.AppSettings["BaseUserFileAddress"];
+                string base_file_address = HttpContext.Server.MapPath(base_file_path);
+                string savedBaseFilePath = Path.Combine(base_file_address, file_name);
+                userModel.PhotoName = file_name;
+                userModel.PhotoSaveBaseUrl = savedBaseFilePath;
+            }
+
+            result = _userM.UpdateProfileUser(userModel);
             return Json(result);
         }
 

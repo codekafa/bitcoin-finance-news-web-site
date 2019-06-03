@@ -8,7 +8,7 @@ function getMyPosts() {
             $.each(result, function (i, item) {
 
                 var tr = "<tr>";
-                tr += "<td>" + "<image  src='/Images/_post/small/" + item.TopPhotoUrl + "' />" + "</td>";
+                tr += "<td>" + "<image  src='/Images/_post/small/" + item.TopPhotoUrl + "' style='max-width:200px;' />" + "</td>";
                 tr += "<td> " + item.Title + "</td>";
                 tr += "<td>";
 
@@ -18,7 +18,7 @@ function getMyPosts() {
                     tr += "<h6><span class='badge badge-danger'><i class='fa fa-times'></i></span></h6>";
                 }
                 tr += "</td>";
-                tr += "<td> " + item.IsPublish + "</td>";
+                tr += "<td> " + item.ViewCount + "</td>";
                 tr += "<td>";
                 tr += "<a href='/makale-duzenle/"+item.ID+"' target='_blank' class='btn btn-xs btn-primary' > Düzenle </a>";
 
