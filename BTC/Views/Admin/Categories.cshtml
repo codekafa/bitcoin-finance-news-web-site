@@ -50,6 +50,17 @@
     <script>
         $(document).ready(function () {
             getCategoryList();
+
+            $('#CategoryName').blur(function () {
+                $.ajax('/Blog/generateUrlFormat', {
+                    type: "GET",
+                    data: { uri: $(this).val() },
+                    success: function (result) {
+                        $('#CategoryUri').val(result);
+                    }
+                });
+            });
+
         });
     </script>
 

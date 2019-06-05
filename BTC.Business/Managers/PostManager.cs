@@ -93,6 +93,36 @@ namespace BTC.Business.Managers
 
         }
 
+        public ResponseModel UpdatePostIsPublishField(int category_id, bool state)
+        {
+            ResponseModel result = new ResponseModel();
+
+            bool p = _postRepo.ExecuteQuery("update UserPosts set IsPublish = @State where ID = @ID", new { ID = category_id, State = state });
+
+            if (p)
+            {
+                result.IsSuccess = true;
+                result.Message = "Güncelleme başarı ile gerçekleşti!";
+            }
+
+            return result;
+        }
+
+        public ResponseModel UpdatePostIsActiveField(int category_id, bool state)
+        {
+            ResponseModel result = new ResponseModel();
+
+            bool p = _postRepo.ExecuteQuery("update UserPosts set IsActive = @State where ID = @ID", new { ID = category_id, State = state });
+
+            if (p)
+            {
+                result.IsSuccess = true;
+                result.Message = "Güncelleme başarı ile gerçekleşti!";
+            }
+
+            return result;
+        }
+
         public ResponseModel DeleteComment(int comment_id)
         {
             ResponseModel result = new ResponseModel();
@@ -345,7 +375,7 @@ namespace BTC.Business.Managers
                                 from UserPosts us
                                 inner join Categories c on c.ID = us.CategoryID
                                 inner join Users u on u.ID = us.UserID
-                                where  (@CID is null or CategoryID = @CID) or UserID =@UID or IsPublish = @IsPublish ", new { CID = category_id, UID = user_id, IsPublish = publish }).ToList();
+                                where  (@CID is null or CategoryID = @CID) and UserID =@UID and IsPublish = @IsPublish ", new { CID = category_id, UID = user_id, IsPublish = publish }).ToList();
         }
 
         public void UpdatePublishFiledPost(int post_id, bool value)

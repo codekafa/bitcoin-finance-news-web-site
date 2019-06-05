@@ -30,21 +30,21 @@
 
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@item.FirstName  @item.LastName</td>
-                            <td>@item.Email</td>
-                            <td>@item.Phone</td>
-                            <td>@item.CreateDate.ToLongDateString() @item.CreateDate.ToLongTimeString()</td>
-                            <td>
-                                <input type="checkbox" class="form-control is_vip_user" user-id="@item.ID" @(item.IsVip ? "checked" : "") />
-                            </td>
-                            <td>
-                                <input type="checkbox" class="form-control is_active_user" user-id="@item.ID" @(item.IsActive ? "checked" : "") />
-                            </td>
-                            <td>
-                                <input type="checkbox" class="form-control is_approve_user" user-id="@item.ID" @(item.IsApproved ? "checked" : "") />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>@item.FirstName  @item.LastName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Phone</td>
+                                <td>@item.CreateDate.ToLongDateString() @item.CreateDate.ToLongTimeString()</td>
+                                <td>
+                                    <input type="checkbox" class="form-control is_vip_user" user-id="@item.ID" @(item.IsVip ? "checked" : "") />
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="form-control is_active_user" user-id="@item.ID" @(item.IsActive ? "checked" : "") />
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="form-control is_approve_user" user-id="@item.ID" @(item.IsApproved ? "checked" : "") />
+                                </td>
+                            </tr>
                         }
 
                     </tbody>
@@ -55,3 +55,16 @@
 </div>
 
 
+
+
+@section scripts
+{
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            loadUserHandlers();
+        });
+    </script>
+
+}

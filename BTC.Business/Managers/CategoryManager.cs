@@ -74,6 +74,7 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             result.Message = "Kategori başarı ile eklenmiştir!";
             result.ResultData = category;
+            ClearCategoryCache();
             return result;
 
         }
@@ -90,10 +91,10 @@ namespace BTC.Business.Managers
             catRepo.Update(category);
             result.IsSuccess = true;
             result.Message = "Kategori başarı ile güncellenmiştir!";
+            ClearCategoryCache();
             return result;
 
         }
-
         public ResponseModel UpdateCategoryState(int id, bool state)
         {
             ResponseModel result = new ResponseModel();
@@ -105,8 +106,13 @@ namespace BTC.Business.Managers
                 result.IsSuccess = true;
                 result.Message = "Kategori durumu başarı ile güncellenmiştir!";
             }
-
+            ClearCategoryCache();
             return result;
+        }
+
+        public void ClearCategoryCache()
+        {
+            MemoryCacheManager.Instance.Remove(ConstantProxy.CategoryCacheName);
         }
     }
 }

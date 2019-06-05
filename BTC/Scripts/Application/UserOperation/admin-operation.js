@@ -1,5 +1,171 @@
 ﻿
+
+/*users*/
+
+function loadUserHandlers() {
+
+    $('.is_vip_user').on('change', function () {
+
+        var c_h = $(this);
+        var id = c_h.attr("user-id");
+        if (c_h.is(":checked") == true) {
+            updateIsVip(id, true);
+        } else {
+            updateIsVip(id, false);
+        }
+
+    });
+
+    $('.is_active_user').on('change', function () {
+
+        var c_h = $(this);
+        var id = c_h.attr("user-id");
+        if (c_h.is(":checked") == true) {
+            updateIsActive(id, true);
+        } else {
+            updateIsActive(id, false);
+        }
+
+    });
+
+    $('.is_approve_user').on('change', function () {
+
+        var c_h = $(this);
+        var id = c_h.attr("user-id");
+        if (c_h.is(":checked") == true) {
+            updateIsApprove(id, true);
+        } else {
+            updateIsApprove(id, false);
+        }
+    });
+
+}
+
+
+function updateIsActive(id, state) {
+
+    var message = "";
+
+    if (state == true) {
+        message = "Seçili kullanıcı aktif olarak kaydedilecektir.Onaylıyor musunuz?";
+    } else {
+        message = "Seçili kullanıcı aktif statüsünden çıkacaktır.Onaylıyor musunuz?";
+    }
+
+    if (confirm(message) == true) {
+        $.ajax('/Admin/updateUserStatus', {
+            type: "GET",
+            dataType: "json",
+            data: { user_id: id, state: state, operation_type: 1 },
+            success: function (result) {
+                alertResponse(result);
+            }
+        });
+    }
+
+
+
+}
+
+function updateIsVip(id, state) {
+
+    var message = "";
+
+    if (state == true) {
+        message = "Seçili kullanıcı VİP olarak kaydedilecektir.Onaylıyor musunuz?";
+    } else {
+        message = "Seçili kullanıcı VİP statüsünden çıkacaktır.Onaylıyor musunuz?";
+    }
+
+    if (confirm(message) == true) {
+        $.ajax('/Admin/updateUserStatus', {
+            type: "GET",
+            dataType: "json",
+            data: { user_id: id, state: state, operation_type: 2 },
+            success: function (result) {
+                alertResponse(result);
+            }
+        });
+    }
+
+}
+
+function updateIsApprove(id, state) {
+
+
+    var message = "";
+
+    if (state == true) {
+        message = "Seçili kullanıcı onaylı olarak kaydedilecektir.Onaylıyor musunuz?";
+    } else {
+        message = "Seçili kullanıcı onaylı statüsünden çıkacaktır.Onaylıyor musunuz?";
+    }
+    if (confirm(message) == true) {
+        $.ajax('/Admin/updateUserStatus', {
+            type: "GET",
+            dataType: "json",
+            data: { user_id: id, state: state, operation_type: 3 },
+            success: function (result) {
+                alertResponse(result);
+            }
+        });
+    }
+}
+
+/*users*/
+
 /*posts*/
+
+function loadPostHandlers() {
+
+
+}
+
+function updatePostIsActive(id, state) {
+
+    var message = "";
+
+    if (state == true) {
+        message = "Seçili makale aktif olarak kaydedilecektir.Onaylıyor musunuz?";
+    } else {
+        message = "Seçili makale aktif statüsünden çıkacaktır.Onaylıyor musunuz?";
+    }
+
+    if (confirm(message) == true) {
+        $.ajax('/Admin/updatePostStatus', {
+            type: "GET",
+            dataType: "json",
+            data: { category_id: id, state: state, operation_type: 1 },
+            success: function (result) {
+                alertResponse(result);
+            }
+        });
+    }
+
+}
+
+function updatePostIsPublish(id, state) {
+
+    var message = "";
+
+    if (state == true) {
+        message = "Seçili makale yayında olarak kaydedilecektir.Onaylıyor musunuz?";
+    } else {
+        message = "Seçili makale yayında statüsünden çıkacaktır.Onaylıyor musunuz?";
+    }
+
+    if (confirm(message) == true) {
+        $.ajax('/Admin/updatePostStatus', {
+            type: "GET",
+            dataType: "json",
+            data: { category_id: id, state: state, operation_type: 2 },
+            success: function (result) {
+                alertResponse(result);
+            }
+        });
+    }
+
+}
 
 function getCategories(element) {
     $.ajax('/Blog/getCategories', {
@@ -132,17 +298,17 @@ function getCategoryList() {
         type: "GET",
         async: false,
         success: function (result) {
-
+            $('#categoryListBody').html("");
             $.each(result, function (i, item) {
                 var tr = "<tr>";
-                tr += "<td>" + item.Name + "<input type='hidden' id='category_name_" + item.ID + "' value=" + item.Name +"  /></td>";
-                tr += "<td>" + item.Uri + "<input type='hidden' id='category_uri_" + item.ID + "' value=" + item.Uri +"  /></td>";
+                tr += "<td>" + item.Name + "<input type='hidden' id='category_name_" + item.ID + "' value=" + item.Name + "  /></td>";
+                tr += "<td>" + item.Uri + "<input type='hidden' id='category_uri_" + item.ID + "' value=" + item.Uri + "  /></td>";
                 if (item.IsActive == true) {
                     tr += "<td><span class='alert alert-success btn-xs' style='padding:0px;'>Aktif</span></td>";
-                    tr += "<td><button type='button' onclick='updateCategoryState(" + item.ID + ",true)' class='btn btn-xs btn-danger'>Pasife Al</button><button type='button' onclick='editCategory(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
+                    tr += "<td><button type='button' onclick='updateCategoryState(" + item.ID + ",false)' class='btn btn-xs btn-danger'>Pasife Al</button><button type='button' onclick='editCategory(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
                 } else {
                     tr += "<td><span class='alert alert-danger btn-xs' style='padding:0px;'>Pasif</span></td>";
-                    tr += "<td><button type='button' onclick='updateCategoryState(" + item.ID + ",false)' class='btn btn-xs btn-success'>Aktife Al</button><button type='button' onclick='editCategory(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
+                    tr += "<td><button type='button' onclick='updateCategoryState(" + item.ID + ",true)' class='btn btn-xs btn-success'>Aktife Al</button><button type='button' onclick='editCategory(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
                 }
 
                 tr += "</tr>";
@@ -156,7 +322,7 @@ function getCategoryList() {
 function editCategory(id) {
     clearInputs();
     $('#CategoryID').val(id);
-    $('#CategoryName').val($('#category_name_'+id).val());
+    $('#CategoryName').val($('#category_name_' + id).val());
     $('#CategoryUri').val($('#category_uri_' + id).val());
 }
 
@@ -168,7 +334,7 @@ function clearInputs() {
 
 function addCategory() {
     var obj = new Object();
-    obj.CategoryID = $('#CategoryID').val();
+    obj.ID = $('#CategoryID').val();
     obj.Name = $('#CategoryName').val();
     obj.Uri = $('#CategoryUri').val();
 
@@ -192,7 +358,7 @@ function updateCategoryState(id, state) {
     $.ajax('/Admin/updateCategoryState', {
         type: "GET",
         dataType: "json",
-        data: { category_id: id, state: state },
+        data: { id: id, state: state },
         success: function (result) {
             alertResponse(result);
             if (result.IsSuccess == true) {
@@ -205,3 +371,40 @@ function updateCategoryState(id, state) {
 
 
 /*categories*/
+
+
+
+/*email settings*/
+
+function updateMailSettings() {
+    $.ajax({
+        url: "/Admin/updateMailSettings",
+        dataType: "json",
+        type: 'POST',
+        data: $('#mailSettingForm').serialize(),
+        success: function (data) {
+            alertResponse(data);
+        }
+    });
+}
+
+
+/*email settings*/
+
+/*site settings*/
+
+
+function updateSiteSettings() {
+    $.ajax({
+        url: "/Admin/updateSiteettings",
+        dataType: "json",
+        type: 'POST',
+        data: $('#siteSettingForm').serialize(),
+        success: function (data) {
+            alertResponse(data);
+        }
+    });
+}
+
+
+/*site settings*/

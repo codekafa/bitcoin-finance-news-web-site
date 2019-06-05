@@ -1,5 +1,6 @@
 ﻿using BTC.Base;
 using BTC.Business.Managers;
+using BTC.Common.Constants;
 using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Model.View;
@@ -16,11 +17,13 @@ namespace BTC.Controllers
         UserManager _userM;
         PostManager _postM;
         CategoryManager _catM;
+        SiteSettingManager _siteM;
         public AdminController()
         {
             _userM = new UserManager();
             _postM = new PostManager();
             _catM = new CategoryManager();
+            _siteM = new SiteSettingManager();
         }
 
         [Route("~/dashboard")]
@@ -37,6 +40,25 @@ namespace BTC.Controllers
         }
 
 
+        public JsonResult updateUserStatus(int user_id, bool state, int operation_type)
+        {
+            ResponseModel result = new ResponseModel();
+            switch (operation_type)
+            {
+                case 1:
+                    result = _userM.UpdateUserIsActiveField(user_id, state);
+                    break;
+                case 2:
+                    result = _userM.UpdateUserIsVipField(user_id, state);
+                    break;
+                case 3:
+                    result = _userM.UpdateUserIsApproveField(user_id, state);
+                    break;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [Route("~/makale-listesi")]
         public ActionResult Posts()
         {
@@ -48,6 +70,22 @@ namespace BTC.Controllers
             List<PostModel> list = new List<PostModel>();
             list = _postM.GetAllPost(category_id, user_id, publish);
             return PartialView(list);
+        }
+
+        public JsonResult updatePostStatus(int category_id, bool state, int operation_type)
+        {
+            ResponseModel result = new ResponseModel();
+            switch (operation_type)
+            {
+                case 1:
+                    result = _postM.UpdatePostIsActiveField(category_id, state);
+                    break;
+                case 2:
+                    result = _postM.UpdatePostIsPublishField(category_id, state);
+                    break;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult getWriters()
@@ -103,12 +141,12 @@ namespace BTC.Controllers
             ResponseModel result = new ResponseModel();
             if (category.ID > 0)
             {
-                category.Uri = _postM.GenerateUriFormat(category.Name);
+                category.Uri = _postM.GenerateUriFormat(category.Uri);
                 result = _catM.UpdateCategory(category);
             }
             else
             {
-                category.Uri = _postM.GenerateUriFormat(category.Name);
+                category.Uri = _postM.GenerateUriFormat(category.Uri);
                 category.CreateDate = DateTime.Now;
                 result = _catM.AddCategory(category);
             }
@@ -129,9 +167,24 @@ namespace BTC.Controllers
         [Route("~/mail-ayarlari")]
         public ActionResult MailSettings()
         {
-            return View();
+            var settingModel = StaticSettings.MailSettings;
+            return View(settingModel);
         }
 
+        [HttpPost]
+        public JsonResult updateMailSettings(MailSettings settingModel)
+        {
+            ResponseModel result = new ResponseModel();
+            if (ModelState.IsValid)
+            {    
+                result = _siteM.UpdateMailSettings(settingModel);
+            }
+            else
+            {
+                result.Message = "Lütfen zorunlu alanları doldurun!";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         [Route("~/sms-ayarlari")]
         public ActionResult SmsSettings()
@@ -142,7 +195,23 @@ namespace BTC.Controllers
         [Route("~/site-ayarlari")]
         public ActionResult SiteSettings()
         {
-            return View();
+            var settingModel = StaticSettings.SiteSettings;
+            return View(settingModel);
+        }
+
+        [HttpPost]
+        public JsonResult updateSiteettings(SiteSettings settingModel)
+        {
+            ResponseModel result = new ResponseModel();
+            if (ModelState.IsValid)
+            {
+                result = _siteM.UpdateSiteSettings(settingModel);
+            }
+            else
+            {
+                result.Message = "Lütfen zorunlu alanları doldurun!";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
     }

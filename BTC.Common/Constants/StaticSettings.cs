@@ -16,6 +16,7 @@ namespace BTC.Common.Constants
         private static SiteSettingsRepository _siteRepo;
         private static MailSettingRepository _mailRepo;
         private static SmsSettingsRepository _smsRepo;
+        private static CommentRepository _commentRepo;
         static StaticSettings()
         {
 
@@ -25,9 +26,11 @@ namespace BTC.Common.Constants
             SiteSettings = new SiteSettings();
             MailSettings = new MailSettings();
             SmsSettings = new SmsSettings();
+            LastComments = new List<Comments>();
             _siteRepo = new SiteSettingsRepository();
             _mailRepo = new MailSettingRepository();
             _smsRepo = new SmsSettingsRepository();
+            _commentRepo = new CommentRepository();
             ReloadSettings();
         }
 
@@ -36,6 +39,12 @@ namespace BTC.Common.Constants
             SiteSettings = _siteRepo.GetAll().FirstOrDefault();
             MailSettings = _mailRepo.GetAll().FirstOrDefault();
             SmsSettings = _smsRepo.GetAll().FirstOrDefault();
+            LastComments = _commentRepo.GetByCustomQuery("select * from Comments where IsPublish = 1 order by ID desc", null).ToList();
+
+            if (LastComments == null)
+            {
+                LastComments = new List<Comments>();
+            }
 
             if (SiteSettings == null)
             {
@@ -56,6 +65,8 @@ namespace BTC.Common.Constants
         public static MailSettings MailSettings { get; private set; }
 
         public static SmsSettings SmsSettings { get; private set; }
+
+        public static List<Comments> LastComments { get; private set; }
         public static StaticSettings Instance
         {
             get

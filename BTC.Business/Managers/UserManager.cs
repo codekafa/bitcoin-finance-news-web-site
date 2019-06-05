@@ -48,6 +48,51 @@ namespace BTC.Business.Managers
             return _userRepo.GetByID(user_id);
         }
 
+        public ResponseModel UpdateUserIsActiveField(int user_id, bool state)
+        {
+            ResponseModel result = new ResponseModel();
+
+            bool p =  _userRepo.ExecuteQuery("update Users set IsActive = @State where ID = @ID", new { ID = user_id, State = state });
+
+            if (p)
+            {
+                result.IsSuccess = true;
+                result.Message = "Güncelleme başarı ile gerçekleşti!";
+            }
+
+            return result;
+        }
+
+        public ResponseModel UpdateUserIsVipField(int user_id, bool state)
+        {
+            ResponseModel result = new ResponseModel();
+
+            bool p = _userRepo.ExecuteQuery("update Users set IsVip = @State where ID = @ID", new { ID = user_id, State = state });
+
+            if (p)
+            {
+                result.IsSuccess = true;
+                result.Message = "Güncelleme başarı ile gerçekleşti!";
+            }
+
+            return result;
+        }
+
+        public ResponseModel UpdateUserIsApproveField(int user_id, bool state)
+        {
+            ResponseModel result = new ResponseModel();
+
+            bool p = _userRepo.ExecuteQuery("update Users set IsApproved = @State where ID = @ID", new { ID = user_id, State = state });
+
+            if (p)
+            {
+                result.IsSuccess = true;
+                result.Message = "Güncelleme başarı ile gerçekleşti!";
+            }
+
+            return result;
+        }
+
         public Users GetUserByEmail(string email)
         {
             return _userRepo.GetByCustomQuery("select * from Users where Email=@Email", new { Email = email }).FirstOrDefault();
