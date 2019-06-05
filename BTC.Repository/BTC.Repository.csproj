@@ -46,6 +46,7 @@
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="CommentRepository.cs" />
     <Compile Include="Connection\BTCConnection.cs" />
+    <Compile Include="ContentViewRepository.cs" />
     <Compile Include="LoginAttemptsRepository.cs" />
     <Compile Include="MailSettingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

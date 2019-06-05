@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Entity\Categories.cs" />
     <Compile Include="Entity\Comments.cs" />
+    <Compile Include="Entity\ContentViews.cs" />
     <Compile Include="Entity\LoginAttempts.cs" />
     <Compile Include="Entity\MailSettings.cs" />
     <Compile Include="Entity\PasswordChangeMails.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Response\ResponseModel.cs" />
     <Compile Include="View\CommentListModel.cs" />
     <Compile Include="View\ContactModel.cs" />
+    <Compile Include="View\ContentViewListModel.cs" />
     <Compile Include="View\CurrentUserModel.cs" />
     <Compile Include="View\LoginUserModel.cs" />
     <Compile Include="View\PasswordChangeModel.cs" />
