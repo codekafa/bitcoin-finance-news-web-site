@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Yorum Listesi";
+    ViewBag.SelectPage = "tum-yorumlar";
+}
+
+<h2>Yorumlar</h2>
+
+<div class="container container-top-padding" style="padding-bottom:150px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Yorum</th>
+                            <th>Ad</th>
+                            <th>Email</th>
+                            <th>Tarih</th>
+                            <th>Makale</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="commentListBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            getComments();
+        });
+    </script>
+
+}

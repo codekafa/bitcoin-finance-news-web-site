@@ -1,7 +1,9 @@
-﻿using BTC.Model.Entity;
+﻿using BTC.Core.Base.Repository;
+using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Repository;
+using BTC.Repository.Connection;
 using BTC.Repository.ViewRepository;
 using System;
 using System.Collections.Generic;
@@ -89,6 +91,51 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             return result;
 
+        }
+
+        public ResponseModel DeleteComment(int comment_id)
+        {
+            ResponseModel result = new ResponseModel();
+            bool op = _cRepo.ExecuteQuery("delete from  Comments  where ID = @ID", new { ID = comment_id });
+
+            if (op)
+            {
+                result.IsSuccess = true;
+                result.Message = "Yorum başarı ile silindi!";
+            }
+            else
+            {
+                result.IsSuccess = false;
+                result.Message = "Bir hata oluştu!";
+            }
+            return result;
+        }
+
+        public ResponseModel PublishComment(int comment_id)
+        {
+            ResponseModel result = new ResponseModel();
+            bool op = _cRepo.ExecuteQuery("update Comments set IsPublish = 1 where ID = @ID", new { ID = comment_id });
+
+            if (op)
+            {
+                result.IsSuccess = true;
+                result.Message = "Yorum başarı ile yayınlandı!";
+            }
+            else
+            {
+                result.IsSuccess = false;
+                result.Message = "Bir hata oluştu!";
+            }
+            return result;
+        }
+
+        public List<CommentListModel> GetWaitingComments()
+        {
+            var cRepo = new BaseDapperRepository<BTCConnection, CommentListModel>();
+            var list = cRepo.GetByCustomQuery(@"select up.Title as [PostTitle], c.* from Comments c 
+                        inner join UserPosts up on up.ID = c.PostID
+                        where c.IsPublish = 0", null).ToList();
+            return list;
         }
 
         public void UpdateViewCount(int iD)
@@ -287,6 +334,18 @@ namespace BTC.Business.Managers
                                 inner join Users u on u.ID = us.UserID
                                 where   us.IsPublish = 1 and us.IsActive = 1 Order by  us.ViewCount desc", null).ToList();
             return postList;
+        }
+
+        public List<PostModel> GetAllPost(int? category_id, int user_id, bool publish)
+        {
+            return _postModelRepo.GetByCustomQuery(@"select  TOP 20
+                                u.FirstName + ' ' + u.LastName as [Writer],
+                                c.Name as [Category],
+                                us.*
+                                from UserPosts us
+                                inner join Categories c on c.ID = us.CategoryID
+                                inner join Users u on u.ID = us.UserID
+                                where  (@CID is null or CategoryID = @CID) or UserID =@UID or IsPublish = @IsPublish ", new { CID = category_id, UID = user_id, IsPublish = publish }).ToList();
         }
 
         public void UpdatePublishFiledPost(int post_id, bool value)

@@ -1,0 +1,57 @@
+﻿@using BTC.Model.Entity
+@{
+    ViewBag.Title = "Kullanıcı Listesi";
+    ViewBag.SelectPage = "tum-uyeler";
+}
+
+
+@model List<Users>
+
+
+
+<div class="container container-top-padding" style="padding-bottom:150px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" style="margin-top: 30px;">
+                <h2>Kullanıcılar</h2>
+                <table id="userListTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ad</th>
+                            <th>Email</th>
+                            <th>Tel</th>
+                            <th>Tarih</th>
+                            <th>Vip</th>
+                            <th>Aktif</th>
+                            <th>Onaylı</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersListBody">
+
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.FirstName  @item.LastName</td>
+                            <td>@item.Email</td>
+                            <td>@item.Phone</td>
+                            <td>@item.CreateDate.ToLongDateString() @item.CreateDate.ToLongTimeString()</td>
+                            <td>
+                                <input type="checkbox" class="form-control is_vip_user" user-id="@item.ID" @(item.IsVip ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_active_user" user-id="@item.ID" @(item.IsActive ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_approve_user" user-id="@item.ID" @(item.IsApproved ? "checked" : "") />
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

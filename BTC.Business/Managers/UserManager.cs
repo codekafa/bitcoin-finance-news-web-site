@@ -1,8 +1,10 @@
 ﻿using BTC.Common.Cryptology;
+using BTC.Core.Base.Repository;
 using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Repository;
+using BTC.Repository.Connection;
 using BTC.Setting;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,11 @@ namespace BTC.Business.Managers
         public Users CreateUser(Users userModel)
         {
             return _userRepo.CreateUser(userModel);
+        }
+
+        public List<Users> GetAllUsers()
+        {
+            return _userRepo.GetAll();
         }
 
         public bool UpdateUser(Users userModel)
@@ -122,5 +129,15 @@ namespace BTC.Business.Managers
             return result;
         }
 
+
+        public List<UserSelectListModel> GetSelectedUsers(int role_id)
+        {
+            var viewRepo = new BaseDapperRepository<BTCConnection, UserSelectListModel>();
+            var list = viewRepo.GetByCustomQuery(@"
+                            select u.FirstName + ' ' + u.LastName as [FullName] , u.ID as [ID] from Users u
+                            inner join UserRoleRels ur on ur.UserID = u.ID
+                            where ur.RoleID = @RoleID", new { RoleID = role_id }).ToList();
+            return list;
+        }
     }
 }

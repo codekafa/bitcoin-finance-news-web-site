@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Kategori Listesi";
+    ViewBag.SelectPage = "tum-kategoriler";
+}
+
+<h2>Kategoriler</h2>
+
+<div class="container container-top-padding" style="padding-bottom:150px">
+    <div class="row" style="padding-bottom: 20px;">
+        <div class="col-md-4">
+            <input type="hidden" id="CategoryID" name="CategoryID" value="" class="form-control" />
+            <label for="CategoryName">Kategori Adı</label>
+            <input type="text" id="CategoryName" name="CategoryName" value="" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label for="CategoryUri">Kategori Url</label>
+            <input type="text" id="CategoryUri" name="CategoryUri" value="" class="form-control" />
+        </div>
+        <div class="col-md-4" style="margin-top: 24px;">
+            <button class="btn btn-primary" type="button" onclick="addCategory()"> Kaydet </button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ad</th>
+                    <th>Url</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody id="categoryListBody"></tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            getCategoryList();
+        });
+    </script>
+
+}

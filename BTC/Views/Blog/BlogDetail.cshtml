@@ -29,8 +29,20 @@
                 <div class="box-article">
 
                     @Html.Raw(Model.Body)
-                </div>
 
+                    <br>
+                    @if (!string.IsNullOrWhiteSpace(Model.Tags))
+                    {
+                        string[] tags = Model.Tags.Split(',');
+                        <h3>Etiketler</h3>
+                        for (int i = 0; i < tags.Count(); i++)
+                        {
+                            <a href="/blog/etiket/@tags[i]" target="_blank" class="badge  badge-pill badge-primary">@tags[i]</a>
+                        }
+
+                    }
+
+                </div>
                 <div class="box-comment">
                     <div class="comments-author">
                         <img src="~/Images/_userfiles/profile/small/@Model.WriterPhoto" alt="@Model.Writer" />

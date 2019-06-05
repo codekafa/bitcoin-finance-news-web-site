@@ -61,6 +61,7 @@
     <Compile Include="Entity\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response\ResponseModel.cs" />
+    <Compile Include="View\CommentListModel.cs" />
     <Compile Include="View\ContactModel.cs" />
     <Compile Include="View\CurrentUserModel.cs" />
     <Compile Include="View\LoginUserModel.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="View\PostModel.cs" />
     <Compile Include="View\RegisterUserModel.cs" />
     <Compile Include="View\UpdateUserModel.cs" />
+    <Compile Include="View\UserSelectListModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Core\BTC.Core.csproj">

@@ -63,10 +63,10 @@
                             <div>
                                 <p> Hoşgeldiniz - @currentUser.FullName </p>
 
-                                @if (currentUser.IsAdmin)
+                                @*@if (currentUser.IsAdmin)
                                 {
                                     <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git</a>
-                                }
+                                }*@
                                 @*<a href="~/cikis-yap"> Çıkış</a>*@
 
                             </div>
@@ -124,7 +124,38 @@
                     </ul>
                 </div>
             }
-
+            @if (currentUser != null && currentUser.IsAdmin)
+            {
+                <div class="box-list">
+                    <p class="sub-title">Yönetim</p>
+                    <ul class="list-unstyled components">
+                        <li class="tum-uyeler">
+                            <a href="~/kullanicilar"><i class="fas fa-users"></i>Kullanıcılar</a>
+                        </li>
+                        <li class="tum-makaleler">
+                            <a href="~/makale-listesi"><i class="fas fa-list"></i>Makaleler</a>
+                        </li>
+                        <li class="tum-urunler">
+                            <a href="~/urun-listesi"><i class="fas fa-list"></i>Ürünler</a>
+                        </li>
+                        <li class="tum-yorumlar">
+                            <a href="~/yorum-listesi"><i class="fas fa-comments"></i>Yorumlar</a>
+                        </li>
+                        <li class="tum-kategoriler">
+                            <a href="~/kategori-listesi"><i class="fas fa-list"></i>Kategoriler</a>
+                        </li>
+                        <li class="mail">
+                            <a href="~/mail-ayarlari"><i class="fas fa-sms"></i>Mail Ayarları</a>
+                        </li>
+                        <li class="sms">
+                            <a href="~/sms-ayarlari"><i class="fas fa-sms"></i>Sms Ayarları</a>
+                        </li>
+                        <li class="site">
+                            <a href="~/site-ayarlari"><i class="fas fa-sitemap"></i>Site Ayarları</a>
+                        </li>
+                    </ul>
+                </div>
+            }
             <div class="box-list">
                 <p class="sub-title">Biz Kimiz</p>
                 <ul class="list-unstyled components">

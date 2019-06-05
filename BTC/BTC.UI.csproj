@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Base\AuthAttribute.cs" />
     <Compile Include="Base\BaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -1787,6 +1788,7 @@
     <Content Include="Scripts\Application\Editor\add-post.js" />
     <Content Include="Scripts\Application\Editor\edit-post.js" />
     <Content Include="Scripts\Application\Global\app-global.js" />
+    <Content Include="Scripts\Application\UserOperation\admin-operation.js" />
     <Content Include="Scripts\Application\UserOperation\contact.js" />
     <Content Include="Scripts\Application\UserOperation\user-operation.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1943,6 +1945,16 @@
     <Content Include="Views\Blog\_GetPartialViewPosts.cshtml" />
     <Content Include="Views\Blog\_GetPartialViewBestViewPosts.cshtml" />
     <Content Include="Views\Blog\_GetCategories.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\Posts.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
+    <Content Include="Views\Admin\Comments.cshtml" />
+    <Content Include="Views\Admin\MailSettings.cshtml" />
+    <Content Include="Views\Admin\SmsSettings.cshtml" />
+    <Content Include="Views\Admin\SiteSettings.cshtml" />
+    <Content Include="Views\Admin\Categories.cshtml" />
+    <Content Include="Views\Admin\_GetPosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

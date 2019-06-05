@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Makale Listesi";
+    ViewBag.SelectPage = "tum-makaleler";
+}
+
+
+<form method="post" id="post_list" action="Posts" style="padding-bottom:150px">
+    <div class="container container-top-padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row" style="margin-top: 60px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label for="category_id">Kategori</label>
+                                <select id="category_id" name="category_id" class="form-control"></select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="user_id">Yazar</label>
+                                <select id="user_id" name="user_id" class="form-control"> </select>
+                            </div>
+                            <div class="col-md-4" style="margin-top: 28px;">
+                                <label><input id="publish" type="checkbox" />Yayında Olanlar</label>
+                                <button type="button"  onclick="getPostList()" class="btn btn-primary">Ara</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="userList">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+@section scripts
+{
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            getWriters("user_id");
+            getCategories("category_id");
+        });
+    </script>
+
+}
