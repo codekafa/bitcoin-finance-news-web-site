@@ -14,13 +14,15 @@ namespace BTC.Model.View
         private bool? _isWriter { get; set; }
         private bool? _isAdmin { get; set; }
         private bool? _isMember { get; set; }
-
+        public  List<ContentViewListModel> ContentViews { get; set; }
         private bool? _isSupplier { get; set; }
         public CurrentUserModel()
         {
             Roles = new List<UserRoleRels>();
+            ContentViews = new List<ContentViewListModel>();
         }
         public Users CurrentUser { get; set; }
+
         public List<UserRoleRels> Roles { get; set; }
         public bool IsWriter
         {
@@ -55,7 +57,6 @@ namespace BTC.Model.View
                 return _isMember.Value;
             }
         }
-
         public bool IsSupplier
         {
             get

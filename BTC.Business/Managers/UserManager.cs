@@ -1,4 +1,5 @@
-﻿using BTC.Common.Cryptology;
+﻿using BTC.Common.Constants;
+using BTC.Common.Cryptology;
 using BTC.Core.Base.Repository;
 using BTC.Model.Entity;
 using BTC.Model.Response;
@@ -22,12 +23,15 @@ namespace BTC.Business.Managers
 
         UserRoleRelRepository _userRoleRepo;
 
+        ContentViewManager _contentM;
+
         ImageManager _imageM;
         public UserManager()
         {
             _userRepo = new UserRepository();
             _userRoleRepo = new UserRoleRelRepository();
             _imageM = new ImageManager();
+            _contentM = new ContentViewManager();
         }
         public Users CreateUser(Users userModel)
         {
@@ -52,7 +56,7 @@ namespace BTC.Business.Managers
         {
             ResponseModel result = new ResponseModel();
 
-            bool p =  _userRepo.ExecuteQuery("update Users set IsActive = @State where ID = @ID", new { ID = user_id, State = state });
+            bool p = _userRepo.ExecuteQuery("update Users set IsActive = @State where ID = @ID", new { ID = user_id, State = state });
 
             if (p)
             {
@@ -112,6 +116,41 @@ namespace BTC.Business.Managers
             CurrentUserModel result = new CurrentUserModel();
             result.CurrentUser = user;
             result.Roles = _userRoleRepo.GetByCustomQuery("select * from UserRoleRels where UserID = @UserID", new { UserID = user.ID }).ToList();
+
+            foreach (var item in StaticSettings.ContentViews)
+            {
+                if (result.CurrentUser.IsVip && item.CanSeeVip)
+                {
+                    result.ContentViews.Add(item);
+                    continue;
+                }
+
+                if (result.IsMember && item.CanSeeMember)
+                {
+                    result.ContentViews.Add(item);
+                    continue;
+                }
+
+                if (result.IsWriter && item.CanSeeWriter)
+                {
+                    result.ContentViews.Add(item);
+                    continue;
+                }
+
+                if (result.IsSupplier && item.CanSeeTrader)
+                {
+                    result.ContentViews.Add(item);
+                    continue;
+                }
+
+                if (result.IsAdmin)
+                {
+                    result.ContentViews.Add(item);
+                    continue;
+                }
+            }
+
+
             return result;
         }
 

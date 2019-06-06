@@ -18,12 +18,14 @@ namespace BTC.Controllers
         PostManager _postM;
         CategoryManager _catM;
         SiteSettingManager _siteM;
+        ContentViewManager _contentM;
         public AdminController()
         {
             _userM = new UserManager();
             _postM = new PostManager();
             _catM = new CategoryManager();
             _siteM = new SiteSettingManager();
+            _contentM = new ContentViewManager();
         }
 
         [Route("~/dashboard")]
@@ -176,7 +178,7 @@ namespace BTC.Controllers
         {
             ResponseModel result = new ResponseModel();
             if (ModelState.IsValid)
-            {    
+            {
                 result = _siteM.UpdateMailSettings(settingModel);
             }
             else
@@ -211,6 +213,76 @@ namespace BTC.Controllers
             {
                 result.Message = "Lütfen zorunlu alanları doldurun!";
             }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [Route("~/menu-icerikleri")]
+        public ActionResult ContentList()
+        {
+            var list = _contentM.GetAllContentViews();
+            return View(list);
+        }
+
+        [Route("~/icerik-olustur")]
+        [Route("~/icerik-duzenle/{content_id}")]
+        public ActionResult AddOrEditContentView(int? content_id)
+        {
+            ContentViews contentView = new ContentViews();
+
+            if (content_id.HasValue)
+                contentView = _contentM.GetContentViewByID(content_id.Value);
+
+            if (contentView == null)
+                contentView = new ContentViews();
+
+            return View(contentView);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult addOrEditContent(ContentViews content)
+        {
+            ResponseModel result = new ResponseModel();
+
+            if (content.ID <= 0)
+            {
+                result = _contentM.AddNewContent(content);
+            }
+            else
+            {
+                result = _contentM.UpdateContent(content);
+            }
+
+            return Json(result);
+        }
+
+
+        public JsonResult updateContentStatus(int content_id, bool state, int operation_type)
+        {
+            ResponseModel result = new ResponseModel();
+            switch (operation_type)
+            {
+                case 1:
+                    result = _contentM.UpdateIsPublishContent(content_id, state);
+                    break;
+                case 2:
+                    result = _contentM.UpdateCanSeeMemberContent(content_id, state);
+                    break;
+                case 3:
+                    result = _contentM.UpdateCanSeeTraderContent(content_id, state);
+                    break;
+                case 4:
+                    result = _contentM.UpdateCanSeeUserContent(content_id, state);
+                    break;
+                case 5:
+                    result = _contentM.UpdateCanSeeVipContent(content_id, state);
+                    break;
+                case 6:
+                    result = _contentM.UpdateCanSeeWriterContent(content_id, state);
+                    break; ;
+            }
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

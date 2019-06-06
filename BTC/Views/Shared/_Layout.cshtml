@@ -64,9 +64,9 @@
                                 <p> Hoşgeldiniz - @currentUser.FullName </p>
 
                                 @*@if (currentUser.IsAdmin)
-                                {
-                                    <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git</a>
-                                }*@
+                                    {
+                                        <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git</a>
+                                    }*@
                                 @*<a href="~/cikis-yap"> Çıkış</a>*@
 
                             </div>
@@ -124,6 +124,39 @@
                     </ul>
                 </div>
             }
+
+            @if (BTC.Common.Constants.StaticSettings.ContentViews.Count > 0)
+            {
+                <div class="box-list">
+                    <p class="sub-title">İçerİkler</p>
+                    <ul class="list-unstyled components">
+
+                        @if (currentUser != null)
+                        {
+
+                            foreach (var item in currentUser.ContentViews.OrderBy(x=>x.RowNumber).ToList())
+                            {
+                                <li class="@item.Uri">
+                                    <a href="~/gorsel/@item.Uri"><i class="fas fa-file-image"></i>@item.Title</a>
+                                </li>
+                            }
+
+                        }
+                        else
+                        {
+                            foreach (var item in BTC.Common.Constants.StaticSettings.ContentViews.Where(x => x.CanSeeUser).OrderBy(x=> x.RowNumber).ToList())
+                            {
+                                <li class="@item.Uri">
+                                    <a href="~/gorsel/@item.Uri"><i class="fas  fa-file-image"></i>@item.Title</a>
+                                </li>
+                            }
+                        }
+
+
+                    </ul>
+                </div>
+            }
+
             @if (currentUser != null && currentUser.IsAdmin)
             {
                 <div class="box-list">
@@ -152,6 +185,9 @@
                         </li>
                         <li class="site">
                             <a href="~/site-ayarlari"><i class="fas fa-sitemap"></i>Site Ayarları</a>
+                        </li>
+                        <li class="icerik">
+                            <a href="~/menu-icerikleri"><i class="fas fa-book"></i>İçerik Listesi</a>
                         </li>
                     </ul>
                 </div>
@@ -247,15 +283,15 @@
                             <div class="col-lg-3">
                                 <h3>Sosyal Meda</h3>
                                 @*<div class="newsletter-bx">
-                                    <form role="search" method="post">
-                                        <div class="input-group">
-                                            <input name="news-letter" class="form-control" placeholder="ENTER YOUR EMAIL" type="text">
-                                            <span class="input-group-btn">
-                                                <button type="submit" class="site-button"><i class="far fa-paper-plane"></i></button>
-                                            </span>
-                                        </div>
-                                    </form>
-                                </div>*@
+                                        <form role="search" method="post">
+                                            <div class="input-group">
+                                                <input name="news-letter" class="form-control" placeholder="ENTER YOUR EMAIL" type="text">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="site-button"><i class="far fa-paper-plane"></i></button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>*@
 
                                 <div class="social">
                                     <ul>
@@ -278,7 +314,7 @@
                                         <div class="col-md-8 p-0">
                                             <h3>Adres</h3>
                                             <p>@BTC.Common.Constants.StaticSettings.SiteSettings.Address  </p>
-</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -353,7 +389,7 @@
 
     <script type="text/javascript">
 
-        
+
 
     </script>
 

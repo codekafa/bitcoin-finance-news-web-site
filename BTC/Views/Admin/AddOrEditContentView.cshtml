@@ -1,0 +1,195 @@
+﻿@using BTC.Model.Entity
+@{
+    ViewBag.Title = "İçerik İşlemleri";
+    ViewBag.SelectPage = "icerik";
+}
+@model ContentViews
+
+@section styles
+{
+    <style>
+        .row {
+            margin: 10px;
+        }
+
+        .left-w {
+            width: 20px;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="container box-content-info">
+        <div class="container-fluid container-top-padding">
+            <div class="col-md-12">
+                <div class="col-lg-12">
+                    <form id="form-addContentView" method="post">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">İçerik Detayları</h5>
+                            </div>
+                            <div class="panel-body fixed-margin">
+                                <div class="row">
+                                    <input name="ID" id="ID" value="@Model.ID" type="hidden" class="form-control" />
+                                    <div class="col-md-2">
+                                        Sıra No <span style="color:red">*</span>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input name="RowNumber" id="RowNumber" value="@Model.RowNumber" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Başlık: <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="Title" id="Title" value="@Model.Title" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Url: <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="Uri" id="Uri" value="@Model.Uri" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Anahtar Kelimeler: <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input name="Keywords" id="Keywords" value="@Model.Keywords" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Açıklama: <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <textarea name="Description" rows="3" id="Description" class="form-control">@Model.Description </textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">İçerik: <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <textarea name="ContentBody" rows="9" id="ContentBody" class="form-control">@Model.ContentBody </textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Yayında mı? <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="IsPublish" name="IsPublish" value="@Model.IsPublish">
+                                        <input type="checkbox" class="form-control left-w" name="IsPublishCheck" id="IsPublishCheck" @(Model.IsPublish ? "checked" : "") value="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Tüm Kullanıcılar Görebilir <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="CanSeeUser" name="CanSeeUser" value="@Model.CanSeeUser">
+                                        <input type="checkbox" class="form-control left-w" name="CanSeeUserCheck" id="CanSeeUserCheck" @(Model.CanSeeUser ? "checked" : "") value="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Tüm Üyeler Görebilir <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="CanSeeMember" name="CanSeeMember" value="@Model.CanSeeMember">
+                                        <input type="checkbox" class="form-control left-w" name="CanSeeMemberCheck" id="CanSeeMemberCheck" @(Model.CanSeeMember ? "checked" : "") value="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Tüm Yazarlar Görebilir <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="CanSeeWriter" name="CanSeeWriter" value="@Model.CanSeeWriter">
+                                        <input type="checkbox" class="form-control left-w" name="CanSeeWriterCheck" id="CanSeeWriterCheck" @(Model.CanSeeWriter ? "checked" : "") value="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Tüm Tedarikçiler Görebilir <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="CanSeeTrader" name="CanSeeTrader" value="@Model.CanSeeTrader">
+                                        <input type="checkbox" class="form-control left-w" name="CanSeeTraderCheck" id="CanSeeTraderCheck" @(Model.CanSeeTrader ? "checked" : "") value="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Tüm Vip üyeler Görebilir <span style="color:red">*</span></div>
+                                    <div class="col-md-10">
+                                        <input type="hidden" id="CanSeeVip" name="CanSeeVip" value="@Model.CanSeeVip">
+                                        <input type="checkbox" class="form-control left-w" name="CanSeeVipCheck" id="CanSeeVipCheck" @(Model.CanSeeVip ? "checked" : "") value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer" style="text-align:right;">
+                            <button id="btnSave" class="btn btn-primary will-disable">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+
+            
+            $('#Title').blur(function () {
+                $.ajax('/Blog/generateUrlFormat', {
+                    type: "GET",
+                    data: { uri: $(this).val() },
+                    success: function (result) {
+                        $('#Uri').val(result);
+                    }
+                });
+            });
+
+            $('#form-addContentView').on('submit', function (e) {
+                e.preventDefault();
+
+                if ($('#CanSeeVipCheck').prop('checked') == true) {
+                    $('#CanSeeVip').val(true);
+                }
+                if ($('#CanSeeTraderCheck').prop('checked') == true) {
+                    $('#CanSeeTrader').val(true);
+                }
+                if ($('#CanSeeWriterCheck').prop('checked') == true) {
+                    $('#CanSeeWriter').val(true);
+                }
+                if ($('#CanSeeMemberCheck').prop('checked') == true) {
+                    $('#CanSeeMember').val(true);
+                }
+                if ($('#CanSeeUserCheck').prop('checked') == true) {
+                    $('#CanSeeUser').val(true);
+                }
+                 if ($('#IsPublishCheck').prop('checked') == true) {
+                    $('#IsPublish').val(true);
+                }
+
+                var dat = new FormData($('#form-addContentView').get(0));
+
+                $.ajax({
+                    data: dat,
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    url: '/Admin/addOrEditContent',
+                    success: function (d) {
+                        alertResponse(d);
+
+                        if (d.IsSuccess == true) {
+                            location.reload();
+                        }
+
+                    }
+                });
+            });
+
+
+
+        });
+
+    </script>
+}
+
+
+

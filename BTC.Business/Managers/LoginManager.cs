@@ -35,6 +35,9 @@ namespace BTC.Business.Managers
                 var currentUserModel = _userM.GetCurrentUserModel(db_user);
                 SessionVariables.SetUser(currentUserModel);
                 var do_user_log = UserBrowserHelper.getUserRequestInfo();
+
+
+
                 DoLogLoginUser(do_user_log);
                 result.IsSuccess = true;
             }

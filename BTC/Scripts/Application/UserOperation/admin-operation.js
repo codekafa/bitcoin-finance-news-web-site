@@ -4,8 +4,9 @@
 
 function loadUserHandlers() {
 
-    $('.is_vip_user').on('change', function () {
+    $('.is_vip_user').on('change', function (e) {
 
+        e.preventDefault();
         var c_h = $(this);
         var id = c_h.attr("user-id");
         if (c_h.is(":checked") == true) {

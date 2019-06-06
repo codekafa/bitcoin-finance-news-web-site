@@ -1,0 +1,142 @@
+﻿@using BTC.Model.Entity;
+@{
+    ViewBag.Title = "İçerik Listesi";
+    ViewBag.SelectPage = "icerik";
+}
+@model List<ContentViews>
+
+<h2>İçerik Listesi</h2>
+
+<div class="container container-top-padding" style="padding-bottom:150px">
+    <div class="row">
+        <div class="row">  <a href="~/icerik-olustur" class="btn btn-primary" target="_blank">Yeni İçerik Oluştur</a></div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Bilgiler</th>
+                    <th colspan="7" class="text-center">Yetkiler</th>
+                </tr>
+                <tr>
+                    <th>Sıra No</th>
+                    <th>Başlık</th>
+                    <th>Yayın</th>
+                    <th>Anonim</th>
+                    <th>Üyeler</th>
+                    <th>Yazarlar</th>
+                    <th>Tedarikçiler</th>
+                    <th>Vip</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody id="contentListBody">
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @item.RowNumber</td>
+                        <td>@item.Title</td>
+                        <td><input type="checkbox" content-id="@item.ID" class="form-control is_publish" @(item.IsPublish ? "checked" : "") /></td>
+                        <td><input type="checkbox" content-id="@item.ID" class="form-control is_anonim" @(item.CanSeeUser ? "checked" : "") /></td>
+                        <td><input type="checkbox" content-id="@item.ID" class="form-control is_member" @(item.CanSeeMember ? "checked" : "") /></td>
+                        <td><input type="checkbox" content-id="@item.ID" class="form-control is_writer" @(item.CanSeeWriter ? "checked" : "") /></td>
+                        <td><input type="checkbox" content-id="@item.ID" class="form-control is_supplier" @(item.CanSeeTrader ? "checked" : "") /></td>
+                        <td><input type="checkbox" content-id="@item.ID" class="form-control is_vip" @(item.CanSeeVip ? "checked" : "") /></td>
+                        <td><a class="btn btn-primary btn-xs" href="~/icerik-duzenle/@item.ID" target="_blank">Düzenle</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+
+            $('.is_publish').on('change', function () {
+
+                var c_h = $(this);
+                var id = c_h.attr("content-id");
+                if (c_h.is(":checked") == true) {
+                    updateStatusContent(id, 1, true);
+                } else {
+                    updateStatusContent(id, 1, false);
+                }
+            });
+
+            $('.is_anonim').on('change', function () {
+
+                var c_h = $(this);
+                var id = c_h.attr("content-id");
+                if (c_h.is(":checked") == true) {
+                    updateStatusContent(id, 4, true);
+                } else {
+                    updateStatusContent(id, 4, false);
+                }
+            });
+
+            $('.is_member').on('change', function () {
+
+                var c_h = $(this);
+                var id = c_h.attr("content-id");
+                if (c_h.is(":checked") == true) {
+                    updateStatusContent(id, 2, true);
+                } else {
+                    updateStatusContent(id, 2, false);
+                }
+            });
+
+
+            $('.is_writer').on('change', function () {
+
+                var c_h = $(this);
+                var id = c_h.attr("content-id");
+                if (c_h.is(":checked") == true) {
+                    updateStatusContent(id, 6, true);
+                } else {
+                    updateStatusContent(id, 6, false);
+                }
+            });
+
+            $('.is_supplier').on('change', function () {
+
+                var c_h = $(this);
+                var id = c_h.attr("content-id");
+                if (c_h.is(":checked") == true) {
+                    updateStatusContent(id, 3, true);
+                } else {
+                    updateStatusContent(id, 3, false);
+                }
+            });
+
+            $('.is_vip').on('change', function () {
+
+                var c_h = $(this);
+                var id = c_h.attr("content-id");
+                if (c_h.is(":checked") == true) {
+                    updateStatusContent(id, 5, true);
+                } else {
+                    updateStatusContent(id, 5, false);
+                }
+            });
+
+        });
+
+        function updateStatusContent(id, o_t, state) {
+
+            $.ajax('/Admin/updateContentStatus', {
+                type: "GET",
+                dataType: "json",
+                data: { content_id: id, state: state, operation_type: o_t },
+                success: function (result) {
+                    alertResponse(result);
+                }
+            });
+        }
+
+    </script>
+}

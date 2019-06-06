@@ -1,0 +1,39 @@
+﻿@using BTC.Model.Entity
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.SelectPage = Model.Uri;
+}
+
+@model ContentViews
+
+<div class="feed-content blog-single">
+    <div class="box-single-img">
+        <div class="gr-back"></div>
+        <div class="container info-blog">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>@Model.Title</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container content-single-art" style="margin: 17px auto;">
+        <div class="row">
+
+            <div class="col-md-12 box-blog-single">
+                <div class="box-article">
+
+                    <p>@Model.Description</p>
+
+                    @Html.Raw(Model.ContentBody)
+
+                    <br>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
