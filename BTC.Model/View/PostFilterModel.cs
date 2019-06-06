@@ -14,5 +14,7 @@ namespace BTC.Model.View
         public string TagName { get; set; }
 
         public string SearchKey { get; set; }
+
+        public string Writer { get; set; }
     }
 }

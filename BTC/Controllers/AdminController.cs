@@ -19,6 +19,7 @@ namespace BTC.Controllers
         CategoryManager _catM;
         SiteSettingManager _siteM;
         ContentViewManager _contentM;
+        MainMenuManager _menuM;
         public AdminController()
         {
             _userM = new UserManager();
@@ -26,6 +27,7 @@ namespace BTC.Controllers
             _catM = new CategoryManager();
             _siteM = new SiteSettingManager();
             _contentM = new ContentViewManager();
+            _menuM = new MainMenuManager();
         }
 
         [Route("~/dashboard")]
@@ -37,10 +39,9 @@ namespace BTC.Controllers
         [Route("~/kullanicilar")]
         public ActionResult Users()
         {
-            var user_List = _userM.GetAllUsers();
+            var user_List = _userM.GetUserListModel();
             return View(user_List);
         }
-
 
         public JsonResult updateUserStatus(int user_id, bool state, int operation_type)
         {
@@ -257,7 +258,6 @@ namespace BTC.Controllers
             return Json(result);
         }
 
-
         public JsonResult updateContentStatus(int content_id, bool state, int operation_type)
         {
             ResponseModel result = new ResponseModel();
@@ -286,5 +286,41 @@ namespace BTC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("~/menu-ayarlari")]
+        public ActionResult MainMenu()
+        {
+            return View();
+        }
+
+        public JsonResult getMenuItems()
+        {
+            return Json(_menuM.GetMenuItems(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult addOrEditMenu(MainMenu menu)
+        {
+            ResponseModel result = new ResponseModel();
+            if (menu.ID > 0)
+            {
+                result = _menuM.UpdateMenu(menu);
+            }
+            else
+            {
+                menu.IsActive = true;
+                result = _menuM.AddMenu(menu);
+            }
+            return Json(result);
+        }
+
+        public JsonResult updateMenuState(int id, bool state)
+        {
+            ResponseModel result = new ResponseModel();
+
+            result = _menuM.UpdateMenuState(id, state);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

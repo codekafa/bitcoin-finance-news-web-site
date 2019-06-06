@@ -1,11 +1,11 @@
-﻿@using BTC.Model.Entity
+﻿@using BTC.Model.View
 @{
     ViewBag.Title = "Kullanıcı Listesi";
     ViewBag.SelectPage = "tum-uyeler";
 }
 
 
-@model List<Users>
+@model List<UserListModel>
 
 
 
@@ -20,31 +20,47 @@
                             <th>Ad</th>
                             <th>Email</th>
                             <th>Tel</th>
-                            <th>Tarih</th>
+                            <th>Üyelik Tarihi</th>
                             <th>Vip</th>
                             <th>Aktif</th>
                             <th>Onaylı</th>
+                            <th>Üye</th>
+                            <th>Yazar</th>
+                            <th>Tedarikçi</th>
+                            <th>Admin</th>
                         </tr>
                     </thead>
                     <tbody id="usersListBody">
 
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.FirstName  @item.LastName</td>
-                                <td>@item.Email</td>
-                                <td>@item.Phone</td>
-                                <td>@item.CreateDate.ToLongDateString() @item.CreateDate.ToLongTimeString()</td>
-                                <td>
-                                    <input type="checkbox" class="form-control is_vip_user" user-id="@item.ID" @(item.IsVip ? "checked" : "") />
-                                </td>
-                                <td>
-                                    <input type="checkbox" class="form-control is_active_user" user-id="@item.ID" @(item.IsActive ? "checked" : "") />
-                                </td>
-                                <td>
-                                    <input type="checkbox" class="form-control is_approve_user" user-id="@item.ID" @(item.IsApproved ? "checked" : "") />
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>@item.FullName</td>
+                            <td>@item.Email</td>
+                            <td>@item.Phone</td>
+                            <td>@item.CreateDate.ToLongDateString() @item.CreateDate.ToLongTimeString()</td>
+                            <td>
+                                <input type="checkbox" class="form-control is_vip_user" user-id="@item.ID" @(item.IsVip ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_active_user" user-id="@item.ID" @(item.IsActive ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_approve_user" user-id="@item.ID" @(item.IsApproved ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_member" user-id="@item.ID" @(item.IsMember ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_writer" user-id="@item.ID" @(item.IsWriter ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_supplier" user-id="@item.ID" @(item.IsSupplier ? "checked" : "") />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-control is_admin" user-id="@item.ID" @(item.IsAdmin ? "checked" : "") />
+                            </td>
+                        </tr>
                         }
 
                     </tbody>

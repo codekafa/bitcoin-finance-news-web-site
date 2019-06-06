@@ -8,6 +8,7 @@
     <title>@ViewBag.Title - @BTC.Common.Constants.StaticSettings.SiteSettings.SiteTitle</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300' rel='stylesheet' type='text/css'>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/bundles/css/toastr")
@@ -36,40 +37,42 @@
     <input type="hidden" id="select-page" value="@ViewBag.SelectPage">
 
     <div class="wrapper">
+
+
         <nav id="sidebar">
-            <div class="sidebar-header">
-                <a href="~/ana-sayfa">
-                    <h3 class="logo"><img src="/assets/images/logo.png" alt="logo" />Bitcoin Finans</h3>
-                </a>
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="box-account">
-                <div class="row m-0">
-                    <div class="col-md-3 p-0 box-avatar">
+        <div class="sidebar-header">
+            <a href="~/ana-sayfa">
+                <h3 class="logo"><img src="/assets/images/logo.png" alt="logo" />Bitcoin Finans</h3>
+            </a>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="box-account">
+            <div class="row m-0">
+                <div class="col-md-3 p-0 box-avatar">
 
-                        @if (currentUser != null && !string.IsNullOrWhiteSpace(currentUser.CurrentUser.ProfilePhotoUrl))
-                        {
-                            <img src="~/Images/_userfiles/profile/small/@currentUser.CurrentUser.ProfilePhotoUrl" alt="avatar" />
-                        }
-                        else
-                        {
-                            <img src="/assets/images/avatar.png" alt="avatar" />
-                        }
+                    @if (currentUser != null && !string.IsNullOrWhiteSpace(currentUser.CurrentUser.ProfilePhotoUrl))
+                    {
+                        <img src="~/Images/_userfiles/profile/small/@currentUser.CurrentUser.ProfilePhotoUrl" alt="avatar" />
+                    }
+                    else
+                    {
+                        <img src="/assets/images/avatar.png" alt="avatar" />
+                    }
 
-                    </div>
-                    <div class="box-txt-account col-md-9 p-0">
-                        @if (currentUser != null)
-                        {
-                            <div>
-                                <p> Hoşgeldiniz - @currentUser.FullName </p>
+                </div>
+                <div class="box-txt-account col-md-9 p-0">
+                    @if (currentUser != null)
+                    {
+                        <div>
+                            <p> Hoşgeldiniz - @currentUser.FullName </p>
 
-                                @*@if (currentUser.IsAdmin)
-                                    {
-                                        <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git</a>
-                                    }*@
-                                @*<a href="~/cikis-yap"> Çıkış</a>*@
+                            @*@if (currentUser.IsAdmin)
+        {
+        <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git</a>
+        }*@
+        @*<a href="~/cikis-yap"> Çıkış</a>*@
 
-                            </div>
+    </div>
                         }
                         else
                         {
@@ -88,19 +91,49 @@
                     <li class="ana-sayfa">
                         <a href="~/ana-sayfa"><i class="fas fa-file-archive"></i> Ana Sayfa</a>
                     </li>
+                    <li class="son-dakika">
+                        <a href="~/blog/kategori/son-dakika-haberleri"><i class="fas fa-minus"></i>Son Dakika</a>
+                    </li>
                     <li class="makaleler">
-                        <a href="~/blog"><i class="fas fa-pen-nib"></i>Blog</a>
+                        <a href="~/blog"><i class="fas fa-pen-nib"></i>Yayınlar</a>
                     </li>
                     @if (currentUser != null && (currentUser.IsWriter || currentUser.IsAdmin))
                     {
                         <li class="makalelerim">
-                            <a href="~/makalelerim"><i class="fas fa-pen"></i>Makalelerim</a>
+                            <a href="~/makalelerim"><i class="fas fa-pen"></i>Yayınlarım</a>
                         </li>
                         <li class="yeni-makale">
-                            <a href="~/yeni-makale-ekle"><i class="fas fa-plus"></i>Yeni Makale Ekle</a>
+                            <a href="~/yeni-makale-ekle"><i class="fas fa-plus"></i>Yeni Yayın Ekle</a>
                         </li>
                     }
 
+                </ul>
+            </div>
+
+            <div class="box-list">
+                <p class="sub-title">Köşe Yazarları</p>
+                <ul class="list-unstyled components">
+                    @foreach (var item in BTC.Common.Constants.StaticSettings.Writers)
+                    {
+                        <li class="@item.Uri">
+                            <a href="~/yayinlar/yazar/@item.Uri"><i class="fas fa-user-alt"></i>@item.FirstName @item.LastName</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="box-list">
+                <p class="sub-title">Kategoriler</p>
+                <ul class="list-unstyled components">
+                    @foreach (var item in BTC.Common.Constants.StaticSettings.Categories)
+                    {
+                        if (item.Uri != "son-dakika-haberleri")
+                        {
+                            <li class="@item.Uri">
+                                <a href="~/blog/kategori/@item.Uri"><i class="fas fa-pen-nib"></i>@item.Name</a>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
 
@@ -134,7 +167,7 @@
                         @if (currentUser != null)
                         {
 
-                            foreach (var item in currentUser.ContentViews.OrderBy(x=>x.RowNumber).ToList())
+                            foreach (var item in currentUser.ContentViews.OrderBy(x => x.RowNumber).ToList())
                             {
                                 <li class="@item.Uri">
                                     <a href="~/icerik/@item.Uri"><i class="fas fa-file-image"></i>@item.Title</a>
@@ -144,7 +177,7 @@
                         }
                         else
                         {
-                            foreach (var item in BTC.Common.Constants.StaticSettings.ContentViews.Where(x => x.CanSeeUser).OrderBy(x=> x.RowNumber).ToList())
+                            foreach (var item in BTC.Common.Constants.StaticSettings.ContentViews.Where(x => x.CanSeeUser).OrderBy(x => x.RowNumber).ToList())
                             {
                                 <li class="@item.Uri">
                                     <a href="~/icerik/@item.Uri"><i class="fas  fa-file-image"></i>@item.Title</a>
@@ -189,15 +222,18 @@
                         <li class="icerik">
                             <a href="~/menu-icerikleri"><i class="fas fa-book"></i>İçerik Listesi</a>
                         </li>
+                        <li class="menu-ayarlari">
+                            <a href="~/menu-ayarlari"><i class="fas fa-book"></i>Menu Ayarları</a>
+                        </li>
                     </ul>
                 </div>
             }
             <div class="box-list">
-                <p class="sub-title">Biz Kimiz</p>
+                <p class="sub-title"></p>
                 <ul class="list-unstyled components">
-                    <li class="hakkimizda">
+                    @*<li class="hakkimizda">
                         <a href="~/hakkimizda"><i class="fas fa-user-friends"></i>Hakkımızda</a>
-                    </li>
+                    </li>*@
                     <li class="iletisim">
                         <a href="~/iletisim"><i class="far fa-envelope"></i>İletişim</a>
                     </li>
@@ -231,6 +267,7 @@
             }
 
         </nav>
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid top-menu">
                 <button type="button" id="sidebarCollapse" class="btn btn-info">

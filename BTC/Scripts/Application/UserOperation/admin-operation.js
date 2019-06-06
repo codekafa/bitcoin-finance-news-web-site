@@ -40,8 +40,40 @@ function loadUserHandlers() {
         }
     });
 
+    $('.is_member').on('change', function () {
+
+        var c_h = $(this);
+        var id = c_h.attr("user-id");
+        if (c_h.is(":checked") == true) {
+            updateIsMember(id, true);
+        } else {
+            updateIsMember(id, false);
+        }
+    });
+
 }
 
+function updateIsMember(id, state) {
+
+    var message = "";
+
+    if (state == true) {
+        message = "Seçili kullanıcı üye olarak kaydedilecektir.Onaylıyor musunuz?";
+    } else {
+        message = "Seçili kullanıcı üye statüsünden çıkacaktır.Onaylıyor musunuz?";
+    }
+
+    if (confirm(message) == true) {
+        $.ajax('/Admin/updateUserRole', {
+            type: "GET",
+            dataType: "json",
+            data: { user_id: id, state: state, operation_type :1 },
+            success: function (result) {
+                alertResponse(result);
+            }
+        });
+    }
+}
 
 function updateIsActive(id, state) {
 
@@ -409,3 +441,87 @@ function updateSiteSettings() {
 
 
 /*site settings*/
+
+ 
+
+/*menu settings*/
+
+
+function getMenuList() {
+
+    $.ajax('/Admin/getMenuItems', {
+        type: "GET",
+        async: false,
+        success: function (result) {
+            $('#menuListBody').html("");
+            $.each(result, function (i, item) {
+                var tr = "<tr>";
+                tr += "<td>" + item.Title + "<input type='hidden' id='title_" + item.ID + "' value=" + item.Title + "  /></td>";
+                tr += "<td>" + item.RowNumber + "<input type='hidden' id='row_number_" + item.ID + "' value=" + item.RowNumber + "  /></td>";
+                if (item.IsActive == true) {
+                    tr += "<td><span class='alert alert-success btn-xs' style='padding:0px;'>Aktif</span></td>";
+                    tr += "<td><button type='button' onclick='updateMenuState(" + item.ID + ",false)' class='btn btn-xs btn-danger'>Pasife Al</button><button type='button' onclick='editMenu(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
+                } else {
+                    tr += "<td><span class='alert alert-danger btn-xs' style='padding:0px;'>Pasif</span></td>";
+                    tr += "<td><button type='button' onclick='updateMenuState(" + item.ID + ",true)' class='btn btn-xs btn-success'>Aktife Al</button><button type='button' onclick='editMenu(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
+                }
+
+                tr += "</tr>";
+                $('#menuListBody').append(tr);
+            });
+        }
+    });
+}
+
+
+function clearMenuInputs() {
+    $('#ID').val("");
+    $('#Title').val("");
+    $('#RowNumber').val("");
+}
+
+
+function editMenu(id) {
+    $('#Title').val($('#title_' + id).val());
+    $('#ID').val(id);
+    $('#RowNumber').val($('#row_number_' + id).val());
+}
+
+function addOrEditMenu() {
+    var obj = new Object();
+    obj.ID = $('#ID').val();
+    obj.Title = $('#Title').val();
+    obj.RowNumber = $('#RowNumber').val();
+
+    $.ajax('/Admin/addOrEditMenu', {
+        type: "Post",
+        dataType: "json",
+        data: obj,
+        success: function (result) {
+            alertResponse(result);
+            if (result.IsSuccess == true) {
+                getMenuList();
+                clearMenuInputs();
+            }
+        }
+    });
+
+}
+
+function updateMenuState(id, state) {
+
+    $.ajax('/Admin/updateMenuState', {
+        type: "GET",
+        dataType: "json",
+        data: { id: id, state: state },
+        success: function (result) {
+            alertResponse(result);
+            if (result.IsSuccess == true) {
+                getMenuList();
+            }
+        }
+    });
+
+}
+
+/*menu settings*/

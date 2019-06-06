@@ -345,6 +345,8 @@ namespace BTC.Business.Managers
                                 where   us.IsPublish = 1 and us.IsActive = 1 and 
 								(@CategoryName is null or c.Uri = @CategoryName)
 								and 
+                                (@Writer is null or u.Uri = @Writer)
+								and 
 								(@SearchKey is null or us.Title like '%'+ @SearchKey +'%')
 								and 
 								(@TagName is null or us.Tags like '%' +@TagName+ '%')", filter).ToList();

@@ -154,6 +154,30 @@ namespace BTC.Business.Managers
             return result;
         }
 
+        public List<UserListModel> GetUserListModel()
+        {
+            List<UserListModel> list = new List<UserListModel>();
+
+            var u_repo = new BaseDapperRepository<BTCConnection, UserListModel>();
+
+            list = u_repo.GetByCustomQuery(@"select 
+                                    u.Email,
+                                    u.FirstName + ' ' + u.LastName as [FullName],
+                                    u.Phone,
+                                    u.ID,
+                                    u.IsActive,
+                                    u.IsApproved,
+                                    u.IsVip,
+                                    u.CreateDate,
+                                    (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 1) as [IsAdmin],
+                                    (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 2) as [IsWriter],
+                                    (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 3) as [IsMember],
+                                    (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 4) as [IsSupplier]
+                                    from Users u", null).ToList();
+
+            return list;
+
+        }
         public ResponseModel ValidateUpdateProfileUser(UpdateUserModel user)
         {
             ResponseModel result = new ResponseModel();

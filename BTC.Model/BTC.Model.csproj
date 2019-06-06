@@ -51,6 +51,7 @@
     <Compile Include="Entity\ContentViews.cs" />
     <Compile Include="Entity\LoginAttempts.cs" />
     <Compile Include="Entity\MailSettings.cs" />
+    <Compile Include="Entity\MainMenu.cs" />
     <Compile Include="Entity\PasswordChangeMails.cs" />
     <Compile Include="Entity\RegisterEmails.cs" />
     <Compile Include="Entity\RegisterMessages.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="View\PostModel.cs" />
     <Compile Include="View\RegisterUserModel.cs" />
     <Compile Include="View\UpdateUserModel.cs" />
+    <Compile Include="View\UserListModel.cs" />
     <Compile Include="View\UserSelectListModel.cs" />
   </ItemGroup>
   <ItemGroup>

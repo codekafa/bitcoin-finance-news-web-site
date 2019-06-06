@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Managers\CategoryManager.cs" />
     <Compile Include="Managers\ContentViewManager.cs" />
+    <Compile Include="Managers\MainMenuManager.cs" />
     <Compile Include="Managers\MemoryCacheManager.cs" />
     <Compile Include="Managers\EmailManager.cs" />
     <Compile Include="Managers\ImageManager.cs" />

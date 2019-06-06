@@ -49,6 +49,7 @@
     <Compile Include="ContentViewRepository.cs" />
     <Compile Include="LoginAttemptsRepository.cs" />
     <Compile Include="MailSettingRepository.cs" />
+    <Compile Include="MainMenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PaswodChangeEmailsRepository.cs" />
     <Compile Include="RegisterEmailsRepository.cs" />

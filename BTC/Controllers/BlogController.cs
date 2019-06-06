@@ -36,12 +36,14 @@ namespace BTC.Controllers
         [Route("~/blog/kategori/{category_name}")]
         [Route("~/blog/etiket/{tag}")]
         [Route("~/blog/search/{search_key}")]
-        public ActionResult Blog(string category_name, string search_key, string tag)
+        [Route("~/yayinlar/yazar/{writer}")]
+        public ActionResult Blog(string category_name, string search_key, string tag,string writer)
         {
             PostFilterModel filter = new PostFilterModel();
             filter.CategoryName = category_name;
             filter.SearchKey = search_key;
             filter.TagName = tag;
+            filter.Writer = writer;
             ViewBag.Filter = filter;
             return View();
         }
@@ -55,10 +57,10 @@ namespace BTC.Controllers
             return View(result);
         }
 
-
         public PartialViewResult _GetPartialViewPosts(PostFilterModel filter)
         {
             var postList = _postM.GetPostsByFilterModel(filter);
+            ViewBag.Filter = filter;
             return PartialView(postList);
         }
 
@@ -67,6 +69,9 @@ namespace BTC.Controllers
             var postList = _postM.GetBestViewTop3Post();
             return PartialView(postList);
         }
+
+
+
 
         public PartialViewResult _GetCategories()
         {
