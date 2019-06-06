@@ -137,7 +137,7 @@
                             foreach (var item in currentUser.ContentViews.OrderBy(x=>x.RowNumber).ToList())
                             {
                                 <li class="@item.Uri">
-                                    <a href="~/gorsel/@item.Uri"><i class="fas fa-file-image"></i>@item.Title</a>
+                                    <a href="~/icerik/@item.Uri"><i class="fas fa-file-image"></i>@item.Title</a>
                                 </li>
                             }
 
@@ -147,7 +147,7 @@
                             foreach (var item in BTC.Common.Constants.StaticSettings.ContentViews.Where(x => x.CanSeeUser).OrderBy(x=> x.RowNumber).ToList())
                             {
                                 <li class="@item.Uri">
-                                    <a href="~/gorsel/@item.Uri"><i class="fas  fa-file-image"></i>@item.Title</a>
+                                    <a href="~/icerik/@item.Uri"><i class="fas  fa-file-image"></i>@item.Title</a>
                                 </li>
                             }
                         }

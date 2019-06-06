@@ -17,7 +17,7 @@ namespace BTC.Controllers
             _contentM = new ContentViewManager();
         }
 
-        [Route("~/gorsel/{name}")]
+        [Route("~/icerik/{name}")]
         public ActionResult ContentViever(string name)
         {
             var content = _contentM.GetContentViewByUri(name);

@@ -12,9 +12,9 @@ namespace BTC.Common.Constants
         public static string BaseProfilePhotoPath { get {return WebConfigurationManager.AppSettings["BaseProfilePhotoPath"].ToString(); } }
 
         public static string BaseImagePath { get { return WebConfigurationManager.AppSettings["BaseImagePath"].ToString(); } }
-
-
         public static string CategoryCacheName { get { return "categories"; } }
+
+        public static string BaseSiteUrl { get { return WebConfigurationManager.AppSettings["BaseSiteUrl"].ToString(); } }
 
     }
 }

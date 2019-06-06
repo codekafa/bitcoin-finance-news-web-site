@@ -378,6 +378,14 @@ namespace BTC.Business.Managers
                                 where  (@CID is null or CategoryID = @CID) and UserID =@UID and IsPublish = @IsPublish ", new { CID = category_id, UID = user_id, IsPublish = publish }).ToList();
         }
 
+        public List<PostModel> GetAllPostModelsOnlyUriField(bool publish = true)
+        {
+            return _postModelRepo.GetByCustomQuery(@"select 
+                                us.Uri
+                                from UserPosts us
+                                where IsPublish = @IsPublish ", new { IsPublish = publish }).ToList();
+        }
+
         public void UpdatePublishFiledPost(int post_id, bool value)
         {
             _postRepo.ExecuteQuery("update UserPosts set IsPublish = @P where ID = @ID", new { p = value, ID = post_id });

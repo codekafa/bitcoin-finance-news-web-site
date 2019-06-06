@@ -96,7 +96,7 @@ namespace BTC.Business.Managers
         public List<ContentViewListModel> GetListViewPublished()
         {
             var cRepo = new BaseDapperRepository<BTCConnection, ContentViewListModel>();
-            var list = cRepo.GetByCustomQuery("select Title, Uri, RowNumber from ContentViews where IsPublish = 1 ", null);
+            var list = cRepo.GetByCustomQuery("select Title, Uri, RowNumber, CanSeeUser, CanSeeMember,CanSeeTrader,CanSeeWriter,CanSeeVip from ContentViews where IsPublish = 1 ", null);
             return list;
         }
 
