@@ -55,6 +55,7 @@
     <Compile Include="Managers\LoginManager.cs" />
     <Compile Include="Managers\PostManager.cs" />
     <Compile Include="Managers\RegisterManager.cs" />
+    <Compile Include="Managers\SitePageManager.cs" />
     <Compile Include="Managers\SiteSettingManager.cs" />
     <Compile Include="Managers\SmsManager.cs" />
     <Compile Include="Managers\UserManager.cs" />

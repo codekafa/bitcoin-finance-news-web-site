@@ -126,6 +126,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1789,6 +1790,9 @@
     <Content Include="Scripts\Application\Editor\add-post.js" />
     <Content Include="Scripts\Application\Editor\edit-post.js" />
     <Content Include="Scripts\Application\Global\app-global.js" />
+    <Content Include="Scripts\Application\News\add-news.js" />
+    <Content Include="Scripts\Application\News\edit-news.js" />
+    <Content Include="Scripts\Application\News\my-news-list.js" />
     <Content Include="Scripts\Application\UserOperation\admin-operation.js" />
     <Content Include="Scripts\Application\UserOperation\contact.js" />
     <Content Include="Scripts\Application\UserOperation\user-operation.js" />
@@ -1961,6 +1965,12 @@
     <Content Include="Views\Admin\AddOrEditContentView.cshtml" />
     <Content Include="Views\Admin\MainMenu.cshtml" />
     <Content Include="Views\Shared\_menuBar.cshtml" />
+    <Content Include="Views\News\News.cshtml" />
+    <Content Include="Views\News\NewsDetail.cshtml" />
+    <Content Include="Views\News\_GetPartialViewNews.cshtml" />
+    <Content Include="Views\News\GetMyNews.cshtml" />
+    <Content Include="Views\News\AddNews.cshtml" />
+    <Content Include="Views\News\EditNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

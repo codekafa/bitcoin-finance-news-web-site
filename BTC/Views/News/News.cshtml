@@ -1,0 +1,24 @@
+﻿@using BTC.Model.View
+@{
+    ViewBag.Title = "Haberler";
+    ViewBag.SelectPage = "son-dakika";
+}
+
+<input type="hidden" id="FirstId" value="">
+<input type="hidden" id="LastId" value="">
+
+
+
+<div class="feed-content blog" style="padding-top:50px;">
+    <h1 class="text-center">Son Dakika Haberleri</h1>
+    <div class="container container-top-padding">
+        <div class="row">
+
+            <div class="col-md-12 box-body-feed">
+                @Html.Action("_GetPartialViewNews")
+            </div>
+
+        </div>
+    </div>
+
+</div>

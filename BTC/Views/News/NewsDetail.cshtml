@@ -1,0 +1,52 @@
+﻿@using BTC.Model.View
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.SelectPage = "son-dakika";
+}
+@model PostModel
+
+    <div class="feed-content blog-single">
+        <div class="box-single-img">
+            <div class="gr-back"></div>
+            <div class="container info-blog">
+                <div class="row">
+                    <div class="col-md-12">
+                        <i class="far fa-clock"></i>
+                        <span>@Model.CreateDate.ToShortDateString()</span>
+                        <i class="fas fa-user-tie"></i>
+                        <span>@Model.Writer</span>
+                        <i class="far fa-eye"></i>
+                        <span>@Model.ViewCount</span>
+                        <h3>@Model.Title</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container content-single-art">
+            <div class="row">
+
+                <div class="col-md-12 box-blog-single">
+                    <div class="box-article">
+
+                        @Html.Raw(Model.Body)
+
+                        <br>
+                        @if (!string.IsNullOrWhiteSpace(Model.Tags))
+                        {
+                            string[] tags = Model.Tags.Split(',');
+                            <h3>Etiketler</h3>
+                            for (int i = 0; i < tags.Count(); i++)
+                            {
+                                <a href="#" target="_blank" class="badge  badge-pill badge-primary">@tags[i]</a>
+                            }
+
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+

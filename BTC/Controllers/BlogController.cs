@@ -37,7 +37,7 @@ namespace BTC.Controllers
         [Route("~/blog/etiket/{tag}")]
         [Route("~/blog/search/{search_key}")]
         [Route("~/yayinlar/yazar/{writer}")]
-        public ActionResult Blog(string category_name, string search_key, string tag,string writer)
+        public ActionResult Blog(string category_name, string search_key, string tag, string writer)
         {
             PostFilterModel filter = new PostFilterModel();
             filter.CategoryName = category_name;
@@ -69,9 +69,6 @@ namespace BTC.Controllers
             var postList = _postM.GetBestViewTop3Post();
             return PartialView(postList);
         }
-
-
-
 
         public PartialViewResult _GetCategories()
         {

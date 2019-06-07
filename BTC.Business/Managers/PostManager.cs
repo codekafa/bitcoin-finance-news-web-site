@@ -43,7 +43,7 @@ namespace BTC.Business.Managers
                 return result;
             }
 
-            if (postModel.CategoryID <= 0)
+            if (postModel.CategoryID <= 0 && !postModel.IsNews)
             {
                 result.Message = "Kategori alanını doldurunuz!";
                 return result;
@@ -56,7 +56,7 @@ namespace BTC.Business.Managers
             }
 
 
-            if (postModel.ID <= 0 || postModel.IsChangeMainImage)
+            if (!postModel.IsNews && (postModel.ID <= 0 || postModel.IsChangeMainImage))
             {
                 if (postModel.MainImage == null)
                 {
@@ -196,10 +196,12 @@ namespace BTC.Business.Managers
                     post.MetaTitle = postModel.MetaTitle;
                     post.Summary = postModel.Summary;
                     post.Tags = postModel.Tags;
+                    post.IsNews = postModel.IsNews;
                     post.Uri = postModel.Uri;
                     post.UserID = postModel.UserID;
                     post.TopPhotoUrl = postModel.TopPhotoUrl;
                     post.Title = postModel.Title;
+                  
                     if (postModel.MainImage != null)
                     {
                         _imgM.SavePostMainPage(postModel.MainImage, postModel.FileSaveMap);
@@ -219,10 +221,6 @@ namespace BTC.Business.Managers
                     return result;
                 }
             }
-
-
-
-
         }
         public UserPosts GetById(int post_id)
         {
@@ -259,7 +257,7 @@ namespace BTC.Business.Managers
                     post.MetaTitle = postModel.MetaTitle;
                     post.Summary = postModel.Summary;
                     post.Tags = postModel.Tags;
-
+                    post.IsNews = postModel.IsNews;
                     if (postModel.MainImage != null)
                     {
                         _imgM.SavePostMainPage(postModel.MainImage, postModel.FileSaveMap);
@@ -313,6 +311,20 @@ namespace BTC.Business.Managers
 
         }
 
+        public List<PostModel> GetNewsModelsByUserId(int user_id)
+        {
+            List<PostModel> list = new List<PostModel>();
+            list = _postModelRepo.GetByCustomQuery(@"select 
+                                u.FirstName + ' ' + u.LastName as [Writer],
+                                c.Name as [Category],
+                                us.*
+                                from UserPosts us
+                                inner join Categories c on c.ID = us.CategoryID
+                                inner join Users u on u.ID = us.UserID
+                                where u.ID = @UserID and us.IsActive = 1 and us.IsNews = 1", new { UserID = user_id }).ToList();
+            return list;
+
+        }
         public PostModel GetPostModelByUri(string uri)
         {
             PostModel post = new PostModel();
@@ -350,6 +362,20 @@ namespace BTC.Business.Managers
 								(@SearchKey is null or us.Title like '%'+ @SearchKey +'%')
 								and 
 								(@TagName is null or us.Tags like '%' +@TagName+ '%')", filter).ToList();
+            return postList;
+        }
+
+        public List<PostModel> GetNewsByFilterModel()
+        {
+            List<PostModel> postList = new List<PostModel>();
+            postList = _postModelRepo.GetByCustomQuery(@"select  TOP 20
+                                u.FirstName + ' ' + u.LastName as [Writer],
+                                c.Name as [Category],
+                                us.*
+                                from UserPosts us
+                                inner join Categories c on c.ID = us.CategoryID
+                                inner join Users u on u.ID = us.UserID
+                                where   us.IsPublish = 1 and us.IsActive = 1 and IsNews = 1", null).ToList();
             return postList;
         }
 

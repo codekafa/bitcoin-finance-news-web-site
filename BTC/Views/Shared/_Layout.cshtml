@@ -92,7 +92,7 @@
                         <a href="~/ana-sayfa"><i class="fas fa-file-archive"></i> Ana Sayfa</a>
                     </li>
                     <li class="son-dakika">
-                        <a href="~/blog/kategori/son-dakika-haberleri"><i class="fas fa-minus"></i>Son Dakika</a>
+                        <a href="~/haberler/son-dakika-haberleri"><i class="fas fa-minus"></i>Son Dakika</a>
                     </li>
                     <li class="makaleler">
                         <a href="~/blog"><i class="fas fa-pen-nib"></i>Yayınlar</a>
@@ -104,6 +104,16 @@
                         </li>
                         <li class="yeni-makale">
                             <a href="~/yeni-makale-ekle"><i class="fas fa-plus"></i>Yeni Yayın Ekle</a>
+                        </li>
+                    }
+
+                    @if (currentUser != null &&  currentUser.IsAdmin)
+                    {
+                        <li class="haberler">
+                            <a href="~/haberler"><i class="fas fa-pen"></i>Haberler</a>
+                        </li>
+                        <li class="haber-ekle">
+                            <a href="~/yeni-haber-ekle"><i class="fas fa-plus"></i>Yeni Haber Ekle</a>
                         </li>
                     }
 

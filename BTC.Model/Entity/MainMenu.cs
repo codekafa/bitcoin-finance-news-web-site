@@ -13,5 +13,7 @@ namespace BTC.Model.Entity
         public int RowNumber { get; set; }
         public string Title { get; set; }
         public bool IsActive { get; set; }
+
+        public bool IsStatic { get; set; }
     }
 }

@@ -38,5 +38,7 @@ namespace BTC.Model.Entity
         public bool IsPublish { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool IsNews { get; set; }
     }
 }

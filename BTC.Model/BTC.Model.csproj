@@ -55,6 +55,7 @@
     <Compile Include="Entity\PasswordChangeMails.cs" />
     <Compile Include="Entity\RegisterEmails.cs" />
     <Compile Include="Entity\RegisterMessages.cs" />
+    <Compile Include="Entity\SitePages.cs" />
     <Compile Include="Entity\SiteSettings.cs" />
     <Compile Include="Entity\SmsSettings.cs" />
     <Compile Include="Entity\UserPosts.cs" />

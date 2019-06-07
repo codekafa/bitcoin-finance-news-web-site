@@ -402,7 +402,6 @@ function updateCategoryState(id, state) {
 
 }
 
-
 /*categories*/
 
 
@@ -458,6 +457,7 @@ function getMenuList() {
                 var tr = "<tr>";
                 tr += "<td>" + item.Title + "<input type='hidden' id='title_" + item.ID + "' value=" + item.Title + "  /></td>";
                 tr += "<td>" + item.RowNumber + "<input type='hidden' id='row_number_" + item.ID + "' value=" + item.RowNumber + "  /></td>";
+
                 if (item.IsActive == true) {
                     tr += "<td><span class='alert alert-success btn-xs' style='padding:0px;'>Aktif</span></td>";
                     tr += "<td><button type='button' onclick='updateMenuState(" + item.ID + ",false)' class='btn btn-xs btn-danger'>Pasife Al</button><button type='button' onclick='editMenu(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";

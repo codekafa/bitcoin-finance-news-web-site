@@ -13,7 +13,8 @@ namespace BTC.Setting
             Admin = 1,
             Writer = 2,
             Member = 3,
-            Supplier = 4
+            Supplier = 4,
+            NewsPaper =5
         }
 
     }

@@ -54,6 +54,7 @@
     <Compile Include="PaswodChangeEmailsRepository.cs" />
     <Compile Include="RegisterEmailsRepository.cs" />
     <Compile Include="RegisterMessageRepository.cs" />
+    <Compile Include="SitePageRepository.cs" />
     <Compile Include="SiteSettingsRepository.cs" />
     <Compile Include="SmsSettingsRepository.cs" />
     <Compile Include="UserPostRepository.cs" />

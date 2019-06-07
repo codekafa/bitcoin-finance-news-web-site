@@ -13,13 +13,10 @@ namespace BTC.Business.Managers
     {
 
         private MainMenuRepository _menuRepo;
-
         public MainMenuManager()
         {
             _menuRepo = new MainMenuRepository();
         }
-
-
         public ResponseModel ValidateAddOrEditMenu(MainMenu menu)
         {
             ResponseModel result = new ResponseModel();
@@ -54,12 +51,10 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             return result;
         }
-
         public List<MainMenu> GetMenuItems()
         {
             return _menuRepo.GetAll();
         }
-
         public ResponseModel UpdateMenuState(int id, bool state)
         {
             ResponseModel result = new ResponseModel();
@@ -78,7 +73,6 @@ namespace BTC.Business.Managers
                 return result;
             }
         }
-
         public ResponseModel UpdateMenu(MainMenu menu)
         {
             ResponseModel result = new ResponseModel();
@@ -93,7 +87,6 @@ namespace BTC.Business.Managers
             result.Message = "Güncelleme başarılı!";
             return result;
         }
-
         public ResponseModel AddMenu(MainMenu menu)
         {
             ResponseModel result = new ResponseModel();

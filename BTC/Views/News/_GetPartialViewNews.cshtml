@@ -1,0 +1,22 @@
+﻿@using BTC.Model.View
+@model List<PostModel>
+
+
+@foreach (var item in Model)
+{
+    <div class="box-comment box-blog">
+        <div class="info-blog">
+            <i class="far fa-clock"></i>
+            <span>@item.CreateDate.ToShortDateString()</span>
+            <i class="fas fa-user-tie"></i>
+            <span>@item.Writer</span>
+            <i class="far fa-eye"></i>
+            <span>@item.ViewCount</span>
+        </div>
+        <h3>@item.Title</h3>
+        <p style="word-wrap: break-word;">
+            @item.Summary
+        </p>
+        <a href="/haberler/son-dakika-haberleri/@item.Uri" target="_blank" class="btn btn-more">Devamı...</a>
+    </div>
+}

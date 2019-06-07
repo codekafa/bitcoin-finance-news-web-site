@@ -58,5 +58,7 @@ namespace BTC.Model.View
         public string FileSaveMap { get; set; }
 
         public List<Comments> PostComments { get; set; }
+
+        public bool IsNews { get; set; }
     }
 }
