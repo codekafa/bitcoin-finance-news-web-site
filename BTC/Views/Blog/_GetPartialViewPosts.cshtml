@@ -1,8 +1,8 @@
 ﻿@using BTC.Model.View
 @model List<PostModel>
 
-@{ 
-      PostFilterModel filter = ViewBag.Filter as PostFilterModel;
+@{
+    PostFilterModel filter = ViewBag.Filter as PostFilterModel;
 }
 
 
@@ -17,13 +17,9 @@
 {
     <div class="box-comment box-blog">
 
-        @if (filter.CategoryName != "son-dakika-haberleri")
-        {
-            <div class="gdlr-core-zoom-on-hover" style="max-height:300px; max-width:800px">
-                <img src="~/Images/_post/large/@item.TopPhotoUrl" class="response img-responsive" alt="" style="height:100%;width:100%" />
-            </div>
-        }
-
+        <div class="gdlr-core-zoom-on-hover" style="max-height:300px; max-width:800px">
+            <img src="~/Images/_post/large/@item.TopPhotoUrl" class="response img-responsive" alt="" style="height:100%;width:100%" />
+        </div>
         <div class="info-blog">
             <i class="far fa-clock"></i>
             <span>@item.CreateDate.ToShortDateString()</span>

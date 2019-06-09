@@ -63,6 +63,18 @@ namespace BTC.Business.Managers
 
         }
 
+        public Task SaveProductImage(HttpPostedFileBase file, string savedBaseFilePath)
+        {
+            return Task.Run(() =>
+            {
+                byte[] imgByteArr = new BinaryReader(file.InputStream)
+                      .ReadBytes((int)file.InputStream.Length);
+                Image new_img = ByteArrayToImage(imgByteArr);
+                new_img.Save(savedBaseFilePath);
+            });
+
+        }
+
         public bool CheckImageType(string type)
         {
             switch (type)
@@ -163,6 +175,23 @@ namespace BTC.Business.Managers
 
                     file_path = file_path.Replace("medium", "small");
 
+                    if (File.Exists(file_path))
+                    {
+                        File.Delete(file_path);
+                    }
+                }
+            });
+
+        }
+
+        public Task RemoveProductPhoto(string file_name)
+        {
+
+            return Task.Run(() =>
+            {
+                if (!string.IsNullOrWhiteSpace(file_name))
+                {
+                    string file_path = Path.Combine(@"\Images\_products\", file_name);
                     if (File.Exists(file_path))
                     {
                         File.Delete(file_path);

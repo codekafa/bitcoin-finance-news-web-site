@@ -1794,6 +1794,9 @@
     <Content Include="Scripts\Application\News\add-news.js" />
     <Content Include="Scripts\Application\News\edit-news.js" />
     <Content Include="Scripts\Application\News\my-news-list.js" />
+    <Content Include="Scripts\Application\Product\add-product.js" />
+    <Content Include="Scripts\Application\Product\edit-product.js" />
+    <Content Include="Scripts\Application\Product\my-product-list.js" />
     <Content Include="Scripts\Application\UserOperation\admin-operation.js" />
     <Content Include="Scripts\Application\UserOperation\contact.js" />
     <Content Include="Scripts\Application\UserOperation\user-operation.js" />
@@ -1975,12 +1978,14 @@
     <Content Include="Views\Product\MyProducts.cshtml" />
     <Content Include="Views\Product\AddNewProduct.cshtml" />
     <Content Include="Views\Product\EditProduct.cshtml" />
+    <Content Include="Views\Product\_GetPartialViewMyProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\_post\large\" />
     <Folder Include="Images\_post\medium\" />
     <Folder Include="Images\_post\small\" />
+    <Folder Include="Images\_products\" />
     <Folder Include="Images\_userfiles\profile\medium\" />
     <Folder Include="Images\_userfiles\profile\origin\" />
     <Folder Include="Images\_userfiles\profile\small\" />

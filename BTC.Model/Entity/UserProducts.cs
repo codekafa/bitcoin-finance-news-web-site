@@ -22,7 +22,8 @@ namespace BTC.Model.Entity
 
         public string Keywords { get; set; }
 
-        public decimal Price { get; set; }
+        public string Tags { get; set; }
+        public decimal? Price { get; set; }
 
         public DateTime CreateDate { get; set; }
 

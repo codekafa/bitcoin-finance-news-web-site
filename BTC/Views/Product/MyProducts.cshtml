@@ -1,7 +1,23 @@
-﻿
+﻿@using BTC.Model.View
 @{
-    ViewBag.Title = "MyProducts";
+    ViewBag.Title = "Ürünlerim";
+    ViewBag.SelectPage = "urunlerim";
 }
 
-<h2>MyProducts</h2>
+<input type="hidden" id="FirstId" value="">
+<input type="hidden" id="LastId" value="">
 
+
+
+<div class="feed-content blog" style="padding-top:50px;">
+    <h1 class="text-center">Ürün Listesi</h1>
+    <div class="container container-top-padding">
+        <div class="row">
+            <div class="col-md-12 box-body-feed">
+                @Html.Action("_GetPartialViewMyProducts")
+            </div>
+
+        </div>
+    </div>
+
+</div>

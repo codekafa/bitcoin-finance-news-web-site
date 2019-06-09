@@ -21,6 +21,8 @@ using System.Web.Mvc;
 
 namespace BTC.Controllers
 {
+
+
     public class BlogController : BaseController
     {
         PostManager _postM;

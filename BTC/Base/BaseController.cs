@@ -23,5 +23,10 @@ namespace BTC.Base
             return RedirectToAction("ErrorPage", "Home", result);
         }
 
+        public RedirectToRouteResult RedirectNotAuthority()
+        {
+            return RedirectToAction("NotAuthority", "Home");
+        }
+
     }
 }
