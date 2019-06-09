@@ -50,6 +50,7 @@
     <Compile Include="LoginAttemptsRepository.cs" />
     <Compile Include="MailSettingRepository.cs" />
     <Compile Include="MainMenuRepository.cs" />
+    <Compile Include="ProductPhotoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PaswodChangeEmailsRepository.cs" />
     <Compile Include="RegisterEmailsRepository.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="SiteSettingsRepository.cs" />
     <Compile Include="SmsSettingsRepository.cs" />
     <Compile Include="UserPostRepository.cs" />
+    <Compile Include="UserProductRepository.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="UserRoleRelRepository.cs" />
     <Compile Include="UserRoleRepository.cs" />
