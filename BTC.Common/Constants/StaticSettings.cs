@@ -10,7 +10,7 @@ using System.Web;
 
 namespace BTC.Common.Constants
 {
-    public sealed class StaticSettings
+    public  class StaticSettings
     {
         private static readonly StaticSettings instance = new StaticSettings();
 

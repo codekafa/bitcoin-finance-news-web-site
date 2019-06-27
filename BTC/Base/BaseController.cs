@@ -8,15 +8,15 @@ namespace BTC.Base
     public class BaseController : Controller
     {
         public CurrentUserModel CurrentUser { get { return SessionVariables.User; } }
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            filterContext.ExceptionHandled = true;
-            ResponseModel responseModel = new ResponseModel();
-            responseModel.IsSuccess = false;
-            responseModel.Message = "Yolunda gitmeyen birşeyler var!";
-            TempData["ResponseModel"] = responseModel;
-            filterContext.Result = RedirectToAction("ErrorPage", "Home");
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    filterContext.ExceptionHandled = true;
+        //    ResponseModel responseModel = new ResponseModel();
+        //    responseModel.IsSuccess = false;
+        //    responseModel.Message = "Yolunda gitmeyen birşeyler var!";
+        //    TempData["ResponseModel"] = responseModel;
+        //    filterContext.Result = RedirectToAction("ErrorPage", "Home");
+        //}
         public RedirectToRouteResult RedirectToErrorPage(ResponseModel result)
         {
             TempData["ResponseModel"] = result;

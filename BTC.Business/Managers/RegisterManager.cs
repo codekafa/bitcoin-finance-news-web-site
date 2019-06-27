@@ -108,7 +108,7 @@ namespace BTC.Business.Managers
                         // sms gönderimi
 
                         result.IsSuccess = true;
-                        result.Message = "sms-approve";
+                        result.Message = "login-approve-sms";
                     }
 
                     if (_emailM.IsApproveSendMailNewUser())
@@ -119,7 +119,7 @@ namespace BTC.Business.Managers
                         if (result.IsSuccess)
                         {
                             result.IsSuccess = true;
-                            result.Message = "email-approve";
+                            result.Message = "login-approve-mail";
                         }
                     }
 

@@ -83,10 +83,10 @@ namespace BTC.Business.Managers
                 result.IsSuccess = true;
                 result.Message = "Email başarı le gönderildi.";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result.IsSuccess = false;
-                result.Message = "Email gönderilirken bir sorun oluştu.";
+                result.Message = "Email gönderilirken bir sorun oluştu. Hata Detay : " + ex.Message;
             }
             return result;
         }

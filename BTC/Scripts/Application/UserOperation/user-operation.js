@@ -55,8 +55,8 @@ function registerUser() {
         },
         success: function (data) {
             if (data.IsSuccess == true) {
-                $('.register-form').css('display', 'none');
-                $('.' + data.Message).css('display', 'block');
+                $('#login').css('display', 'none');
+                $('#' + data.Message).css('display', 'block');
             } else {
                 dangerAlert(data.Message)
             }

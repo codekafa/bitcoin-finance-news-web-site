@@ -25,26 +25,34 @@ namespace BTC.Business.Managers
 
         public ResponseModel LoginUser(LoginUserModel user)
         {
-
-            var db_user = _userM.GetUserByEmailAndPassword(user.UserName, user.Password);
             ResponseModel result = new ResponseModel();
-            result.IsSuccess = false;
-
-            if (db_user != null && db_user.IsActive && db_user.IsApproved)
+            try
             {
-                var currentUserModel = _userM.GetCurrentUserModel(db_user);
-                SessionVariables.SetUser(currentUserModel);
-                var do_user_log = UserBrowserHelper.getUserRequestInfo();
+                var db_user = _userM.GetUserByEmailAndPassword(user.UserName, user.Password);
+               
+                result.IsSuccess = false;
+
+                if (db_user != null && db_user.IsActive && db_user.IsApproved)
+                {
+                    var currentUserModel = _userM.GetCurrentUserModel(db_user);
+                    SessionVariables.SetUser(currentUserModel);
+                    var do_user_log = UserBrowserHelper.getUserRequestInfo();
 
 
 
-                DoLogLoginUser(do_user_log);
-                result.IsSuccess = true;
+                    DoLogLoginUser(do_user_log);
+                    result.IsSuccess = true;
+                }
+                else
+                {
+                    result.Message = "Kullanıcı adı yada şifreniz yanlış!";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                result.Message = "Kullanıcı adı yada şifreniz yanlış!";
-            }
+                result.Message = ex.Message;
+                throw;
+            }          
 
             return result;
         }
