@@ -54,6 +54,7 @@ function registerUser() {
             registerUser: obj
         },
         success: function (data) {
+            console.log(data);
             if (data.IsSuccess == true) {
                 $('#login').css('display', 'none');
                 $('#' + data.Message).css('display', 'block');
