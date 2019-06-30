@@ -17,7 +17,7 @@ namespace BTC.Panel.Base
             filterContext.ExceptionHandled = true;
             ResponseModel responseModel = new ResponseModel();
             responseModel.IsSuccess = false;
-            responseModel.Message = "Yolunda gitmeyen birşeyler var!";
+            responseModel.Message = "Yolunda gitmeyen birşeyler var! Detay: " + filterContext.Exception.Message;
             TempData["ResponseModel"] = responseModel;
             filterContext.Result = RedirectToAction("ErrorPage", "Home");
         }

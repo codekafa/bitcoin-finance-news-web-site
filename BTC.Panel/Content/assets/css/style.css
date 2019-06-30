@@ -1,4 +1,4 @@
-/* This css file is to over write bootstrap css
+﻿/* This css file is to over write bootstrap css
 --------------------------------------------------------- /
 * Theme Name: Sufee-Admin Admin Template
 * Theme URI: http://demos.jeweltheme.com/Sufee-Admin/
@@ -929,7 +929,7 @@
   transition: all 0.3s ease; }
 
 body {
-  background: #f1f2f7;
+  /*background: #f1f2f7;*/
   display: table;
   font-family: 'Open Sans' sans-serif !important;
   font-size: 16px;

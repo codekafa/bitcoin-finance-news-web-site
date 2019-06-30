@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Menü Ayarları";
+    ViewBag.SelectPage = "menu-ayarlari";
+}
+
+    <div class="row" style="padding-bottom: 20px;">
+        <div class="col-md-4">
+            <input type="hidden" id="ID" name="ID" value="" class="form-control" />
+            <label for="Title">Menü Adı</label>
+            <input type="text" id="Title" name="Title" value="" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label for="RowNumber">Sıra Numarası</label>
+            <input type="number" min="0" id="RowNumber" name="RowNumber" value="" class="form-control" />
+        </div>
+        <div class="col-md-4" style="margin-top: 24px;">
+            <button class="btn btn-primary" type="button" onclick="addOrEditMenu()"> Kaydet </button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ad</th>
+                    <th>Sıra No</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody id="menuListBody"></tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            getMenuList();
+        });
+    </script>
+
+}
+
+

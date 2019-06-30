@@ -1,0 +1,66 @@
+﻿
+@using BTC.Model.View
+@model List<PostModel>
+
+<script>
+
+    
+    $('.is_publish').on('change', function () {
+        var c_h = $(this);
+        var id = c_h.attr("post-id");
+        if (c_h.is(":checked") == true) {
+            updatePostIsPublish(id, true);
+        } else {
+            updatePostIsPublish(id, false);
+        }
+
+    });
+
+    $('.is_active').on('change', function () {
+
+        var c_h = $(this);
+        var id = c_h.attr("post-id");
+        if (c_h.is(":checked") == true) {
+            updatePostIsActive(id, true);
+        } else {
+            updatePostIsActive(id, false);
+        }
+
+    });
+
+</script>
+
+<table id="userListTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Yazar</th>
+            <th>Başlık</th>
+            <th>Kategori</th>
+            <th>Tarih</th>
+            <th>Gösterim</th>
+            <th>Yayın</th>
+            <th>Aktif</th>
+            @*<th>Onaylı</th>*@
+        </tr>
+    </thead>
+    <tbody id="usersListBody">
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Writer</td>
+            <td>@item.Title</td>
+            <td>@item.Category</td>
+            <td>@item.CreateDate.ToLongDateString() @item.CreateDate.ToLongTimeString()</td>
+            <td>@item.ViewCount</td>
+            <td>
+                <input type="checkbox" class="form-control is_publish" post-id="@item.ID" @(item.IsPublish ? "checked" : "") />
+            </td>
+            <td>
+                <input type="checkbox" class="form-control is_active" post-id="@item.ID" @(item.IsActive ? "checked" : "") />
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>

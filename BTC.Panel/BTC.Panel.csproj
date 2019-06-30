@@ -124,10 +124,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Base\AuthAttribute.cs" />
     <Compile Include="Base\BaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
-    <Compile Include="Controllers\SiteSettingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +165,9 @@
     <Content Include="Content\images\placeholder.png" />
     <Content Include="Content\images\twitter_corner_black.png" />
     <Content Include="Content\images\twitter_corner_blue.png" />
+    <Content Include="Content\Plugins\editor\css\quill.css" />
+    <Content Include="Content\Plugins\editor\js\quill.js" />
+    <Content Include="Content\Plugins\phoneFormat\jquery-input-mask-phone-number.min.js" />
     <Content Include="Content\Plugins\toastr\css\toastr.min.css" />
     <Content Include="Content\Plugins\toastr\js\toastr.min.js" />
     <Content Include="Content\vendors\animate.css\animate.css" />
@@ -2143,8 +2148,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Application\Blog\blog-detail.js" />
+    <Content Include="Scripts\Application\Blog\my-post-list.js" />
+    <Content Include="Scripts\Application\Editor\add-post.js" />
+    <Content Include="Scripts\Application\Editor\edit-post.js" />
     <Content Include="Scripts\Application\Global\app-global.js" />
+    <Content Include="Scripts\Application\News\add-news.js" />
+    <Content Include="Scripts\Application\News\edit-news.js" />
+    <Content Include="Scripts\Application\News\my-news-list.js" />
+    <Content Include="Scripts\Application\Product\add-product.js" />
+    <Content Include="Scripts\Application\Product\edit-product.js" />
+    <Content Include="Scripts\Application\Product\my-product-list.js" />
     <Content Include="Scripts\Application\SettingOperation\site-setting.js" />
+    <Content Include="Scripts\Application\UserOperation\admin-operation.js" />
+    <Content Include="Scripts\Application\UserOperation\contact.js" />
     <Content Include="Scripts\Application\UserOperation\user-operation.js" />
     <Content Include="Content\assets\css\style.css.map" />
     <Content Include="Content\assets\scss\style.scss" />
@@ -2841,6 +2858,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Content\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2857,10 +2875,22 @@
     <Content Include="Views\Home\ErrorPage.cshtml" />
     <Content Include="Views\Home\NotAuthority.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
-    <Content Include="Views\SiteSetting\SiteSettings.cshtml" />
-    <Content Include="Views\SiteSetting\EmailSettings.cshtml" />
-    <Content Include="Views\SiteSetting\SmsSettings.cshtml" />
-    <Content Include="Views\SiteSetting\RegisterSettings.cshtml" />
+    <Content Include="Views\Blog\GetMyPosts.cshtml" />
+    <Content Include="Views\Blog\AddNewPost.cshtml" />
+    <Content Include="Views\Blog\EditPost.cshtml" />
+    <Content Include="Views\Admin\AddOrEditContentView.cshtml" />
+    <Content Include="Views\Admin\Categories.cshtml" />
+    <Content Include="Views\Admin\Comments.cshtml" />
+    <Content Include="Views\Admin\ContentList.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\MailSettings.cshtml" />
+    <Content Include="Views\Admin\MainMenu.cshtml" />
+    <Content Include="Views\Admin\Posts.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
+    <Content Include="Views\Admin\SiteSettings.cshtml" />
+    <Content Include="Views\Admin\SmsSettings.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\_GetPosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Business\BTC.Business.csproj">

@@ -1,28 +1,18 @@
 ﻿using BTC.Base;
 using BTC.Business.Managers;
 using BTC.Common.Session;
-using BTC.Common.Util.Extension;
 using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Setting;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace BTC.Controllers
 {
-
-
     public class BlogController : BaseController
     {
         PostManager _postM;

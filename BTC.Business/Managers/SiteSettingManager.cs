@@ -3,6 +3,7 @@ using BTC.Model.Entity;
 using BTC.Model.Response;
 using BTC.Repository;
 using BTC.Setting;
+using System.Linq;
 
 namespace BTC.Business.Managers
 {
@@ -130,6 +131,14 @@ namespace BTC.Business.Managers
 
             bool value = _mailRepo.Update(updObj);
             result.IsSuccess = value;
+
+            if (updObj.ApproveSendMailNewUser)
+            {
+                var sms_ = _smsRepo.GetAll().FirstOrDefault();
+                sms_.RequiredIsRegister = false;
+                _smsRepo.Update(sms_);
+            }
+
             if (result.IsSuccess)
             {
                 result.Message = "Bilgiler başarı ile güncellendi!";
@@ -141,6 +150,14 @@ namespace BTC.Business.Managers
         {
             ResponseModel result = new ResponseModel();
             bool value = _smsRepo.Update(updObj);
+
+            if (updObj.RequiredIsRegister)
+            {
+                var mail_ = _mailRepo.GetAll().FirstOrDefault();
+                mail_.ApproveSendMailNewUser = false;
+                _mailRepo.Update(mail_);
+            }
+
             result.IsSuccess = value;
             if (result.IsSuccess)
             {

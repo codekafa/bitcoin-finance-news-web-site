@@ -1,0 +1,103 @@
+﻿@using BTC.Model.Entity;
+@{
+    ViewBag.Title = "Site Ayarları";
+    ViewBag.SelectPage = "site";
+}
+
+@model SiteSettings
+
+
+<div class="col-xs-12 col-sm-12">
+    <form id="siteSettingForm" name="mailSettingForm" method="POST" novalidate="">
+        <div class="card">
+            <div class="card-body card-block">
+                <input type="hidden" id="ID" name="ID" value="@Model.ID">
+                <div class="form-group">
+                    <label class=" form-control-label">Site Başlığı</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-header"></i></div>
+                        <input type="text" id="SiteTitle" name="SiteTitle" placeholder="Text" value="@Model.SiteTitle" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Anahtar Kelimeler</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        <input type="text" id="SiteKeywords" name="SiteKeywords" placeholder="Text" value="@Model.SiteKeywords" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Site Açıklaması</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-desktop"></i></div>
+                        <textarea class="form-control" rows="5" id="SiteDescription" maxlength="365" name="SiteDescription">@Model.SiteDescription</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">İletişim Email</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-mail-forward"></i></div>
+                        <input type="email" id="ComtactEmail" name="ComtactEmail" placeholder="Text" value="@Model.ComtactEmail" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Adres</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
+                        <input type="text" id="Address" name="Address" placeholder="Adres" value="@Model.Address" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Telefon</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                        <input type="text" id="Phone" name="Phone" placeholder="Telefon" value="@Model.Phone" class="form-control phoneMask">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Fax</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-fax"></i></div>
+                        <input type="text" id="Fax" name="Fax" placeholder="Fax" value="@Model.Fax" class="form-control phoneMask">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Facebook</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-facebook-f"></i></div>
+                        <input type="text" id="Facebook" name="Facebook" placeholder="Facebook" value="@Model.Facebook" class="form-control ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Instagram</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
+                        <input type="text" id="Instagram" name="Instagram" placeholder="Instagram" value="@Model.Instagram" class="form-control ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Linkedin</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-linkedin"></i></div>
+                        <input type="text" id="Linkedin" name="Linkedin" placeholder="Linkedin" value="@Model.Linkedin" class="form-control ">
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary btn-sm" onclick="updateSiteSettings()">
+                    <i class="fa fa-dot-circle-o"></i> Kaydet
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+}

@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Makale Düzenle";
+    ViewBag.SelectPage = "makale";
+}
+
+@section styles{
+    <link href="~/Content/Plugins/editor/css/quill.css" rel="stylesheet" />
+}
+
+
+<form id="form-editBlogPost" method="post" enctype="multipart/form-data">
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 class="panel-title">Makale Detayları</h5>
+            </div>
+            <div class="panel-body fixed-margin">
+                <div class="form-group">
+                    <input type="hidden" name="Id" id="Id" value="@ViewBag.PostId" />
+                    <input type="hidden" name="TopPhotoUrl" id="TopPhotoUrl" value="" />
+                    <label class=" form-control-label"> Kategori:  <span style="color:red">*</span></label>
+                    <select id="CategoryID" name="CategoryID" class="form-control" data-placeholder="Kategori Seçiniz"></select>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Başlık: <span style="color:red">*</span></label>
+                    <input name="Title" id="Title" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">İçerik: <span style="color:red">*</span></label>
+                    <input type="hidden" id="Body" name="Body" />
+                    <div name="BodyEditor" id="BodyEditor" style="height: 400px;" class=""></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">İçerik Özet : (Listeleme ekranında gözükecek olan içerik) <span style="color:red">*</span></label>
+                    <textarea name="Summary" maxlength="400" rows="5" id="Summary" class="form-control"> </textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Kapak Fotoğrafı : <span style="color:red">*</span></label>
+                    <input type="hidden" id="IsChangeMainImage" name="IsChangeMainImage" />
+                    <input id="MainImage" type="file" class="file will-disable"
+                           name="MainImage" data-show-upload="false" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label"></label>
+                    <input type="hidden" name="IsPublish" id="IsPublish" value="false">
+                    <input type="checkbox" name="IsPublished" id="IsPublished" value="">Makaleyi Yayınla<br>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 class="panel-title">SEO Ayarları</h5>
+            </div>
+            <div class="panel-body fixed-margin">
+                <div class="form-group">
+                    <label class="form-control-label">Url : <span style="color:red">*</span></label>
+                    <input name="Uri" id="Uri" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Meta Açıklaması :</label>
+                    <input name="MetaDescription" id="MetaDescription" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Meta Başlığı : </label>
+                    <input name="MetaTitle" id="MetaTitle" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Anahtar Kelimeler (Virgül ile ayırın.) : </label>
+                    <input name="MetaKeywords" id="MetaKeywords" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Etiketler (Virgül ile ayırın.): </label>
+                    <input name="Tags" id="Tags" class="form-control" placeholder="Finans, Bitcoin vs.." />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-footer" style="text-align:right;">
+            <button id="btnSave" class="btn btn-primary will-disable">Kaydet</button>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+    <script src="~/Content/Plugins/editor/js/quill.js"></script>
+    <script src="~/Scripts/Application/Editor/edit-post.js"></script>
+}
+
+
+

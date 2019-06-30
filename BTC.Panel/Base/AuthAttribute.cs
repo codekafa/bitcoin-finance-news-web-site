@@ -10,8 +10,8 @@ namespace BTC.Panel.Base
 {
     public class AuthAttribute : ActionFilterAttribute, IActionFilter
     {
-        private string[] r;
-        public AuthAttribute(string[] roleList)
+        private int[] r;
+        public AuthAttribute(int[] roleList)
         {
             r = roleList;
         }
