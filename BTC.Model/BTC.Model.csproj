@@ -78,6 +78,7 @@
     <Compile Include="View\PasswordChangeModel.cs" />
     <Compile Include="View\PostFilterModel.cs" />
     <Compile Include="View\PostModel.cs" />
+    <Compile Include="View\ProdcutSearchModel.cs" />
     <Compile Include="View\RegisterUserModel.cs" />
     <Compile Include="View\UpdateUserModel.cs" />
     <Compile Include="View\UserListModel.cs" />

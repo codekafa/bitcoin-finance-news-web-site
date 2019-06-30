@@ -20,6 +20,7 @@ namespace BTC.Panel.Controllers
         SiteSettingManager _siteM;
         ContentViewManager _contentM;
         MainMenuManager _menuM;
+        ProductManager _proM;
         public AdminController()
         {
             _userM = new UserManager();
@@ -28,6 +29,7 @@ namespace BTC.Panel.Controllers
             _siteM = new SiteSettingManager();
             _contentM = new ContentViewManager();
             _menuM = new MainMenuManager();
+            _proM = new ProductManager();
         }
 
         [Route("~/dashboard")]
@@ -98,10 +100,19 @@ namespace BTC.Panel.Controllers
         }
 
 
+
         [Route("~/urun-listesi")]
         public ActionResult Products()
         {
             return View();
+        }
+
+        [HttpPost]
+        public PartialViewResult _GetProducts(ProductSearchModel search)
+        {
+            List<UserProducts> list = new List<UserProducts>();
+            list = _proM.GetProducts(search);
+            return PartialView(list);
         }
 
         [Route("~/yorum-listesi")]
@@ -114,6 +125,14 @@ namespace BTC.Panel.Controllers
         {
             List<CommentListModel> commentList = _postM.GetWaitingComments();
             return Json(commentList, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult getSuppliers()
+        {
+            List<Users> list = new List<Users>();
+            list = _userM.GetUserWithRoleId((int)EnumVariables.Roles.Supplier);
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult publishComment(int comment_id)

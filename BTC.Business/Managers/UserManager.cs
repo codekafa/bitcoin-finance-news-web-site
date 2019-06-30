@@ -154,6 +154,16 @@ namespace BTC.Business.Managers
             return result;
         }
 
+        public List<Users> GetUserWithRoleId(int role_id)
+        {
+            var list = _userRepo.GetByCustomQuery(@"select u.FirstName,u.LastName,u.ID,u.Facebook,u.Instagram,u.Email,u.IsActive,u.IsApproved,u.Linkedin,u.IsVip from Users u
+                inner join UserRoleRels ur on ur.UserId = u.Id
+                where ur.RoleID = @RoleID
+                group by  u.FirstName,u.LastName,u.ID,u.Facebook,u.Instagram,u.Email,u.IsActive,u.IsApproved,u.Linkedin,u.IsVip 
+                ", new { RoleId = role_id });
+            return list;
+        }
+
         public List<UserListModel> GetUserListModel()
         {
             List<UserListModel> list = new List<UserListModel>();

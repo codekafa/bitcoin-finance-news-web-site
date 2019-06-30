@@ -1,8 +1,44 @@
 ﻿
 @{
     ViewBag.Title = "Urun Listesi";
-     ViewBag.SelectPage = "tum-urunler";
+    ViewBag.SelectPage = "tum-urunler";
 }
+<div class="col-md-12">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="supplier_id">Tedarikçi</label>
+            <select id="supplier_id" name="supplier_id" class="form-control"></select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="search_key">Aranan kelime</label>
+            <input id="search_key" name="search_key" class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-4" style="margin-top: 28px;">
+        <button type="button" onclick="getProductList()" class="btn btn-primary">Ara</button>
+    </div>
+</div>
+<div class="col-md-12">
+    <div id="productList">
 
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            getSuppliers();
+        });
+
+    </script>
+
+}
 
 

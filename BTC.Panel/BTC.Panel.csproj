@@ -2907,6 +2907,7 @@
     <Content Include="Views\Product\AddNewProduct.cshtml" />
     <Content Include="Views\Product\EditProduct.cshtml" />
     <Content Include="Views\Product\MyProducts.cshtml" />
+    <Content Include="Views\Admin\_GetProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Business\BTC.Business.csproj">

@@ -107,6 +107,17 @@ namespace BTC.Business.Managers
             return result;
 
         }
+
+        public List<UserProducts> GetProducts(ProductSearchModel search)
+        {
+
+            if (!string.IsNullOrWhiteSpace(search.SearchKey))
+                search.SearchKey = "%" + search.SearchKey + "%";
+
+            var list = _proRepo.GetByCustomQuery("select * from UserProducts where UserID = @SupplierId and (@SearchKey is null or (Name like @SearchKey or Tags like @SearchKey or Keywords like @SearchKey))", search);
+            return list;
+        }
+
         public UserProducts GetProductByID(int product_id, int user_id)
         {
             var product = _proRepo.GetByCustomQuery("select * from UserProducts where UserID = @ID and ID = @PID", new { ID = user_id, PID = product_id }).FirstOrDefault();

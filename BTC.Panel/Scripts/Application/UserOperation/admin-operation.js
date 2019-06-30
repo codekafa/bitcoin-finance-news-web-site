@@ -525,3 +525,50 @@ function updateMenuState(id, state) {
 }
 
 /*menu settings*/
+
+
+
+/*prodcuts*/
+
+
+function getProductList() {
+
+    var obj = new Object();
+
+    var s_p_id = $('#supplier_id').val();
+
+    if (s_p_id == "" || s_p_id == null) {
+        dangerAlert("Lütfen tedarikçi seçiniz.");
+        return;
+    }
+
+    obj.SupplierId = s_p_id;
+    obj.SearchKey = $('#search_key').val();
+
+
+    $.ajax('/Admin/_GetProducts', {
+        type: "Post",
+        dataType: "html",
+        data: obj,
+        success: function (result) {
+            console.log(result);
+            $('#productList').html(result);
+        }
+    });
+
+}
+
+function getSuppliers() {
+    console.log("asdasd");
+    $.ajax('/Admin/getSuppliers', {
+        type: "GET",
+        success: function (result) {
+            $.each(result, function (i, item) {
+                var opt = "<option value='" + item.ID + "'>"+item.FirstName +" " + item.LastName + "</option>"
+                $('#supplier_id').append(opt);
+            });
+        }
+    });
+}
+
+/*products*/
