@@ -128,6 +128,8 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2857,6 +2859,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\_post\large\" />
+    <Folder Include="Images\_post\medium\" />
+    <Folder Include="Images\_post\small\" />
+    <Folder Include="Images\_products\" />
+    <Folder Include="Images\_userfiles\profile\medium\" />
+    <Folder Include="Images\_userfiles\profile\origin\" />
+    <Folder Include="Images\_userfiles\profile\small\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Content\" />
   </ItemGroup>
@@ -2891,6 +2900,13 @@
     <Content Include="Views\Admin\SmsSettings.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\_GetPosts.cshtml" />
+    <Content Include="Views\News\AddNews.cshtml" />
+    <Content Include="Views\News\EditNews.cshtml" />
+    <Content Include="Views\News\GetMyNews.cshtml" />
+    <Content Include="Views\Product\_GetPartialViewMyProducts.cshtml" />
+    <Content Include="Views\Product\AddNewProduct.cshtml" />
+    <Content Include="Views\Product\EditProduct.cshtml" />
+    <Content Include="Views\Product\MyProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Business\BTC.Business.csproj">

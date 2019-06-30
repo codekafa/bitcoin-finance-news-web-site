@@ -1,4 +1,6 @@
-﻿using BTC.Model.Response;
+﻿using BTC.Business.Managers;
+using BTC.Model.Response;
+using BTC.Model.View;
 using BTC.Panel.Base;
 using System;
 using System.Collections.Generic;
@@ -11,11 +13,18 @@ namespace BTC.Panel.Controllers
     [AuthAttribute(null)]
     public class HomeController : Controller
     {
+        private SiteSettingManager _siteM; 
+        public HomeController()
+        {
+            _siteM = new SiteSettingManager();
+        }
+
         [Route("~/")]
         [Route("~/ana-sayfa")]
         public ActionResult Index()
         {
-            return View();
+            var result = _siteM.GetDashboardModel();
+            return View(result.ResultData as DasboardMainModel);
         }
 
         [Route("~/bir-sorun-var")]

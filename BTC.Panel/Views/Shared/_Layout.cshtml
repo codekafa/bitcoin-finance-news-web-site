@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using BTC.Common.Constants;
+@using BTC.Model.View
+@using BTC.Common.Session;
+@{
+    CurrentUserModel currentUser = SessionVariables.User;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -28,8 +35,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img src=" ~/Content/images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="~/Content/images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href="./"><img src=" http://85.95.240.159//assets/images/logo.png" alt="Logo" style="max-width:50px"></a>
+                <a class="navbar-brand hidden" href="./"><img src="http://85.95.240.159//assets/images/logo.png" alt="Logo"></a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -46,16 +53,36 @@
                             <li><i class="fa fa-id-card-o"></i><a href="~/mail-ayarlari">Mail Ayarları</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="~/sms-ayarlari">Sms Ayarları</a></li>
                             @*<li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Üyelik Ayarları</a></li>
-        <li><i class="fa fa-fire"></i><a href="ui-modals.html">Site Bilgileri</a></li>*@
+                <li><i class="fa fa-fire"></i><a href="ui-modals.html">Site Bilgileri</a></li>*@
                             <li><i class="fa fa-share-square-o"></i><a href="~/kullanicilar">Kullanıcı Listesi</a></li>
                             <li><i class="fa fa-id-card-o"></i><a href="~/makale-listesi">Makale Listesi</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="~/urun-listesi">Ürün Listesi</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="~/menu-icerikleri">İçerik Listesi</a></li>
+                            @*<li><i class="fa fa-id-card-o"></i><a href="~/menu-icerikleri">İçerik Listesi</a></li>*@
+                            @*<li><i class="fa fa-id-card-o"></i><a href="~/haberler">Haber Listesi</a></li>*@
                             <li><i class="fa fa-share-square-o"></i><a href="~/yorum-listesi">Yorum Listesi</a></li>
                             <li><i class="fa fa-id-card-o"></i><a href="~/kategori-listesi">Kategori Listesi</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="~/menu-ayarlari">Menü Ayarları</a></li>
                         </ul>
                     </li>
+
+                    @*Sadece Admin*@
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>İçerik Bilgileri</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-id-badge"></i><a href="/menu-icerikleri">İçerik Listesi</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-urun-ekle">İçerik Ekle</a></li>
+                        </ul>
+                    </li>
+
+                    @*Sadece Admin*@
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Haber Bilgileri</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-id-badge"></i><a href="/haberler">Haber Listesi</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-haber-ekle">Haber Ekle</a></li>
+                        </ul>
+                    </li>
+
 
 
                     @*Sadece Yazar*@
@@ -96,20 +123,30 @@
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                     <div class="header-left">
-                       <h2> @ViewBag.Title</h2>
+                        <h2> @ViewBag.Title</h2>
                     </div>
                 </div>
 
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="~/Content/images/admin.jpg" alt="User Avatar">
+
+                            @if (currentUser != null && !string.IsNullOrWhiteSpace(currentUser.CurrentUser.ProfilePhotoUrl))
+                            {
+                                <img class="user-avatar rounded-circle" src="@ConstantProxy.BaseSiteUrl/Images/_userfiles/profile/small/@currentUser.CurrentUser.ProfilePhotoUrl" alt="avatar" />
+                            }
+                            else
+                            {
+                                <img class="user-avatar rounded-circle" src="@ConstantProxy.BaseSiteUrl/assets/images/avatar.png" alt="avatar" />
+                            }
+
+                            @*<img class="user-avatar rounded-circle" src="@ConstantProxy.BaseProfilePhotoPath/" alt="User Avatar">*@
                         </a>
 
                         <div class="user-menu dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
-                            <a class="nav-link" href="~/profilim"><i class="fa fa-user"></i> Profilim</a>
+                            @*<a class="nav-link" href="~/profilim"><i class="fa fa-user"></i> Profilim</a>
 
-                            <a class="nav-link" href="~/sifre-degistir"><i class="fa fa-user-circle"></i> Şifre Değiştir</a>
+                            <a class="nav-link" href="~/sifre-degistir"><i class="fa fa-user-circle"></i> Şifre Değiştir</a>*@
 
                             <a class="nav-link" href="~/cikis-yap"><i class="fa fa-power-off"></i> Çıkış Yap</a>
                         </div>

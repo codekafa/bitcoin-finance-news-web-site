@@ -15,5 +15,6 @@ namespace BTC.Common.Constants
         public static string BaseSiteUrl { get { return WebConfigurationManager.AppSettings["BaseSiteUrl"].ToString(); } }
         public static string BaseProductFileAddress { get { return WebConfigurationManager.AppSettings["BaseProductFileAddress"].ToString(); } }
 
+        public static string BasePanelUrl { get { return WebConfigurationManager.AppSettings["BasePanelUrl"].ToString(); } }
     }
 }

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Haberler";
+    ViewBag.SelectPage = "haberler";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="/yeni-haber-ekle" class="btn btn-primary btn-xs pull-right"  target="_blank" > Yeni Haber Ekle </a>
+    </div>
+    <div class="panel-body fixed-margin">
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <th>
+                        Kapak Fotoğrafı
+                    </th>
+                    <th>
+                        Başlık
+                    </th>
+                    <th>
+                        Yayında Mı?
+                    </th>
+                    <th>
+                        Görüntülenme Sayısı
+                    </th>
+                    <th>
+                        İşlemler
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody id="postListTableBody"></tbody>
+
+        </table>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/Application/News/my-news-list.js"></script>
+}
+
+
+
+
+
+
+

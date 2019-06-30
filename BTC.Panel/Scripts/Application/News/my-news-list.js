@@ -20,12 +20,12 @@ function getMyPosts() {
                 tr += "</td>";
                 tr += "<td> " + item.ViewCount + "</td>";
                 tr += "<td>";
-                tr += "<a href='/haber-duzenle/"+item.ID+"' target='_blank' class='btn btn-xs btn-primary' > Düzenle </a>";
+                tr += "<a href='/haber-duzenle/" + item.ID +"' target='_blank' title='Düzenle' class='btn btn-xs btn-primary' > <i class='fa fa-edit'> </i>  </a>";
 
                 if (item.IsPublish == true) {
-                    tr += "<button type='button' class='btn btn-xs btn-danger' onclick='unPublishPost("+item.ID+")' >  Kaldır </button>";
+                    tr += "<button type='button' class='btn btn-xs btn-danger'  title='Yayından Kaldır' onclick='unPublishPost(" + item.ID +")' >   <i class='fa fa-remove'> </button>";
                 } else {
-                    tr += "<button type='button' class='btn btn-xs btn-warning' onclick='publishPost(" + item.ID +")' > Yayınla </button>";
+                    tr += "<button type='button' class='btn btn-xs btn-warning'  title='Yayınla' onclick='publishPost(" + item.ID +")' >  <i class='fa fa-check-circle'> </i> </button>";
                 }
                 tr += "</td>";
 

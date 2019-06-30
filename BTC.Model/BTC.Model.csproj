@@ -72,6 +72,7 @@
     <Compile Include="View\ContactModel.cs" />
     <Compile Include="View\ContentViewListModel.cs" />
     <Compile Include="View\CurrentUserModel.cs" />
+    <Compile Include="View\DasboardMainModel.cs" />
     <Compile Include="View\EditProductModel.cs" />
     <Compile Include="View\LoginUserModel.cs" />
     <Compile Include="View\PasswordChangeModel.cs" />

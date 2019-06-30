@@ -85,7 +85,15 @@ $(document).ready(function () {
 function addPhotos() {
 
     var dat = new FormData($('#addPhotoForm').get(0));
-    console.log(dat);
+
+
+    var file_count = $('#PhotoList')[0].files.length;
+
+    if (file_count <= 0) {
+        dangerAlert("En az 1 adet fotoğraf seçmelisiniz!");
+        return;
+    }
+
     $.ajax({
         data: dat,
         type: 'post',

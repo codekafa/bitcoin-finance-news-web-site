@@ -338,7 +338,7 @@ function getCategoryList() {
                 tr += "<td>" + item.Uri + "<input type='hidden' id='category_uri_" + item.ID + "' value=" + item.Uri + "  /></td>";
                 if (item.IsActive == true) {
                     tr += "<td><span class='alert alert-success btn-xs' style='padding:0px;'>Aktif</span></td>";
-                    tr += "<td><button type='button' onclick='updateCategoryState(" + item.ID + ",false)' class='btn btn-xs btn-danger'><i class='fa faremove'></i></button><button type='button' onclick='editCategory(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
+                    tr += "<td><button type='button' onclick='updateCategoryState(" + item.ID + ",false)' class='btn btn-xs btn-danger'><i class='fa fa-remove'></i></button><button type='button' onclick='editCategory(" + item.ID + ")' class='btn btn-xs btn-warning'><i class='fa fa-edit'></i></button></td>";
                 } else {
                     tr += "<td><span class='alert alert-danger btn-xs' style='padding:0px;'>Pasif</span></td>";
                     tr += "<td><button type='button' onclick='updateCategoryState(" + item.ID + ",true)' class='btn btn-xs btn-success'><i class='fa fa-check-circle'></i></button><button type='button' onclick='editCategory(" + item.ID + ")' class='btn btn-xs btn-warning'><i class='fa fa-edit'></i></button></td>";

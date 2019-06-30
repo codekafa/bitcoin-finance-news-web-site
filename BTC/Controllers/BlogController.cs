@@ -68,129 +68,129 @@ namespace BTC.Controllers
             return PartialView(cateList);
         }
 
-        [AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
+        //[AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
 
-        [Route("~/makalelerim")]
-        public ActionResult GetMyPosts()
-        {
-            return View();
-        }
+        //[Route("~/makalelerim")]
+        //public ActionResult GetMyPosts()
+        //{
+        //    return View();
+        //}
 
-        [AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
-        [HttpGet]
-        public JsonResult getMyPosts()
-        {
-            var list = _postM.GetPostModelsByUserId(CurrentUser.CurrentUser.ID);
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
+        //[AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
+        //[HttpGet]
+        //public JsonResult getMyPosts()
+        //{
+        //    var list = _postM.GetPostModelsByUserId(CurrentUser.CurrentUser.ID);
+        //    return Json(list, JsonRequestBehavior.AllowGet);
+        //}
 
-        [AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
-        [Route("yeni-makale-ekle")]
-        public ActionResult AddNewPost()
-        {
-            return View();
-        }
+        //[AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
+        //[Route("yeni-makale-ekle")]
+        //public ActionResult AddNewPost()
+        //{
+        //    return View();
+        //}
 
 
-        [AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
-        [Route("~/makale-duzenle/{post_id}")]
-        public ActionResult EditPost(int post_id)
-        {
-            var post = _postM.GetById(post_id);
+        //[AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
+        //[Route("~/makale-duzenle/{post_id}")]
+        //public ActionResult EditPost(int post_id)
+        //{
+        //    var post = _postM.GetById(post_id);
 
-            if (post == null || !post.IsActive || post.UserID != CurrentUser.CurrentUser.ID)
-            {
-                return RedirectToErrorPage(new ResponseModel { IsSuccess = false, Message = "Makale bulunamadı!" });
-            }
-            ViewBag.PostId = post_id;
-            return View();
-        }
+        //    if (post == null || !post.IsActive || post.UserID != CurrentUser.CurrentUser.ID)
+        //    {
+        //        return RedirectToErrorPage(new ResponseModel { IsSuccess = false, Message = "Makale bulunamadı!" });
+        //    }
+        //    ViewBag.PostId = post_id;
+        //    return View();
+        //}
 
-        [HttpPost]
-        [ValidateInput(false)]
-        [AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
-        public JsonResult addOrEditPost(PostModel postModel)
-        {
-            ResponseModel result = new ResponseModel();
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //[AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Writer })]
+        //public JsonResult addOrEditPost(PostModel postModel)
+        //{
+        //    ResponseModel result = new ResponseModel();
 
-            if (!ModelState.IsValid)
-            {
-                result.Message = "Zorunlu alanları doldurunuz!";
-                return Json(result);
-            }
-            postModel.UserID = CurrentUser.CurrentUser.ID;
+        //    if (!ModelState.IsValid)
+        //    {
+        //        result.Message = "Zorunlu alanları doldurunuz!";
+        //        return Json(result);
+        //    }
+        //    postModel.UserID = CurrentUser.CurrentUser.ID;
 
-            if (postModel.ID <= 0)
-            {
-                string file_name = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
-                string base_file_path = WebConfigurationManager.AppSettings["BasePostFileAddress"];
-                string base_file_address = HttpContext.Server.MapPath(base_file_path);
-                string savedBaseFilePath = Path.Combine(base_file_address, file_name);
-                postModel.TopPhotoUrl = file_name;
-                postModel.FileSaveMap = savedBaseFilePath;
-                result = _postM.AddNewPost(postModel);
-            }
-            else
-            {
-                if (Request.Files.Count > 0)
-                {
-                    if (postModel.IsChangeMainImage)
-                    {
-                        string file_name = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
-                        string base_file_path = WebConfigurationManager.AppSettings["BasePostFileAddress"];
-                        string base_file_address = HttpContext.Server.MapPath(base_file_path);
-                        string savedBaseFilePath = Path.Combine(base_file_address, file_name);
-                        postModel.TopPhotoUrl = file_name;
-                        postModel.FileSaveMap = savedBaseFilePath;
-                        postModel.MainImage = Request.Files[0];
-                    }
+        //    if (postModel.ID <= 0)
+        //    {
+        //        string file_name = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
+        //        string base_file_path = WebConfigurationManager.AppSettings["BasePostFileAddress"];
+        //        string base_file_address = HttpContext.Server.MapPath(base_file_path);
+        //        string savedBaseFilePath = Path.Combine(base_file_address, file_name);
+        //        postModel.TopPhotoUrl = file_name;
+        //        postModel.FileSaveMap = savedBaseFilePath;
+        //        result = _postM.AddNewPost(postModel);
+        //    }
+        //    else
+        //    {
+        //        if (Request.Files.Count > 0)
+        //        {
+        //            if (postModel.IsChangeMainImage)
+        //            {
+        //                string file_name = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
+        //                string base_file_path = WebConfigurationManager.AppSettings["BasePostFileAddress"];
+        //                string base_file_address = HttpContext.Server.MapPath(base_file_path);
+        //                string savedBaseFilePath = Path.Combine(base_file_address, file_name);
+        //                postModel.TopPhotoUrl = file_name;
+        //                postModel.FileSaveMap = savedBaseFilePath;
+        //                postModel.MainImage = Request.Files[0];
+        //            }
 
-                }
-                result = _postM.UpdatePost(postModel);
-            }
-            return Json(result);
-        }
+        //        }
+        //        result = _postM.UpdatePost(postModel);
+        //    }
+        //    return Json(result);
+        //}
 
-        public JsonResult getPostById(int post_id)
-        {
-            var post = _postM.GetById(post_id);
+        //public JsonResult getPostById(int post_id)
+        //{
+        //    var post = _postM.GetById(post_id);
 
-            if (post == null || !post.IsActive || post.UserID != CurrentUser.CurrentUser.ID)
-            {
-                return Json(new ResponseModel { IsSuccess = false, Message = "Makale bulunamadı!" }, JsonRequestBehavior.AllowGet);
-            }
+        //    if (post == null || !post.IsActive || post.UserID != CurrentUser.CurrentUser.ID)
+        //    {
+        //        return Json(new ResponseModel { IsSuccess = false, Message = "Makale bulunamadı!" }, JsonRequestBehavior.AllowGet);
+        //    }
 
-            return Json(new ResponseModel { IsSuccess = true, ResultData = post }, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(new ResponseModel { IsSuccess = true, ResultData = post }, JsonRequestBehavior.AllowGet);
+        //}
 
-        public JsonResult getCategories()
-        {
-            return Json(_catRepo.GetCategories(), JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult getCategories()
+        //{
+        //    return Json(_catRepo.GetCategories(), JsonRequestBehavior.AllowGet);
+        //}
 
-        public JsonResult updatePublishPost(int post_id, bool p)
-        {
-            _postM.UpdatePublishFiledPost(post_id, p);
-            return Json(true, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult generateUrlFormat(string uri)
-        {
-            string value = _postM.GenerateUriFormat(uri);
-            return Json(value, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult updatePublishPost(int post_id, bool p)
+        //{
+        //    _postM.UpdatePublishFiledPost(post_id, p);
+        //    return Json(true, JsonRequestBehavior.AllowGet);
+        //}
+        //public JsonResult generateUrlFormat(string uri)
+        //{
+        //    string value = _postM.GenerateUriFormat(uri);
+        //    return Json(value, JsonRequestBehavior.AllowGet);
+        //}
 
-        [HttpPost]
-        public JsonResult addComment(Comments addComment)
-        {
-            ResponseModel result = new ResponseModel();
-            addComment.IsPublish = false;
-            addComment.CreateDate = DateTime.Now;
-            if (SessionVariables.User != null)
-            {
-                addComment.UserID = SessionVariables.User.CurrentUser.ID;
-            }
-            result = _postM.AddComment(addComment);
-            return Json(result);
-        }
+        //[HttpPost]
+        //public JsonResult addComment(Comments addComment)
+        //{
+        //    ResponseModel result = new ResponseModel();
+        //    addComment.IsPublish = false;
+        //    addComment.CreateDate = DateTime.Now;
+        //    if (SessionVariables.User != null)
+        //    {
+        //        addComment.UserID = SessionVariables.User.CurrentUser.ID;
+        //    }
+        //    result = _postM.AddComment(addComment);
+        //    return Json(result);
+        //}
     }
 }

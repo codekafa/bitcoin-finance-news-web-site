@@ -1,6 +1,7 @@
 ﻿using BTC.Common.Constants;
 using BTC.Model.Entity;
 using BTC.Model.Response;
+using BTC.Model.View;
 using BTC.Repository;
 using BTC.Setting;
 using System.Linq;
@@ -166,5 +167,14 @@ namespace BTC.Business.Managers
             StaticSettings.ReloadSettings();
             return result;
         }
+
+
+        public ResponseModel GetDashboardModel()
+        {
+            ResponseModel result = new ResponseModel();
+            result.ResultData = _siteRepo.GetDashboard();
+            return result;
+        }
+
     }
 }

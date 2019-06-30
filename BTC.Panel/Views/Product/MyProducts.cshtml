@@ -1,0 +1,14 @@
+﻿@using BTC.Model.View
+@{
+    ViewBag.Title = "Ürünlerim";
+    ViewBag.SelectPage = "urunlerim";
+}
+
+<input type="hidden" id="FirstId" value="">
+<input type="hidden" id="LastId" value="">
+
+<div class="col-md-12 box-body-feed">
+    <a class="btn btn-xs btn-primary pull-right" href="/yeni-urun-ekle" target="_blank" >Yeni ürün Ekle</a>
+    @Html.Action("_GetPartialViewMyProducts")
+</div>
+

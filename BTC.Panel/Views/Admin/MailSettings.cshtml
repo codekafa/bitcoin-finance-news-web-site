@@ -7,72 +7,69 @@
 @model MailSettings
 
 
-<div class="col-xs-12 col-sm-12">
-    <form id="mailSettingForm" name="mailSettingForm" method="POST" novalidate="">
-        <h2>Mail Ayarları</h2>
-        <div class="card">
-            <div class="card-header">
+<form id="mailSettingForm" name="mailSettingForm" method="POST" novalidate="">
+    <div class="card">
+        <div class="card-header">
 
-            </div>
-            <div class="card-body card-block">
-                <input type="hidden" id="ID" name="ID" value="@Model.ID">
-                <div class="form-group">
-                    <label class=" form-control-label">Smtp Adresi</label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
-                        <input type="text" id="SmtpAddress" name="SmtpAddress" placeholder="" value="@Model.SmtpAddress" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class=" form-control-label">Email Adres</label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-mail-forward"></i></div>
-                        <input type="email" id="Mail" name="Mail" placeholder="" value="@Model.Mail" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class=" form-control-label">Email Şifre</label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                        <input type="password" id="Password" name="Password" placeholder="" value="@Model.Password" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class=" form-control-label">Port  </label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-circle-o-notch"></i></div>
-                        <input type="number" id="Port" name="Port" placeholder="" value="@Model.Port" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class=" form-control-label">Üyelik Onaylama Mail Üzerinden yapılsın?  </label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-check"></i></div>
-                        <select class="form-control" id="ApproveSendMailNewUser" name="ApproveSendMailNewUser">
-
-                            @if (Model.ApproveSendMailNewUser)
-                            {
-                                <option value="true" selected>Evet</option>
-                                <option value="false">Hayır</option>
-                            }
-                            else
-                            {
-                                <option value="true" >Evet</option>
-                                <option value="false" selected>Hayır</option>
-                            }
-
-                        </select>
-                    </div>
+        </div>
+        <div class="card-body card-block">
+            <input type="hidden" id="ID" name="ID" value="@Model.ID">
+            <div class="form-group">
+                <label class=" form-control-label">Smtp Adresi</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
+                    <input type="text" id="SmtpAddress" name="SmtpAddress" placeholder="" value="@Model.SmtpAddress" class="form-control">
                 </div>
             </div>
-            <div class="card-footer">
-                <button type="button" class="btn btn-primary btn-sm" onclick="updateMailSettings()">
-                    <i class="fa fa-dot-circle-o"></i> Kaydet
-                </button>
+            <div class="form-group">
+                <label class=" form-control-label">Email Adres</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-mail-forward"></i></div>
+                    <input type="email" id="Mail" name="Mail" placeholder="" value="@Model.Mail" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=" form-control-label">Email Şifre</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                    <input type="password" id="Password" name="Password" placeholder="" value="@Model.Password" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=" form-control-label">Port  </label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-circle-o-notch"></i></div>
+                    <input type="number" id="Port" name="Port" placeholder="" value="@Model.Port" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=" form-control-label">Üyelik Onaylama Mail Üzerinden yapılsın?  </label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-check"></i></div>
+                    <select class="form-control" id="ApproveSendMailNewUser" name="ApproveSendMailNewUser">
+
+                        @if (Model.ApproveSendMailNewUser)
+                        {
+                            <option value="true" selected>Evet</option>
+                            <option value="false">Hayır</option>
+                        }
+                        else
+                        {
+                            <option value="true">Evet</option>
+                            <option value="false" selected>Hayır</option>
+                        }
+
+                    </select>
+                </div>
             </div>
         </div>
-    </form>
-</div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-sm" onclick="updateMailSettings()">
+                <i class="fa fa-dot-circle-o"></i> Kaydet
+            </button>
+        </div>
+    </div>
+</form>
 
 
 @section scripts
