@@ -40,39 +40,39 @@
 
 
         <nav id="sidebar">
-        <div class="sidebar-header">
-            <a href="~/ana-sayfa">
-                <h3 class="logo"><img src="/assets/images/logo.png" alt="logo" />Bitcoin Finans</h3>
-            </a>
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="box-account">
-            <div class="row m-0">
-                <div class="col-md-3 p-0 box-avatar">
+            <div class="sidebar-header">
+                <a href="~/ana-sayfa">
+                    <h3 class="logo"><img src="/assets/images/logo.png" alt="logo" />Bitcoin Finans</h3>
+                </a>
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="box-account">
+                <div class="row m-0">
+                    <div class="col-md-3 p-0 box-avatar">
 
-                    @if (currentUser != null && !string.IsNullOrWhiteSpace(currentUser.CurrentUser.ProfilePhotoUrl))
-                    {
-                        <img src="~/Images/_userfiles/profile/small/@currentUser.CurrentUser.ProfilePhotoUrl" alt="avatar" />
-                    }
-                    else
-                    {
-                        <img src="/assets/images/avatar.png" alt="avatar" />
-                    }
+                        @if (currentUser != null && !string.IsNullOrWhiteSpace(currentUser.CurrentUser.ProfilePhotoUrl))
+                        {
+                            <img src="~/Images/_userfiles/profile/small/@currentUser.CurrentUser.ProfilePhotoUrl" alt="avatar" />
+                        }
+                        else
+                        {
+                            <img src="/assets/images/avatar.png" alt="avatar" />
+                        }
 
-                </div>
-                <div class="box-txt-account col-md-9 p-0">
-                    @if (currentUser != null)
-                    {
-                        <div>
-                            <p> Hoşgeldiniz - @currentUser.FullName </p>
+                    </div>
+                    <div class="box-txt-account col-md-9 p-0">
+                        @if (currentUser != null)
+                        {
+                            <div>
+                                <p> Hoşgeldiniz - @currentUser.FullName </p>
 
-                            @*@if (currentUser.IsAdmin)
-        {
-        <a target="_blank" href="http://localhost:50499/giris-yap">Panele Git</a>
-        }*@
-        @*<a href="~/cikis-yap"> Çıkış</a>*@
+                                @if (currentUser.IsAdmin)
+                                {
+                                    <a target="_blank" href="@BTC.Common.Constants.ConstantProxy.BasePanelUrl/giris-yap">Panele Git</a>
+                                }
+                                @*<a href="~/cikis-yap"> Çıkış</a>*@
 
-    </div>
+                            </div>
                         }
                         else
                         {
@@ -97,26 +97,6 @@
                     <li class="makaleler">
                         <a href="~/blog"><i class="fas fa-pen-nib"></i>Yayınlar</a>
                     </li>
-                    @if (currentUser != null && (currentUser.IsWriter || currentUser.IsAdmin))
-                    {
-                        <li class="makalelerim">
-                            <a href="~/makalelerim"><i class="fas fa-pen"></i>Yayınlarım</a>
-                        </li>
-                        <li class="yeni-makale">
-                            <a href="~/yeni-makale-ekle"><i class="fas fa-plus"></i>Yeni Yayın Ekle</a>
-                        </li>
-                    }
-
-                    @if (currentUser != null &&  currentUser.IsAdmin)
-                    {
-                        <li class="haberler">
-                            <a href="~/haberler"><i class="fas fa-pen"></i>Haberler</a>
-                        </li>
-                        <li class="haber-ekle">
-                            <a href="~/yeni-haber-ekle"><i class="fas fa-plus"></i>Yeni Haber Ekle</a>
-                        </li>
-                    }
-
                 </ul>
             </div>
 
@@ -147,31 +127,10 @@
                 </ul>
             </div>
 
-            @if (currentUser != null && (currentUser.IsSupplier || currentUser.IsAdmin))
-            {
-                <div class="box-list">
-                    <p class="sub-title">Tedarik</p>
-                    <ul class="list-unstyled components">
-                        <li class="urunler">
-                            <a href="~/urunler"><i class="fas fa-arrow-right"></i>Ürünler</a>
-                        </li>
-                        @if (currentUser != null && (currentUser.IsWriter || currentUser.IsAdmin))
-                        {
-                            <li class="urunlerim">
-                                <a href="~/urunlerim"><i class="fas fa-server"></i>Ürünlerim</a>
-                            </li>
-                            <li class="yeni-urun">
-                                <a href="~/yeni-urun-ekle"><i class="fas fa-plus"></i>Yeni Ürün Ekle</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            }
-
             @if (BTC.Common.Constants.StaticSettings.ContentViews.Count > 0)
             {
                 <div class="box-list">
-                    <p class="sub-title">İçerİkler</p>
+                    <p class="sub-title">İçerikler</p>
                     <ul class="list-unstyled components">
 
                         @if (currentUser != null)
@@ -199,51 +158,12 @@
                     </ul>
                 </div>
             }
-
-            @if (currentUser != null && currentUser.IsAdmin)
-            {
-                <div class="box-list">
-                    <p class="sub-title">Yönetim</p>
-                    <ul class="list-unstyled components">
-                        <li class="tum-uyeler">
-                            <a href="~/kullanicilar"><i class="fas fa-users"></i>Kullanıcılar</a>
-                        </li>
-                        <li class="tum-makaleler">
-                            <a href="~/makale-listesi"><i class="fas fa-list"></i>Makaleler</a>
-                        </li>
-                        <li class="tum-urunler">
-                            <a href="~/urun-listesi"><i class="fas fa-list"></i>Ürünler</a>
-                        </li>
-                        <li class="tum-yorumlar">
-                            <a href="~/yorum-listesi"><i class="fas fa-comments"></i>Yorumlar</a>
-                        </li>
-                        <li class="tum-kategoriler">
-                            <a href="~/kategori-listesi"><i class="fas fa-list"></i>Kategoriler</a>
-                        </li>
-                        <li class="mail">
-                            <a href="~/mail-ayarlari"><i class="fas fa-mail-bulk"></i>Mail Ayarları</a>
-                        </li>
-                        <li class="sms">
-                            <a href="~/sms-ayarlari"><i class="fas fa-sms"></i>Sms Ayarları</a>
-                        </li>
-                        <li class="site">
-                            <a href="~/site-ayarlari"><i class="fas fa-sitemap"></i>Site Ayarları</a>
-                        </li>
-                        <li class="icerik">
-                            <a href="~/menu-icerikleri"><i class="fas fa-book"></i>İçerik Listesi</a>
-                        </li>
-                        <li class="menu-ayarlari">
-                            <a href="~/menu-ayarlari"><i class="fas fa-book"></i>Menu Ayarları</a>
-                        </li>
-                    </ul>
-                </div>
-            }
             <div class="box-list">
                 <p class="sub-title"></p>
                 <ul class="list-unstyled components">
                     @*<li class="hakkimizda">
-                        <a href="~/hakkimizda"><i class="fas fa-user-friends"></i>Hakkımızda</a>
-                    </li>*@
+                            <a href="~/hakkimizda"><i class="fas fa-user-friends"></i>Hakkımızda</a>
+                        </li>*@
                     <li class="iletisim">
                         <a href="~/iletisim"><i class="far fa-envelope"></i>İletişim</a>
                     </li>

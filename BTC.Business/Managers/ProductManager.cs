@@ -124,6 +124,11 @@ namespace BTC.Business.Managers
             return product;
         }
 
+        public UserProducts GetProductByUri(string uri)
+        {
+            var product = _proRepo.GetByCustomQuery("select * from UserProducts where Uri = @Uri and IsPublish = 1", new { Uri = uri}).FirstOrDefault();
+            return product;
+        }
         public ResponseModel AddProduct(AddProductModel addProduct)
         {
             ResponseModel result = new ResponseModel();

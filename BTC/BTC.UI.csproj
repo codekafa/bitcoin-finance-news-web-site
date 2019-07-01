@@ -122,7 +122,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Base\AuthAttribute.cs" />
     <Compile Include="Base\BaseController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1955,20 +1954,7 @@
     <Content Include="Views\Blog\_GetPartialViewPosts.cshtml" />
     <Content Include="Views\Blog\_GetPartialViewBestViewPosts.cshtml" />
     <Content Include="Views\Blog\_GetCategories.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Users.cshtml" />
-    <Content Include="Views\Admin\Posts.cshtml" />
-    <Content Include="Views\Admin\Products.cshtml" />
-    <Content Include="Views\Admin\Comments.cshtml" />
-    <Content Include="Views\Admin\MailSettings.cshtml" />
-    <Content Include="Views\Admin\SmsSettings.cshtml" />
-    <Content Include="Views\Admin\SiteSettings.cshtml" />
-    <Content Include="Views\Admin\Categories.cshtml" />
-    <Content Include="Views\Admin\_GetPosts.cshtml" />
     <Content Include="Views\Content\ContentViever.cshtml" />
-    <Content Include="Views\Admin\ContentList.cshtml" />
-    <Content Include="Views\Admin\AddOrEditContentView.cshtml" />
-    <Content Include="Views\Admin\MainMenu.cshtml" />
     <Content Include="Views\Shared\_menuBar.cshtml" />
     <Content Include="Views\News\News.cshtml" />
     <Content Include="Views\News\NewsDetail.cshtml" />
@@ -1976,10 +1962,8 @@
     <Content Include="Views\News\GetMyNews.cshtml" />
     <Content Include="Views\News\AddNews.cshtml" />
     <Content Include="Views\News\EditNews.cshtml" />
-    <Content Include="Views\Product\MyProducts.cshtml" />
-    <Content Include="Views\Product\AddNewProduct.cshtml" />
-    <Content Include="Views\Product\EditProduct.cshtml" />
-    <Content Include="Views\Product\_GetPartialViewMyProducts.cshtml" />
+    <Content Include="Views\Product\Products.cshtml" />
+    <Content Include="Views\Product\_GetPartialViewProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
