@@ -83,6 +83,7 @@ namespace BTC.Controllers
             else
                 return RedirectToErrorPage(result);
         }
+
         public JsonResult logoutUser()
         {
             LoginManager _loginM = new LoginManager();
