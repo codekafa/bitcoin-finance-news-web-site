@@ -6,8 +6,10 @@ using BTC.Model.View;
 using BTC.Panel.Base;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace BTC.Panel.Controllers
@@ -29,20 +31,58 @@ namespace BTC.Panel.Controllers
         [Route("~/profilim")]
         public ActionResult MyProfile()
         {
-            var userModel = SessionVariables.User;
-            return View(userModel);
+            UpdateUserModel result = new UpdateUserModel();
+            result.ID = SessionVariables.User.CurrentUser.ID;
+            result.Email = SessionVariables.User.CurrentUser.Email;
+            result.Facebook = SessionVariables.User.CurrentUser.Facebook;
+            result.FirstName = SessionVariables.User.CurrentUser.FirstName;
+            result.Instagram = SessionVariables.User.CurrentUser.Instagram;
+            result.LastName = SessionVariables.User.CurrentUser.LastName;
+            result.Linkedin = SessionVariables.User.CurrentUser.Linkedin;
+            result.Phone = SessionVariables.User.CurrentUser.Phone;
+            result.Summary = SessionVariables.User.CurrentUser.Summary;
+            result.PhotoName = SessionVariables.User.CurrentUser.ProfilePhotoUrl;
+            result.Company = SessionVariables.User.Company;
+            if (result.Company != null && result.Company.ID > 0)
+            {
+                result.CompanyID = result.Company.ID;
+                result.CompanyAddress = result.Company.Address;
+                result.CompanyCity = result.Company.CityID;
+                result.CompanyDescription = result.Company.Description;
+                result.CompanyName = result.Company.Name;
+                result.CompanyPhone = result.Company.Phone;
+            }
+            else
+            {
+                result.Company = new UserCompanies();
+            }
+            return View(result);
         }
 
         [HttpPost]
         public JsonResult updateProfile(UpdateUserModel userModel)
         {
             ResponseModel result = new ResponseModel();
+            userModel.ID = SessionVariables.User.CurrentUser.ID;
+
+            if (userModel.ProfilePhotoUrl != null)
+            {
+                string file_name = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
+                string base_file_path = WebConfigurationManager.AppSettings["BaseUserFileAddress"];
+                string base_file_address = HttpContext.Server.MapPath(base_file_path);
+                string savedBaseFilePath = Path.Combine(base_file_address, file_name);
+                userModel.PhotoName = file_name;
+                userModel.PhotoSaveBaseUrl = savedBaseFilePath;
+            }
+
             result = _userM.UpdateProfileUser(userModel);
 
             if (result.IsSuccess)
+            {
                 _loginM.ResetSessionUser(userModel.ID);
+            }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(result);
         }
 
 

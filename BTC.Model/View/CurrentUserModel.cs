@@ -23,6 +23,7 @@ namespace BTC.Model.View
         }
         public Users CurrentUser { get; set; }
 
+        public UserCompanies Company { get; set; }
         public List<UserRoleRels> Roles { get; set; }
         public bool IsWriter
         {

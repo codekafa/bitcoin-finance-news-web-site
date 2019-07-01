@@ -19,19 +19,16 @@ namespace BTC.Business.Managers
     public class UserManager
     {
 
-        private UserRepository _userRepo;
-
+        UserRepository _userRepo;
         UserRoleRelRepository _userRoleRepo;
-
-        ContentViewManager _contentM;
-
         ImageManager _imageM;
+        UserCompanyRepository _companyRepo;
         public UserManager()
         {
             _userRepo = new UserRepository();
             _userRoleRepo = new UserRoleRelRepository();
             _imageM = new ImageManager();
-            _contentM = new ContentViewManager();
+            _companyRepo = new UserCompanyRepository();
         }
         public Users CreateUser(Users userModel)
         {
@@ -116,7 +113,7 @@ namespace BTC.Business.Managers
             CurrentUserModel result = new CurrentUserModel();
             result.CurrentUser = user;
             result.Roles = _userRoleRepo.GetByCustomQuery("select * from UserRoleRels where UserID = @UserID", new { UserID = user.ID }).ToList();
-
+            result.Company = _companyRepo.GetCompanyByUserId(user.ID);
             foreach (var item in StaticSettings.ContentViews)
             {
                 if (result.CurrentUser.IsVip && item.CanSeeVip)
@@ -225,10 +222,40 @@ namespace BTC.Business.Managers
             db_user.Summary = user.Summary;
             result.IsSuccess = _userRepo.Update(db_user);
 
-            if (!result.IsSuccess)
-                result.Message = "Profil bilgiler güncellenirken hata oluştu.";
-            else
+
+            if (result.IsSuccess)
+            {
+
+                if (user.Company == null)
+                    user.Company = new UserCompanies();
+
+                user.Company.ID = user.CompanyID;
+                user.Company.IsActive = true;
+                user.Company.Name = user.CompanyName;
+                user.Company.Phone = user.CompanyPhone;
+                user.Company.Address = user.CompanyAddress;
+                user.Company.CityID = user.CompanyCity;
+                user.Company.Email = user.CompanyEmail;
+                user.Company.UserID = user.ID;
+                user.Company.UpdateDate = DateTime.Now;
+                user.Company.Description = user.CompanyDescription;
+
+
+                if (user.CompanyID > 0)
+                {
+                    _companyRepo.ExecuteQuery("update UserCompanies set Name = @Name, Description = @Description, Phone = @Phone, Email = @Email , Address = @Address, CityID = @CityID , UpdateDate = GETDATE()", user.Company);
+                }
+                else
+                {
+                    user.CompanyID = _companyRepo.Insert(user.Company);
+                }
+                result.ResultData = user;
                 result.Message = "Profil bilgileri başarı ile güncellenmiştir.";
+
+            }
+            else
+                result.Message = "Profil bilgileri güncellenirken hata oluştu.";
+
 
             return result;
         }
@@ -256,6 +283,13 @@ namespace BTC.Business.Managers
                             inner join UserRoleRels ur on ur.UserID = u.ID
                             where ur.RoleID = @RoleID", new { RoleID = role_id }).ToList();
             return list;
+        }
+
+
+        public UserCompanies GetUserCompanyByUserID(int user_id)
+        {
+            var iten = _companyRepo.GetByCustomQuery("select * from UserCompanies where UserID = @UserID", new { UserID = user_id }).FirstOrDefault();
+            return iten;
         }
     }
 }

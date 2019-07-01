@@ -3,79 +3,130 @@
     ViewBag.Title = "Profilim";
 }
 
-@model CurrentUserModel
+@model UpdateUserModel
 
-<div class="animated fadeIn">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12">
-            <form id="profileForm" name="profileForm" method="POST" novalidate="">
-                <div class="card">
-                    <div class="card-header">
-                        <strong>Profil Bilgileri</strong> - <small>@Model.FullName</small>
-                    </div>
-                    <div class="card-body card-block">
-                        <input type="hidden" id="ID" name="ID" value="@Model.CurrentUser.ID">
-                        <div class="form-group">
-                            <label class=" form-control-label">Ad</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                <input type="text" id="FirstName" name="FirstName" placeholder="Text" value="@Model.CurrentUser.FirstName" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Soyad</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                <input type="text" id="LastName" name="LastName" placeholder="Text" value="@Model.CurrentUser.LastName" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Facebook</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-facebook-f"></i></div>
-                                <input type="text" id="Facebook" name="Facebook" placeholder="Text" value="@Model.CurrentUser.Facebook" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Instagram</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
-                                <input type="text" id="Instagram" name="Instagram" placeholder="Text" value="@Model.CurrentUser.Instagram" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Linkedin</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-linkedin-square"></i></div>
-                                <input type="text" id="Linkedin" name="Linkedin" placeholder="Text" value="@Model.CurrentUser.Linkedin" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Profil Özeti</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                <textarea class="form-control" rows="5" id="Summary" name="Summary">@Model.CurrentUser.Summary</textarea>
-                            </div>
-                        </div>
-                        @*<div class="form-group">
-                                <label class=" form-control-label">Profil Fotografı</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-image"></i></div>
-                                    <div class="col-12 col-md-9"><input type="file" id="ProfilePhotoUrl" name="ProfilePhotoUrl" class="form-control-file"></div>
-                                </div>
-                            </div>*@
-                    </div>
-                    <div class="card-footer">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="submitProfileForm()">
-                            <i class="fa fa-dot-circle-o"></i> Kaydet
-                        </button>
+<form id="profileForm" class="profile-form" method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-header">
+            <strong>Profil Bilgileri</strong> - <small>@Model.FirstName +  @Model.LastName</small>
+        </div>
+        <div class="card-body card-block">
+            <input type="hidden" id="ID" name="ID" value="@Model.ID">
+            <input type="hidden" id="PhotoName" name="PhotoName" value="@Model.PhotoName">
+            <div class="form-group">
+                <label class=" form-control-label">Ad</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                    <input type="text" id="FirstName" name="FirstName" placeholder="Text" value="@Model.FirstName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=" form-control-label">Soyad</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                    <input type="text" id="LastName" name="LastName" placeholder="Text" value="@Model.LastName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=" form-control-label">Facebook</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-facebook-f"></i></div>
+                    <input type="text" id="Facebook" name="Facebook" placeholder="Text" value="@Model.Facebook" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=" form-control-label">Instagram</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
+                    <input type="text" id="Instagram" name="Instagram" placeholder="Text" value="@Model.Instagram" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=" form-control-label">Linkedin</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-linkedin-square"></i></div>
+                    <input type="text" id="Linkedin" name="Linkedin" placeholder="Text" value="@Model.Linkedin" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Profil Özeti</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                    <textarea class="form-control" rows="5" id="Summary" name="Summary">@Model.Summary</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="ProfilePhotoUrl">Profil Fotoğrafı</label>
+                <input type="hidden" id="IsChangeProfilePhoto" value="">
+                <input id="ProfilePhotoUrl" class="form-control" name="ProfilePhotoUrl" placeholder="" type="file">
+            </div>
+
+            @if (BTC.Common.Session.SessionVariables.User.IsSupplier)
+            {
+                <input type="hidden" id="CompanyId" name="CompanyID" value="@Model.CompanyID" />
+                <div class="form-group">
+                    <label class=" form-control-label">Firma Adı</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-header"></i></div>
+                        <input type="text" id="CompanyName" name="CompanyName" placeholder="Text" value="@Model.Company.Name" class="form-control">
                     </div>
                 </div>
-            </form>
+                <div class="form-group">
+                    <label class=" form-control-label">Firma Email</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-header"></i></div>
+                        <input type="text" id="CompanyEmail" name="CompanyEmail" placeholder="Text" value="@Model.Company.Email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Firma Tel</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-header"></i></div>
+                        <input type="text" id="CompanyPhone" name="CompanyPhone" placeholder="Text" value="@Model.Company.Phone" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Firma Adres</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
+                        <textarea class="form-control" rows="3" id="CompanyAddress" name="CompanyAddress">@Model.Company.Address</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">İl</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
+                        <textarea class="form-control" rows="3" id="CompanyCity" name="CompanyCity">@Model.Company.CityID</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Firma Özeti</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-subscript"></i></div>
+                        <textarea class="form-control" rows="5" id="CompanyDescription" name="CompanyDescription">@Model.Company.Description</textarea>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="card-footer">
+            @*<button type="button" class="btn btn-primary btn-sm" onclick="submitProfileForm()">
+                    <i class="fa fa-dot-circle-o"></i> Kaydet
+                </button>*@
+            <div class="">
+                <button class="btn btn-primary" type="submit">Kaydet</button>
+            </div>
         </div>
     </div>
-</div>
+</form>
 
 @section scripts{
     @Scripts.Render("~/bundles/js/user-operation")
+
+    <script>
+        $(document).ready(function () {
+            updateUser();
+            photoChange();
+        });
+    </script>
 }

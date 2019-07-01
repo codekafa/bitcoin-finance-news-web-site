@@ -20,7 +20,7 @@ namespace BTC.Controllers
         public ProductController()
         {
             _proM = new ProductManager();
-            _imgM = new ImageManager();
+            //_imgM = new ImageManager();
         }
 
 

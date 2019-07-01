@@ -57,3 +57,22 @@ function submitProfileForm () {
     });
 }
 
+
+function updateUser() {
+    $('#profileForm').on('submit', function (e) {
+        var dat = new FormData($('#profileForm').get(0));
+        e.preventDefault();
+        $.ajax({
+            data: dat,
+            type: 'post',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            url: '/Profile/updateProfile',
+            success: function (d) {
+                alertResponse(d);
+            }
+        });
+    });
+}
+

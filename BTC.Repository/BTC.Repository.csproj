@@ -58,6 +58,7 @@
     <Compile Include="SitePageRepository.cs" />
     <Compile Include="SiteSettingsRepository.cs" />
     <Compile Include="SmsSettingsRepository.cs" />
+    <Compile Include="UserCompanyRepository.cs" />
     <Compile Include="UserPostRepository.cs" />
     <Compile Include="UserProductRepository.cs" />
     <Compile Include="UserRepository.cs" />
