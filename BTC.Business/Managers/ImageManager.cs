@@ -75,6 +75,13 @@ namespace BTC.Business.Managers
 
         }
 
+        public Task SaveSliderImage(HttpPostedFileBase file, string savedBaseFilePath)
+        {
+            return Task.Run(() =>
+            {
+                file.SaveAs(savedBaseFilePath);
+            });
+        }
         public bool CheckImageType(string type)
         {
             switch (type)

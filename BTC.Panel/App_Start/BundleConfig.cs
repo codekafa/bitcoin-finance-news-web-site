@@ -28,6 +28,8 @@ namespace BTC.Panel
 
             bundles.Add(new StyleBundle("~/Content/css/vendor").Include(
                     "~/Content/vendors/bootstrap/dist/css/bootstrap.min.css",
+                     "~/Content/bootstrap.min.css",
+                    "~/Content/bootstrap.theme.min.css",
                     "~/Content/vendors/font-awesome/css/font-awesome.min.css",
                     "~/Content/vendors/themify-icons/css/themify-icons.css",
                     "~/Content/vendors/flag-icon-css/css/flag-icon.min.css",

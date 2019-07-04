@@ -70,7 +70,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>İçerik Bilgileri</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-id-badge"></i><a href="/menu-icerikleri">İçerik Listesi</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-urun-ekle">İçerik Ekle</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/icerik-olustur">İçerik Ekle</a></li>
                         </ul>
                     </li>
 
@@ -83,6 +83,14 @@
                         </ul>
                     </li>
 
+                    @*Sadece Admin*@
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Anasayfa Bilgileri</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-id-badge"></i><a href="/slider-ayarlari">Slider</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/ana-sayfa-ayarlari">İçerikler</a></li>
+                        </ul>
+                    </li>
 
 
                     @*Sadece Yazar*@
@@ -91,6 +99,17 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-id-badge"></i><a href="/makalelerim">Makale Listesi</a></li>
                             <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-makale-ekle">Makale Ekle</a></li>
+                        </ul>
+                    </li>
+
+
+
+                    @*Sadece Admin*@
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Sayfa Bilgileri</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-id-badge"></i><a href="/sayfalar">Sayfa Listesi</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-sayfa-ekle">Sayfa Ekle</a></li>
                         </ul>
                     </li>
 
@@ -146,9 +165,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
-                            @*<a class="nav-link" href="~/profilim"><i class="fa fa-user"></i> Profilim</a>
+                            <a class="nav-link" href="~/profilim"><i class="fa fa-user"></i> Profilim</a>
 
-                            <a class="nav-link" href="~/sifre-degistir"><i class="fa fa-user-circle"></i> Şifre Değiştir</a>*@
+                            <a class="nav-link" href="~/sifre-degistir"><i class="fa fa-user-circle"></i> Şifre Değiştir</a>
 
                             <a class="nav-link" href="~/cikis-yap"><i class="fa fa-power-off"></i> Çıkış Yap</a>
                         </div>

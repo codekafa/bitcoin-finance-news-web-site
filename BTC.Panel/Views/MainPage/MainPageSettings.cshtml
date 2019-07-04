@@ -1,0 +1,131 @@
+﻿@model BTC.Model.Entity.MainPageSettings
+@{
+    ViewBag.Title = "Ana Sayfa İçerik Ayarları";
+}
+
+
+<form action="saveMainPage" id="mainPageSettingForm" method="post">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Step 1</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="form-control-label">Başlık</label>
+                        <input class="form-control" value="@Model.OneStepTitle" maxlength="250" id="OneStepTitle" name="OneStepTitle" />
+                        <label class="form-control-label">Buton</label>
+                        <input class="form-control" value="@Model.OneStepButtonText" maxlength="50" id="OneStepButtonText" name="OneStepButtonText" />
+                        <label class="form-control-label">Buton Adres</label>
+                        <input class="form-control" value="@Model.OneStepButtonUrl" maxlength="250" id="OneStepButtonUrl" name="OneStepButtonUrl" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Açıklama</label>
+                        <textarea class="form-control" id="OneStepDescription" name="OneStepDescription">@Model.OneStepDescription</textarea>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Step 2</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="form-control-label">Başlık</label>
+                        <input class="form-control" value="@Model.TwoStepTitle" maxlength="250" id="TwoStepTitle" name="TwoStepTitle" />
+                        <label class="form-control-label">Buton</label>
+                        <input class="form-control" value="@Model.TwoStepButtonText" maxlength="50" id="TwoStepButtonText" name="TwoStepButtonText" />
+                        <label class="form-control-label">Buton Adres</label>
+                        <input class="form-control" value="@Model.TwoStepButtonUrl" maxlength="250" id="TwoStepButtonUrl" name="TwoStepButtonUrl" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Açıklama</label>
+                        <textarea class="form-control" id="TwoStepDescription" maxlength="750" name="TwoStepDescription">@Model.TwoStepDescription</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Step 3</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="form-control-label">Başlık</label>
+                        <input class="form-control" value="@Model.ThreeStepTitle" maxlength="250" id="ThreeStepTitle" name="ThreeStepTitle">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Açıklama</label>
+                        <textarea class="form-control" id="ThreeStepDescription" maxlength="500" name="ThreeStepDescription">@Model.ThreeStepDescription</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Servis 1</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="form-control-label">Başlık</label>
+                        <input class="form-control" value="@Model.ServiceOneTitle" maxlength="50" id="ServiceOneTitle" name="ServiceOneTitle">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Açıklama</label>
+                        <textarea class="form-control" id="ServiceOneDescription" maxlength="150" name="ServiceOneDescription">@Model.ServiceOneDescription</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Servis 2</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="form-control-label">Başlık</label>
+                        <input class="form-control" value="@Model.ServiceTwoTitle" maxlength="50" id="ServiceTwoTitle" name="ServiceTwoTitle">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Açıklama</label>
+                        <textarea class="form-control" id="ServiceTwoDescription" maxlength="150" name="ServiceTwoDescription">@Model.ServiceTwoDescription</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Servis 3</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="form-control-label">Başlık</label>
+                        <input class="form-control" value="@Model.ServiceThreeTitle" maxlength="50" id="ServiceThreeTitle" name="ServiceThreeTitle">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Açıklama</label>
+                        <textarea class="form-control" id="ServiceThreeDescription" name="ServiceThreeDescription" maxlength="150">@Model.ServiceThreeDescription</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit">Kaydet</button>
+    </div>
+
+</form>
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/Application/MainPage/main-page.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            saveSettings();
+        });
+    </script>
+}
+
+
+

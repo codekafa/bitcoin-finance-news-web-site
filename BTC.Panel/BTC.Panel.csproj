@@ -128,7 +128,9 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainPageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
@@ -2155,9 +2157,14 @@
     <Content Include="Scripts\Application\Editor\add-post.js" />
     <Content Include="Scripts\Application\Editor\edit-post.js" />
     <Content Include="Scripts\Application\Global\app-global.js" />
+    <Content Include="Scripts\Application\MainPage\main-page.js" />
     <Content Include="Scripts\Application\News\add-news.js" />
     <Content Include="Scripts\Application\News\edit-news.js" />
     <Content Include="Scripts\Application\News\my-news-list.js" />
+    <Content Include="Scripts\Application\Page\add-page.js" />
+    <Content Include="Scripts\Application\Page\edit-page.js" />
+    <Content Include="Scripts\Application\Page\page-detail.js" />
+    <Content Include="Scripts\Application\Page\page-list.js" />
     <Content Include="Scripts\Application\Product\add-product.js" />
     <Content Include="Scripts\Application\Product\edit-product.js" />
     <Content Include="Scripts\Application\Product\my-product-list.js" />
@@ -2863,6 +2870,7 @@
     <Folder Include="Images\_post\medium\" />
     <Folder Include="Images\_post\small\" />
     <Folder Include="Images\_products\" />
+    <Folder Include="Images\_sliders\" />
     <Folder Include="Images\_userfiles\profile\medium\" />
     <Folder Include="Images\_userfiles\profile\origin\" />
     <Folder Include="Images\_userfiles\profile\small\" />
@@ -2909,6 +2917,12 @@
     <Content Include="Views\Product\EditProduct.cshtml" />
     <Content Include="Views\Product\MyProducts.cshtml" />
     <Content Include="Views\Admin\_GetProducts.cshtml" />
+    <Content Include="Views\MainPage\Sliders.cshtml" />
+    <Content Include="Views\MainPage\_GetSliders.cshtml" />
+    <Content Include="Views\MainPage\MainPageSettings.cshtml" />
+    <Content Include="Views\Page\Pages.cshtml" />
+    <Content Include="Views\Page\AddNewPage.cshtml" />
+    <Content Include="Views\Page\EditPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Business\BTC.Business.csproj">

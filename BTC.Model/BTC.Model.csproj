@@ -52,6 +52,8 @@
     <Compile Include="Entity\LoginAttempts.cs" />
     <Compile Include="Entity\MailSettings.cs" />
     <Compile Include="Entity\MainMenu.cs" />
+    <Compile Include="Entity\MainPageSettings.cs" />
+    <Compile Include="Entity\MainSliderSettings.cs" />
     <Compile Include="Entity\PasswordChangeMails.cs" />
     <Compile Include="Entity\ProductPhotos.cs" />
     <Compile Include="Entity\RegisterEmails.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Entity\SiteSettings.cs" />
     <Compile Include="Entity\SmsSettings.cs" />
     <Compile Include="Entity\UserCompanies.cs" />
+    <Compile Include="Entity\Pages.cs" />
     <Compile Include="Entity\UserPosts.cs" />
     <Compile Include="Entity\UserProducts.cs" />
     <Compile Include="Entity\UserRoleRels.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="Response\ResponseModel.cs" />
     <Compile Include="View\AddProductModel.cs" />
     <Compile Include="View\AddProductPhotosModel.cs" />
+    <Compile Include="View\AddSliderModel.cs" />
     <Compile Include="View\CommentListModel.cs" />
     <Compile Include="View\ContactModel.cs" />
     <Compile Include="View\ContentViewListModel.cs" />
@@ -78,6 +82,7 @@
     <Compile Include="View\LoginUserModel.cs" />
     <Compile Include="View\PasswordChangeModel.cs" />
     <Compile Include="View\PostFilterModel.cs" />
+    <Compile Include="View\PageModel.cs" />
     <Compile Include="View\PostModel.cs" />
     <Compile Include="View\ProdcutSearchModel.cs" />
     <Compile Include="View\RegisterUserModel.cs" />

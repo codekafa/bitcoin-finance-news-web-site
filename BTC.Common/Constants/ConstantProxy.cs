@@ -9,6 +9,7 @@ namespace BTC.Common.Constants
 {
     public  static class ConstantProxy
     {
+        public static string BaseSliderAddress { get { return WebConfigurationManager.AppSettings["BaseSliderAddress"].ToString(); } }
         public static string BaseProfilePhotoPath { get {return WebConfigurationManager.AppSettings["BaseProfilePhotoPath"].ToString(); } }
         public static string BaseImagePath { get { return WebConfigurationManager.AppSettings["BaseImagePath"].ToString(); } }
         public static string CategoryCacheName { get { return "categories"; } }

@@ -1,0 +1,31 @@
+﻿@using BTC.Common.Constants;
+@model List<BTC.Model.Entity.MainSliderSettings>
+
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Görsel</th>
+                <th>Üst Başlık</th>
+                <th>Alt Başlık</th>
+                <th>Buton</th>
+                <th>Buton Adres</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td><a href="@ConstantProxy.BaseSiteUrl/@ConstantProxy.BaseSliderAddress/@item.PhotoUrl" target="_blank">Önizle</a></td>
+                <td>@item.SmallTitle</td>
+                <td>@item.MediumTitle</td>
+                <td>@item.ButtonText</td>
+                <td>@item.ButtonUrl</td>
+                <td><button onclick="deleteSlider(@item.ID)" type="button" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button></td>
+            </tr>
+            }
+        </tbody>
+    </table>

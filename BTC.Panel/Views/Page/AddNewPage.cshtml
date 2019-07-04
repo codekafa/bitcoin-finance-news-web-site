@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Yeni Sayfa Ekle";
+}
+
+@section styles{
+    <link href="~/Content/Plugins/editor/css/quill.css" rel="stylesheet" />
+}
+
+
+<form id="form-addPage" method="post" enctype="multipart/form-data">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body fixed-margin">
+            <div class="form-group">
+                <label class=" form-control-label">Başlık: <span style="color:red">*</span></label>
+                <input name="Title" id="Title" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">İçerik: <span style="color:red">*</span></label>
+                <input type="hidden" id="Body" name="Body" />
+                <div name="BodyEditor" id="BodyEditor" style="height: 600px;" class=""></div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label"></label>
+                <input type="hidden" name="IsPublish" id="IsPublish" value="false">
+                <input type="checkbox" name="IsPublished" id="IsPublished" value="">Makaleyi Yayınla<br>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title">SEO Ayarları</h5>
+        </div>
+        <div class="panel-body fixed-margin">
+            <div class="form-group">
+                <label class="form-control-label">Url : <span style="color:red">*</span></label>
+                <input name="Uri" id="Uri" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Meta Açıklaması :</label>
+                <input name="MetaDescription" id="MetaDescription" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Meta Başlığı : </label>
+                <input name="MetaTitle" id="MetaTitle" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Anahtar Kelimeler (Virgül ile ayırın.) : </label>
+                <input name="MetaKeywords" id="MetaKeywords" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Etiketler (Virgül ile ayırın.): </label>
+                <input name="Tags" id="Tags" class="form-control" placeholder="Finans, Bitcoin vs.." />
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-footer" style="text-align:right;">
+        <button id="btnSave" class="btn btn-primary will-disable">Kaydet</button>
+    </div>
+</form>
+
+
+
+@section scripts{
+    <script src="~/Content/Plugins/editor/js/quill.js"></script>
+    <script src="~/Scripts/Application/Page/add-page.js"></script>
+}
+
+
+

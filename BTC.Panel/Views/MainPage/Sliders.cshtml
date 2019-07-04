@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Ana Sayfa Slider";
+}
+
+<form action="addSlider" method="post" id="addSliderForm" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label">Görsel (1920/480)</label>
+                <input type="file" id="SliderImage" name="SliderImage" placeholder="Dosya Seçiniz" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label">Üst Yazı</label>
+                <input type="text" value="" class="form-control" id="SmallTitle" name="SmallTitle" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label">Alt Yazı</label>
+                <input type="text" value="" class="form-control" id="MediumTitle" name="MediumTitle" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label">Buton Adı</label>
+                <input type="text" value="" class="form-control" id="ButtonText" name="ButtonText" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label">Buton Url</label>
+                <input type="text" value="" class="form-control" id="ButtonUrl" name="ButtonUrl" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-success" type="submit">Kaydet</button>
+        </div>
+    </div>
+</form>
+
+<h3>Sliderlar</h3>
+
+<div id="sliders">
+
+    @Html.Action("_GetSliders")
+
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/Application/MainPage/main-page.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            getSliders();
+            addSlider();
+        });
+    </script>
+}
