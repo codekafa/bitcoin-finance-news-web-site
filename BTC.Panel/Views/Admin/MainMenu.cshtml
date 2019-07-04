@@ -8,7 +8,11 @@
         <div class="col-md-4">
             <input type="hidden" id="ID" name="ID" value="" class="form-control" />
             <label for="Title">Menü Adı</label>
-            <input type="text" id="Title" name="Title" value="" class="form-control" />
+            <input type="text" max="150" id="Title" name="Title" value="" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label for="Url">Menü Url</label>
+            <input type="text" max="150" id="Url" name="Url" value="" class="form-control" />
         </div>
         <div class="col-md-4">
             <label for="RowNumber">Sıra Numarası</label>
@@ -25,6 +29,7 @@
             <thead>
                 <tr>
                     <th>Ad</th>
+                    <th>Url</th>
                     <th>Sıra No</th>
                     <th>Durum</th>
                     <th>İşlemler</th>
@@ -45,7 +50,8 @@
 
     <script>
         $(document).ready(function () {
-            getMenuList();
+            getParentMenuList();
+            titleUrl();
         });
     </script>
 

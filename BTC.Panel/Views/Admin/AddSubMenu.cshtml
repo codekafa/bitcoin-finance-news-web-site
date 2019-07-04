@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Alt Menu Ekle";
+}
+
+<form id="addSubMenuForm" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="MenuID" name="MenuID" />
+    <div class="col-md-12">
+
+
+    </div>
+
+</form>
+
+<div class="col-md-12">
+    <div id="subMenuDiv">
+        @Html.Action("_GetSubMenus", new { menu_id = ViewBag.MenuID })
+    </div>
+</div>
+
+
+
+
+
+

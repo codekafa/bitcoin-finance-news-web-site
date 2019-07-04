@@ -67,7 +67,7 @@ function updateIsMember(id, state) {
         $.ajax('/Admin/updateUserRole', {
             type: "GET",
             dataType: "json",
-            data: { user_id: id, state: state, operation_type :1 },
+            data: { user_id: id, state: state, operation_type: 1 },
             success: function (result) {
                 alertResponse(result);
             }
@@ -441,29 +441,91 @@ function updateSiteSettings() {
 
 /*site settings*/
 
- 
+
 
 /*menu settings*/
 
 
-function getMenuList() {
+function loadSubMenuForm() {
 
-    $.ajax('/Admin/getMenuItems', {
+    $('#addSubMenuForm').on('submit', function (e) {
+        e.preventDefault();
+        var dat = new FormData($('#addSubMenuForm').get(0));
+
+        $.ajax({
+            data: dat,
+            type: 'post',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            url: '/Admin/addOrEditSubMenu',
+            success: function (d) {
+                alertResponse(d);
+                if (d.IsSuccess == true) {
+                    clearSubMenuForm();
+                    getSubMenuItems();
+                }
+
+            }
+        });
+    });
+
+}
+
+
+function clearSubMenuForm() {
+
+}
+
+
+function updateStateSubMenu(id, state) {
+
+    $.ajax('/Admin/updateStateMenuItem', {
+        type: "get",
+        dataType: "json",
+        data: { menu_id: id, state: state },
+        success: function (result) {
+            alertResponse(result);
+            if (result.IsSuccess == true) {
+                getSubMenuItems();
+            }
+        }
+    });
+
+}
+
+function getSubMenuItems(id) {
+
+    $.ajax('/Admin/_GetSubMenus', {
+        type: "GET",
+        async: false,
+        data: { menu_id: id },
+        success: function (result) {
+            $('#subMenuDiv').html("");
+            $('#subMenuDiv').html(result);
+        }
+    });
+}
+
+function getParentMenuList () {
+
+    $.ajax('/Admin/getParentMenuItems', {
         type: "GET",
         async: false,
         success: function (result) {
             $('#menuListBody').html("");
             $.each(result, function (i, item) {
+                console.log(item);
                 var tr = "<tr>";
-                tr += "<td>" + item.Title + "<input type='hidden' id='title_" + item.ID + "' value=" + item.Title + "  /></td>";
+                tr += "<td>" + item.Title + "<input type='hidden' id='title_" + item.ID + "' value='" + item.Title + "'  /></td>";
+                tr += "<td>" + item.Url + "<input type='hidden' id='url_" + item.ID + "' value=" + item.Url + "  /></td>";
                 tr += "<td>" + item.RowNumber + "<input type='hidden' id='row_number_" + item.ID + "' value=" + item.RowNumber + "  /></td>";
-
                 if (item.IsActive == true) {
                     tr += "<td><span class='alert alert-success btn-xs' style='padding:0px;'>Aktif</span></td>";
-                    tr += "<td><button type='button' onclick='updateMenuState(" + item.ID + ",false)' class='btn btn-xs btn-danger'>Pasife Al</button><button type='button' onclick='editMenu(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
+                    tr += "<td><a href='/alt-menu-ekle/" + item.ID + "' target='_blank' class='btn btn-success btn-xs'><i class='fa fa-plus'></i></a><button type='button' onclick='updateMenuState(" + item.ID + ",false)' class='btn btn-xs btn-danger'><i class='fa fa-remove'></i></button><button type='button' onclick='editMenu(" + item.ID + ")' class='btn btn-xs btn-warning'><i class='fa fa-edit'></i></button></td>";
                 } else {
                     tr += "<td><span class='alert alert-danger btn-xs' style='padding:0px;'>Pasif</span></td>";
-                    tr += "<td><button type='button' onclick='updateMenuState(" + item.ID + ",true)' class='btn btn-xs btn-success'>Aktife Al</button><button type='button' onclick='editMenu(" + item.ID + ")' class='btn btn-xs btn-warning'>Düzenle</button></td>";
+                    tr += "<td><button type='button' onclick='updateMenuState(" + item.ID + ",true)' class='btn btn-xs btn-success'><i class='fa fa-check-circle'></i></button><button type='button' onclick='editMenu(" + item.ID + ")' class='btn btn-xs btn-warning'><i class='fa fa-edit'></i></button></td>";
                 }
 
                 tr += "</tr>";
@@ -477,12 +539,13 @@ function getMenuList() {
 function clearMenuInputs() {
     $('#ID').val("");
     $('#Title').val("");
+    $('#Url').val("");
     $('#RowNumber').val("");
 }
 
-
 function editMenu(id) {
     $('#Title').val($('#title_' + id).val());
+    $('#Url').val($('#url_' + id).val());
     $('#ID').val(id);
     $('#RowNumber').val($('#row_number_' + id).val());
 }
@@ -491,6 +554,7 @@ function addOrEditMenu() {
     var obj = new Object();
     obj.ID = $('#ID').val();
     obj.Title = $('#Title').val();
+    obj.Url = $('#Url').val();
     obj.RowNumber = $('#RowNumber').val();
 
     $.ajax('/Admin/addOrEditMenu', {
@@ -500,7 +564,7 @@ function addOrEditMenu() {
         success: function (result) {
             alertResponse(result);
             if (result.IsSuccess == true) {
-                getMenuList();
+                getParentMenuList();
                 clearMenuInputs();
             }
         }
@@ -523,6 +587,22 @@ function updateMenuState(id, state) {
     });
 
 }
+
+function titleUrl() {
+
+    $('#Title').blur(function () {
+        $.ajax('/Admin/generateUriFormat', {
+            type: "GET",
+            data: { title: $(this).val() },
+            success: function (result) {
+                $('#Url').val(result);
+            }
+        });
+    });
+
+}
+
+
 
 /*menu settings*/
 
@@ -564,7 +644,7 @@ function getSuppliers() {
         type: "GET",
         success: function (result) {
             $.each(result, function (i, item) {
-                var opt = "<option value='" + item.ID + "'>"+item.FirstName +" " + item.LastName + "</option>"
+                var opt = "<option value='" + item.ID + "'>" + item.FirstName + " " + item.LastName + "</option>"
                 $('#supplier_id').append(opt);
             });
         }

@@ -3,3 +3,4 @@ C:\WorkSpaces\BTC\BTC\BTC.Setting\bin\Debug\BTC.Setting.dll
 C:\WorkSpaces\BTC\BTC\BTC.Setting\bin\Debug\BTC.Setting.pdb
 C:\WorkSpaces\BTC\BTC\BTC.Setting\obj\Debug\BTC.Setting.dll
 C:\WorkSpaces\BTC\BTC\BTC.Setting\obj\Debug\BTC.Setting.pdb
+C:\WorkSpaces\BTC\BTC\BTC.Setting\obj\Debug\BTC.Setting.csprojAssemblyReference.cache

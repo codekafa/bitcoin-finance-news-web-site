@@ -70,6 +70,7 @@
     <Compile Include="Entity\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response\ResponseModel.cs" />
+    <Compile Include="View\AddOrEditSubMenuModel.cs" />
     <Compile Include="View\AddProductModel.cs" />
     <Compile Include="View\AddProductPhotosModel.cs" />
     <Compile Include="View\AddSliderModel.cs" />

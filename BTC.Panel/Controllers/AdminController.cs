@@ -311,15 +311,45 @@ namespace BTC.Panel.Controllers
             return View();
         }
 
-        public JsonResult getMenuItems()
+        public JsonResult getParentMenuItems()
         {
-            return Json(_menuM.GetMenuItems(), JsonRequestBehavior.AllowGet);
+            return Json(_menuM.GetParentMenuItems(), JsonRequestBehavior.AllowGet);
         }
+
+        [Route("~/alt-menu-ekle/{menu_id}")]
+        public ActionResult AddSubMenu(int menu_id)
+        {
+            ViewBag.MenuID = menu_id;
+            return View();
+        }
+
+        public PartialViewResult _GetSubMenus(int menu_id)
+        {
+            var list = _menuM.GetSubMenuItems(menu_id);
+            return PartialView(list);
+        }
+
+        [HttpPost]
+        public JsonResult addOrEditSubMenu(AddOrEditSubMenuModel menuItem)
+        {
+            ResponseModel result = new ResponseModel();
+
+            result = _menuM.AddOrEditSubMenu(menuItem);
+
+            return Json(result);
+        }
+
+        public JsonResult generateUriFormat(string title)
+        {
+            return Json(_postM.GenerateUriFormat(title), JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpPost]
         public JsonResult addOrEditMenu(MainMenu menu)
         {
             ResponseModel result = new ResponseModel();
+            menu.IsActive = true;
             if (menu.ID > 0)
             {
                 result = _menuM.UpdateMenu(menu);

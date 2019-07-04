@@ -1,5 +1,6 @@
 ﻿using BTC.Model.Entity;
 using BTC.Model.Response;
+using BTC.Model.View;
 using BTC.Repository;
 using System;
 using System.Collections.Generic;
@@ -51,9 +52,13 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             return result;
         }
-        public List<MainMenu> GetMenuItems()
+        public List<MainMenu> GetParentMenuItems()
         {
-            return _menuRepo.GetAll();
+            return _menuRepo.GetByCustomQuery("select * from MainMenu where ParentId is null or ParentId = 0",null);
+        }
+        public List<MainMenu> GetSubMenuItems(int parent_id)
+        {
+            return _menuRepo.GetByCustomQuery("select * from MainMenu where ParentID = @ParentID", new {  ParentID = parent_id});
         }
         public ResponseModel UpdateMenuState(int id, bool state)
         {
@@ -100,6 +105,11 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             result.Message = "Güncelleme başarılı!";
             return result;
+        }
+
+        public ResponseModel AddOrEditSubMenu(AddOrEditSubMenuModel menuItem)
+        {
+            throw new NotImplementedException();
         }
     }
 }
