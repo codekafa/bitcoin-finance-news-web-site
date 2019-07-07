@@ -61,6 +61,7 @@
     <Compile Include="Entity\SitePages.cs" />
     <Compile Include="Entity\SiteSettings.cs" />
     <Compile Include="Entity\SmsSettings.cs" />
+    <Compile Include="Entity\StaticPages.cs" />
     <Compile Include="Entity\UserCompanies.cs" />
     <Compile Include="Entity\Pages.cs" />
     <Compile Include="Entity\UserPosts.cs" />

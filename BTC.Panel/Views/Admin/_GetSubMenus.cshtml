@@ -7,7 +7,6 @@
             <th>Sıra No</th>
             <th>Sayfa Adı</th>
             <th>Url</th>
-            <th>Durum</th>
             <th>İşlemler</th>
         </tr>
     </thead>
@@ -29,14 +28,7 @@
                 <td>@item.Title</td>
                 <td>@item.Url</td>
                 <td>
-                    @if (item.IsActive)
-                    {
-                        <button class="btn btn-xs btn-danger" type="button" onclick="updateStateSubMenu(@item.ID,'false')"><i class="fa fa-delete"></i></button>
-                    }
-                    else
-                    {
-                        <button class="btn btn-xs btn-success" type="button" onclick="updateStateSubMenu(@item.ID,'true')"><i class="fa fa-check-circle"></i></button>
-                    }
+                    <button class="btn btn-xs btn-danger" type="button" onclick="deleteSubMenuItem(@item.ID)"><i class="fa fa-remove"></i></button>
                 </td>
             </tr>
         }

@@ -3,20 +3,62 @@
     ViewBag.Title = "Alt Menu Ekle";
 }
 
-<form id="addSubMenuForm" method="post" enctype="multipart/form-data">
-    <input type="hidden" id="MenuID" name="MenuID" />
-    <div class="col-md-12">
 
+<ul class="nav nav-tabs">
+    <li class=""><a data-toggle="tab" href="#page-search">Sayfa Bul</a></li>
+    <li><a data-toggle="tab" href="#static-page">Static Sayfalar</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="page-search" class="tab-pane fade in active">
+        <form id="addSubMenuForm" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="MenuID" name="MenuID" value="@ViewBag.MenuID" />
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label">Menu İcon</label>
+                        <input value="" id="MenuIcon" name="MenuIcon" class="form-control" type="file" />
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="form-control-label">Ara</label>
+                        <input value="" id="SearchKey" name="SearchKey" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" style="    margin-top: 27px;" id="searchPage" class="btn btn-primary">Getir</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="static-page" class="tab-pane fade in">
+
+        @Html.Action("_GetStaticPages")
 
     </div>
+</div>
 
-</form>
+
+
+<div id="getPagesBySearchKey">
+
+</div>
+
+
+
 
 <div class="col-md-12">
     <div id="subMenuDiv">
         @Html.Action("_GetSubMenus", new { menu_id = ViewBag.MenuID })
     </div>
 </div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/Application/UserOperation/admin-operation.js"></script>
+}
 
 
 

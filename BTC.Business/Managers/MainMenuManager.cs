@@ -14,9 +14,11 @@ namespace BTC.Business.Managers
     {
 
         private MainMenuRepository _menuRepo;
+        StaticPageRepository _staticRepo;
         public MainMenuManager()
         {
             _menuRepo = new MainMenuRepository();
+            _staticRepo = new StaticPageRepository();
         }
         public ResponseModel ValidateAddOrEditMenu(MainMenu menu)
         {
@@ -110,6 +112,54 @@ namespace BTC.Business.Managers
         public ResponseModel AddOrEditSubMenu(AddOrEditSubMenuModel menuItem)
         {
             throw new NotImplementedException();
+        }
+
+        public List<StaticPages> GetStaticPages()
+        {
+            return _staticRepo.GetAll();
+        }
+
+        public ResponseModel AddStaticPageToMenu(int menu_id, int page_id,int row_number)
+        {
+            ResponseModel result = new ResponseModel();
+
+            try
+            {
+                var sstatic_menu = _staticRepo.GetByID(page_id);
+                _menuRepo.Insert(new MainMenu { IsActive = true, ParentID = menu_id, Title = sstatic_menu.Name, Url = sstatic_menu.Uri , IsStatic = true , RowNumber = row_number });
+                result.IsSuccess = true;
+                result.Message = "Menü başarı ile eklendi!";
+
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Message = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public ResponseModel DeleteSubMenuItem(int menu_id)
+        {
+            ResponseModel result = new ResponseModel();
+
+            try
+            {
+                _menuRepo.ExecuteQuery("delete from MainMenu where ID = @ID", new { ID = menu_id });
+                result.IsSuccess = true;
+                result.Message = "Menü başarı ile silindi!";
+
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Message = ex.Message;
+            }
+
+            return result;
+
         }
     }
 }

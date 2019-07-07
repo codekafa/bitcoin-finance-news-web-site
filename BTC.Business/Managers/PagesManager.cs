@@ -24,7 +24,7 @@ namespace BTC.Business.Managers
 
         PagesRepository _pageRepo;
         PageModelRepository _pageModelRepo;
-
+   
         public PagesManager()
         {
             _pageRepo = new PagesRepository();
@@ -244,5 +244,8 @@ namespace BTC.Business.Managers
             url = url.ToLower(en_culture);
             return url;
         }
+
+    
+
     }
 }

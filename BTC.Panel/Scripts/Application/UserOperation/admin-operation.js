@@ -463,7 +463,8 @@ function loadSubMenuForm() {
                 alertResponse(d);
                 if (d.IsSuccess == true) {
                     clearSubMenuForm();
-                    getSubMenuItems();
+                     var menu_id = $('#MenuID').val();
+                    getSubMenuItems(menu_id);
                 }
 
             }
@@ -487,10 +488,33 @@ function updateStateSubMenu(id, state) {
         success: function (result) {
             alertResponse(result);
             if (result.IsSuccess == true) {
-                getSubMenuItems();
+                var menu_id = $('#MenuID').val();
+                getSubMenuItems(menu_id);
             }
         }
     });
+
+}
+
+
+function deleteSubMenuItem(id) {
+
+    if (confirm("Seçili menüyü ana menüden silmek istediğinize emin misiniz?") == true) {
+        $.ajax('/Admin/deleteSubMenuItem', {
+            type: "get",
+            dataType: "json",
+            data: { menu_id: id },
+            success: function (result) {
+                alertResponse(result);
+                if (result.IsSuccess == true) {
+                    var menu_id = $('#MenuID').val();
+                    getSubMenuItems(menu_id);
+                }
+            }
+        });
+    }
+
+
 
 }
 
@@ -507,7 +531,7 @@ function getSubMenuItems(id) {
     });
 }
 
-function getParentMenuList () {
+function getParentMenuList() {
 
     $.ajax('/Admin/getParentMenuItems', {
         type: "GET",
@@ -518,7 +542,7 @@ function getParentMenuList () {
                 console.log(item);
                 var tr = "<tr>";
                 tr += "<td>" + item.Title + "<input type='hidden' id='title_" + item.ID + "' value='" + item.Title + "'  /></td>";
-                tr += "<td>" + item.Url + "<input type='hidden' id='url_" + item.ID + "' value=" + item.Url + "  /></td>";
+                //tr += "<td>" + item.Url + "<input type='hidden' id='url_" + item.ID + "' value=" + item.Url + "  /></td>";
                 tr += "<td>" + item.RowNumber + "<input type='hidden' id='row_number_" + item.ID + "' value=" + item.RowNumber + "  /></td>";
                 if (item.IsActive == true) {
                     tr += "<td><span class='alert alert-success btn-xs' style='padding:0px;'>Aktif</span></td>";
@@ -581,7 +605,7 @@ function updateMenuState(id, state) {
         success: function (result) {
             alertResponse(result);
             if (result.IsSuccess == true) {
-                getMenuList();
+                getParentMenuList();
             }
         }
     });
@@ -602,6 +626,27 @@ function titleUrl() {
 
 }
 
+function addStaticPageToMenu(id) {
+
+    var menu_id = $('#MenuID').val();
+    var row_number = $('#row_number_' + id).val();
+
+    if (row_number == "") {
+        dangerAlert("Sıra numarası giriniz!");
+        return;
+    }
+
+    $.ajax('/Admin/addStaticPageMenu', {
+        type: "GET",
+        data: { menu_id: menu_id, page_id: id, row_number: row_number },
+        success: function (result) {
+            alertResponse(result);
+            getSubMenuItems(menu_id);
+        }
+    });
+
+
+}
 
 
 /*menu settings*/

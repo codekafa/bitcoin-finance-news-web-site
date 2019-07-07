@@ -2925,6 +2925,7 @@
     <Content Include="Views\Page\EditPage.cshtml" />
     <Content Include="Views\Admin\AddSubMenu.cshtml" />
     <Content Include="Views\Admin\_GetSubMenus.cshtml" />
+    <Content Include="Views\Admin\_GetStaticPages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Business\BTC.Business.csproj">

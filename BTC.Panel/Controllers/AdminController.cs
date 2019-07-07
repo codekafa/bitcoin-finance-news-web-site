@@ -21,6 +21,7 @@ namespace BTC.Panel.Controllers
         ContentViewManager _contentM;
         MainMenuManager _menuM;
         ProductManager _proM;
+        PagesManager _pageM;
         public AdminController()
         {
             _userM = new UserManager();
@@ -30,6 +31,8 @@ namespace BTC.Panel.Controllers
             _contentM = new ContentViewManager();
             _menuM = new MainMenuManager();
             _proM = new ProductManager();
+            _pageM = new PagesManager();
+
         }
 
         [Route("~/dashboard")]
@@ -329,6 +332,12 @@ namespace BTC.Panel.Controllers
             return PartialView(list);
         }
 
+        public PartialViewResult _GetStaticPages()
+        {
+            var list = _menuM.GetStaticPages();
+            return PartialView(list);
+        }
+
         [HttpPost]
         public JsonResult addOrEditSubMenu(AddOrEditSubMenuModel menuItem)
         {
@@ -345,10 +354,20 @@ namespace BTC.Panel.Controllers
         }
 
 
+        public JsonResult addStaticPageMenu(int menu_id,int page_id, int row_number)
+        {
+            ResponseModel result = new ResponseModel();
+
+            result = _menuM.AddStaticPageToMenu(menu_id, page_id, row_number);
+
+            return Json(result, JsonRequestBehavior.AllowGet) ;
+        }
+
         [HttpPost]
         public JsonResult addOrEditMenu(MainMenu menu)
         {
             ResponseModel result = new ResponseModel();
+            menu.Url = _postM.GenerateUriFormat(menu.Title);
             menu.IsActive = true;
             if (menu.ID > 0)
             {
@@ -370,6 +389,15 @@ namespace BTC.Panel.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public JsonResult deleteSubMenuItem(int menu_id)
+        {
+            ResponseModel result = new ResponseModel();
+
+            result = _menuM.DeleteSubMenuItem(menu_id);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

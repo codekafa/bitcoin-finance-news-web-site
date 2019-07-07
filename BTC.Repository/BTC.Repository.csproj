@@ -60,6 +60,7 @@
     <Compile Include="SitePageRepository.cs" />
     <Compile Include="SiteSettingsRepository.cs" />
     <Compile Include="SmsSettingsRepository.cs" />
+    <Compile Include="StaticPageRepository.cs" />
     <Compile Include="UserCompanyRepository.cs" />
     <Compile Include="PagesRepository.cs" />
     <Compile Include="UserPostRepository.cs" />

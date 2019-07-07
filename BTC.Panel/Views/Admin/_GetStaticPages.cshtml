@@ -1,0 +1,32 @@
+﻿@model List<BTC.Model.Entity.StaticPages>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Sıra No</th>
+            <th>Sayfa Adı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td><input type="number" id="row_number_@item.ID" class="form-control" /></td>
+            <td>@item.Name</td>
+            <td><button type="button" onclick="addStaticPageToMenu(@item.ID)" class="btn btn-primary btn-xs">Ekle</button></td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+
+
+
+
+
