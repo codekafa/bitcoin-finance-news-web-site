@@ -69,6 +69,7 @@
     <Compile Include="UserRoleRelRepository.cs" />
     <Compile Include="UserRoleRepository.cs" />
     <Compile Include="ViewRepository\PageModelRepository.cs" />
+    <Compile Include="ViewRepository\PageUrlItemRepository.cs" />
     <Compile Include="ViewRepository\PostModelRepository.cs" />
   </ItemGroup>
   <ItemGroup>

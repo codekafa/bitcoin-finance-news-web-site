@@ -463,7 +463,7 @@ function loadSubMenuForm() {
                 alertResponse(d);
                 if (d.IsSuccess == true) {
                     clearSubMenuForm();
-                     var menu_id = $('#MenuID').val();
+                    var menu_id = $('#MenuID').val();
                     getSubMenuItems(menu_id);
                 }
 
@@ -645,6 +645,24 @@ function addStaticPageToMenu(id) {
         }
     });
 
+}
+
+
+function getPageUrls(content_body, type_id) {
+
+
+    if ($("#"+ content_body).html().trim().length > 0) {
+        return false;
+    }
+
+    $.ajax('/Admin/GetPageUrls', {
+        type: "GET",
+        data: { type_id: type_id },
+        success: function (result) {
+            console.log(result);
+            $("#" + content_body).html(result);
+        }
+    });
 
 }
 

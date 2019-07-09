@@ -399,5 +399,14 @@ namespace BTC.Panel.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+
+        public PartialViewResult GetPageUrls(int type_id)
+        {
+            List<PageUrlItem> list = new List<PageUrlItem>();
+            list = _menuM.GetPageUrl(type_id);
+            return PartialView(list);
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Repository;
+using BTC.Repository.ViewRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,12 @@ namespace BTC.Business.Managers
 
         private MainMenuRepository _menuRepo;
         StaticPageRepository _staticRepo;
+        PageUrlItemRepository _pagerepo;
         public MainMenuManager()
         {
             _menuRepo = new MainMenuRepository();
             _staticRepo = new StaticPageRepository();
+            _pagerepo = new PageUrlItemRepository();
         }
         public ResponseModel ValidateAddOrEditMenu(MainMenu menu)
         {
@@ -31,7 +34,7 @@ namespace BTC.Business.Managers
 
             if (menu.ID > 0)
             {
-                var exist = _menuRepo.GetByCustomQuery("select * from MainMenu where ID != @ID and RowNumber = @Row", new { ID = menu.ID, Row = menu.RowNumber }).FirstOrDefault();
+                var exist = _menuRepo.GetByCustomQuery("select * from MainMenu where ID != @ID and RowNumber = @Row and ParentID = @ParentID", new { ID = menu.ID, Row = menu.RowNumber, ParentID = menu.ParentID }).FirstOrDefault();
 
                 if (exist != null)
                 {
@@ -42,7 +45,7 @@ namespace BTC.Business.Managers
             }
             else
             {
-                var exist = _menuRepo.GetByCustomQuery("select * from MainMenu where  RowNumber = @Row", new { ID = menu.ID, Row = menu.RowNumber }).FirstOrDefault();
+                var exist = _menuRepo.GetByCustomQuery("select * from MainMenu where  RowNumber = @Row and ParentID = 0", new { ID = menu.ID, Row = menu.RowNumber }).FirstOrDefault();
 
                 if (exist != null)
                 {
@@ -56,11 +59,11 @@ namespace BTC.Business.Managers
         }
         public List<MainMenu> GetParentMenuItems()
         {
-            return _menuRepo.GetByCustomQuery("select * from MainMenu where ParentId is null or ParentId = 0",null);
+            return _menuRepo.GetByCustomQuery("select * from MainMenu where ParentId is null or ParentId = 0", null);
         }
         public List<MainMenu> GetSubMenuItems(int parent_id)
         {
-            return _menuRepo.GetByCustomQuery("select * from MainMenu where ParentID = @ParentID", new {  ParentID = parent_id});
+            return _menuRepo.GetByCustomQuery("select * from MainMenu where ParentID = @ParentID", new { ParentID = parent_id });
         }
         public ResponseModel UpdateMenuState(int id, bool state)
         {
@@ -119,14 +122,14 @@ namespace BTC.Business.Managers
             return _staticRepo.GetAll();
         }
 
-        public ResponseModel AddStaticPageToMenu(int menu_id, int page_id,int row_number)
+        public ResponseModel AddStaticPageToMenu(int menu_id, int page_id, int row_number)
         {
             ResponseModel result = new ResponseModel();
 
             try
             {
                 var sstatic_menu = _staticRepo.GetByID(page_id);
-                _menuRepo.Insert(new MainMenu { IsActive = true, ParentID = menu_id, Title = sstatic_menu.Name, Url = sstatic_menu.Uri , IsStatic = true , RowNumber = row_number });
+                _menuRepo.Insert(new MainMenu { IsActive = true, ParentID = menu_id, Title = sstatic_menu.Name, Url = sstatic_menu.Uri, IsStatic = true, RowNumber = row_number });
                 result.IsSuccess = true;
                 result.Message = "Menü başarı ile eklendi!";
 
@@ -161,5 +164,30 @@ namespace BTC.Business.Managers
             return result;
 
         }
+
+
+        public List<PageUrlItem> GetPageUrl(int type_id)
+        {
+            switch (type_id)
+            {
+                case 1:
+                    return _pagerepo.GetCategoryList();
+                case 2:
+                    return _pagerepo.GetUserListByRoleID((int)BTC.Setting.EnumVariables.Roles.Writer);
+                case 3:
+                    return _pagerepo.GetUserListByRoleID((int)BTC.Setting.EnumVariables.Roles.Supplier);
+                case 4:
+                    return _pagerepo.GetPageList();
+                case 5:
+                    return _pagerepo.GetContentList();
+                case 6:
+                    return _pagerepo.GetPostList();
+                case 7:
+                    return _pagerepo.GetUserListByRoleID((int)BTC.Setting.EnumVariables.Roles.Member);
+                default:
+                    return new List<PageUrlItem>();
+            }
+        }
+
     }
 }

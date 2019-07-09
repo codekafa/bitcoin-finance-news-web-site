@@ -1,0 +1,27 @@
+﻿@model List<BTC.Model.View.PageUrlItem>
+
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Sayfa Adı</th>
+            <th>Url</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+                <td>@item.Uri</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

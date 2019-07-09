@@ -11,26 +11,33 @@
 
 <div class="tab-content">
     <div id="page-search" class="tab-pane fade in active">
-        <form id="addSubMenuForm" method="post" enctype="multipart/form-data">
-            <input type="hidden" id="MenuID" name="MenuID" value="@ViewBag.MenuID" />
-            <div class="col-md-12">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="form-control-label">Menu İcon</label>
-                        <input value="" id="MenuIcon" name="MenuIcon" class="form-control" type="file" />
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label class="form-control-label">Ara</label>
-                        <input value="" id="SearchKey" name="SearchKey" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" style="    margin-top: 27px;" id="searchPage" class="btn btn-primary">Getir</button>
-                </div>
+
+        <ul class="nav nav-tabs">
+            <li onclick="getPageUrls('category-page',1)"><a data-toggle="tab" href="#category-page">Kategoriler</a></li>
+            <li onclick="getPageUrls('writer-page',2)"><a data-toggle="tab" href="#writer-page">Yazarlar</a></li>
+            <li onclick="getPageUrls('supplier-page',3)"><a data-toggle="tab" href="#supplier-page">Tedarikçiler</a></li>
+            <li onclick="getPageUrls('page-page',4)"><a data-toggle="tab" href="#page-page">Sayfalar</a></li>
+            <li onclick="getPageUrls('content-page',5)"><a data-toggle="tab" href="#content-page">İçerikler</a></li>
+            <li onclick="getPageUrls('post-page',6)"><a data-toggle="tab" href="#post-page">Yazılar</a></li>
+            <li onclick="getPageUrls('member-page',7)"><a data-toggle="tab" href="#member-page">Üyeler</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="category-page" class="tab-pane fade in col-md-12">
             </div>
-        </form>
+            <div id="writer-page" class="tab-pane fade in col-md-12">
+            </div>
+            <div id="supplier-page" class="tab-pane fade in col-md-12">
+            </div>
+            <div id="page-page" class="tab-pane fade in col-md-12">
+            </div>
+            <div id="content-page" class="tab-pane fade in col-md-12">
+            </div>
+            <div id="post-page" class="tab-pane fade in col-md-12">
+            </div>
+            <div id="member-page" class="tab-pane fade in col-md-12">
+            </div>
+        </div>
     </div>
     <div id="static-page" class="tab-pane fade in">
 

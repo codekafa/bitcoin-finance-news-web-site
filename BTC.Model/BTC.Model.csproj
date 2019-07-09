@@ -82,6 +82,7 @@
     <Compile Include="View\DasboardMainModel.cs" />
     <Compile Include="View\EditProductModel.cs" />
     <Compile Include="View\LoginUserModel.cs" />
+    <Compile Include="View\PageUrlItem.cs" />
     <Compile Include="View\PasswordChangeModel.cs" />
     <Compile Include="View\PostFilterModel.cs" />
     <Compile Include="View\PageModel.cs" />
