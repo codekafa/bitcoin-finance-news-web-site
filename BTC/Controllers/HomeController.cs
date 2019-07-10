@@ -152,6 +152,14 @@ namespace BTC.Controllers
             return View();
         }
 
+        public PartialViewResult _GetNavMenu()
+        {
+            MainMenuManager _menuM = new MainMenuManager();
+            var list = _menuM.GetAllMenuItems();
+            return PartialView(list);
+
+        }
+
         [HttpPost]
         public JsonResult sendContactMessage(ContactModel msj)
         {

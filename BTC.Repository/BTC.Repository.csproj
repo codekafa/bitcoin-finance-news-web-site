@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryRepository.cs" />
+    <Compile Include="CitiesRepository.cs" />
     <Compile Include="CommentRepository.cs" />
     <Compile Include="Connection\BTCConnection.cs" />
     <Compile Include="ContentViewRepository.cs" />

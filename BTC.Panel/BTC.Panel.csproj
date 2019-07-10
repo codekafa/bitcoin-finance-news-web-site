@@ -2154,6 +2154,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\Application\Blog\blog-detail.js" />
     <Content Include="Scripts\Application\Blog\my-post-list.js" />
+    <Content Include="Scripts\Application\Common\city.js" />
     <Content Include="Scripts\Application\Editor\add-post.js" />
     <Content Include="Scripts\Application\Editor\edit-post.js" />
     <Content Include="Scripts\Application\Global\app-global.js" />
@@ -2927,6 +2928,7 @@
     <Content Include="Views\Admin\_GetSubMenus.cshtml" />
     <Content Include="Views\Admin\_GetStaticPages.cshtml" />
     <Content Include="Views\Admin\GetPageUrls.cshtml" />
+    <Content Include="Views\Admin\Cities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Business\BTC.Business.csproj">

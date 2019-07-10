@@ -45,7 +45,7 @@ namespace BTC.Business.Managers
             }
             else
             {
-                var exist = _menuRepo.GetByCustomQuery("select * from MainMenu where  RowNumber = @Row and ParentID = 0", new { ID = menu.ID, Row = menu.RowNumber }).FirstOrDefault();
+                var exist = _menuRepo.GetByCustomQuery("select * from MainMenu where  RowNumber = @Row and ParentID = @ParentID", new { ID = menu.ID, Row = menu.RowNumber, ParentID = menu.ParentID }).FirstOrDefault();
 
                 if (exist != null)
                 {
@@ -165,7 +165,10 @@ namespace BTC.Business.Managers
 
         }
 
-
+        public List<MainMenu> GetAllMenuItems()
+        {
+            return _menuRepo.GetByCustomQuery("select * from MainMenu where IsActive = 1", null);
+        }
         public List<PageUrlItem> GetPageUrl(int type_id)
         {
             switch (type_id)
@@ -188,6 +191,88 @@ namespace BTC.Business.Managers
                     return new List<PageUrlItem>();
             }
         }
+
+        public ResponseModel AddSubPageToMenu(int menu_id, int page_id, int row_number, int type_id)
+        {
+            ResponseModel result = new ResponseModel();
+            MainMenu parentMenu = _menuRepo.GetByID(menu_id);
+            PageUrlItem item = null;
+            string url = "";
+            switch (type_id)
+            {
+                case 1:
+                    item = _pagerepo.GetCategoryList(page_id).FirstOrDefault();
+                    break;
+                case 2:
+                    item = _pagerepo.GetUserListByRoleID((int)BTC.Setting.EnumVariables.Roles.Writer, page_id).FirstOrDefault();
+                    break;
+                case 3:
+                    item = _pagerepo.GetUserListByRoleID((int)BTC.Setting.EnumVariables.Roles.Supplier, page_id).FirstOrDefault();
+                    break;
+                case 4:
+                    item = _pagerepo.GetPageList(page_id).FirstOrDefault();
+                    break;
+                case 5:
+                    item = _pagerepo.GetContentList(page_id).FirstOrDefault();
+                    break;
+                case 6:
+                    item = _pagerepo.GetPostList(page_id).FirstOrDefault();
+                    break;
+                case 7:
+                    item = _pagerepo.GetUserListByRoleID((int)BTC.Setting.EnumVariables.Roles.Member, page_id).FirstOrDefault();
+                    break;
+                default:
+                    item = null;
+                    break;
+            }
+
+            if (item == null)
+            {
+                result.Message = "Sayfa bulunamadı!";
+                return result;
+            }
+
+            switch (type_id)
+            {
+                case 1:
+                    url = "/blog/kategori/" + item.Uri;
+                    break;
+                case 2:
+                    url = "/yayinlar/yazar/" + item.Uri;
+                    break;
+                case 3:
+                    url = "/tedarikciler/" + item.Uri;
+                    break;
+                case 4:
+                    url = "/" + parentMenu.Url + "/" + item.Uri;
+                    break;
+                case 5:
+                    url = "/icerik/" + item.Uri;
+                    break;
+                case 6:
+                    url = "/blog-detay/" + item.Uri;
+                    break;
+                case 7:
+                    url = "/uyeler/" + item.Uri;
+                    break;
+                default:
+                    item = null;
+                    break;
+            }
+
+            MainMenu new_menu_item = new MainMenu();
+            new_menu_item.IsActive = true;
+            new_menu_item.IsStatic = false;
+            new_menu_item.ParentID = parentMenu.ID;
+            new_menu_item.RowNumber = row_number;
+            new_menu_item.Title = item.Name;
+            new_menu_item.Url = url;
+
+            result = this.AddMenu(new_menu_item);
+            return result;
+
+        }
+
 
     }
 }

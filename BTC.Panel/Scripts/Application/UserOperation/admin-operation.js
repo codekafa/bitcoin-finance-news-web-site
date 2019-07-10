@@ -659,10 +659,34 @@ function getPageUrls(content_body, type_id) {
         type: "GET",
         data: { type_id: type_id },
         success: function (result) {
-            console.log(result);
             $("#" + content_body).html(result);
         }
     });
+}
+
+
+function addPageUriItem(id) {
+    var type_id = $('#page-search ul a.active').attr("data-id");
+    var parent_id = $('#MenuID').val();
+    var row_number = $('#table_id_' + type_id + " #row_number_" + id).val();
+
+
+    if (row_number == undefined || row_number == "" || row_number == "0") {
+        dangerAlert("Sıra numarası zorunludur!");
+        return false;
+    }
+
+    $.ajax('/Admin/addPageMenuItem', {
+        type: "GET",
+        data: { menu_id: parent_id, page_id: id, row_number: row_number, type_id: type_id },
+        success: function (result) {
+            alertResponse(result);
+            if (result.IsSuccess == true) {
+                getSubMenuItems(parent_id);
+            }
+        }
+    });
+
 
 }
 

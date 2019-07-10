@@ -39,6 +39,7 @@ namespace BTC.Controllers
             result.Phone = SessionVariables.User.CurrentUser.Phone;
             result.Summary = SessionVariables.User.CurrentUser.Summary;
             result.PhotoName = SessionVariables.User.CurrentUser.ProfilePhotoUrl;
+            ViewBag.CityIDForUser = SessionVariables.User.Company.CityID;
             return View(result);
         }
 

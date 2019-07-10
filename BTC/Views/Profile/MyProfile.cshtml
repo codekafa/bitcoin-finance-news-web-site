@@ -12,6 +12,7 @@
             <form id="profileForm" class="profile-form" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="ID" name="ID" value="@Model.ID">
                 <input type="hidden" id="PhotoName" name="PhotoName" value="@Model.PhotoName">
+                <input type="hidden" id="CityIDForUser" value="@ViewBag.CityIDForUser">
                 <div class=" form-group col-6 col-lg-6">
                     <label for="FirstName">Ad *</label>
                     <input id="FirstName" class="form-control" name="FirstName" placeholder="Ad" type="text" value="@Model.FirstName" required="">
@@ -75,6 +76,7 @@
         $(document).ready(function () {
             updateUser();
             photoChange();
+            getCities();
         });
     </script>
 }

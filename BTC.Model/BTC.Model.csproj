@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Categories.cs" />
+    <Compile Include="Entity\Cities.cs" />
     <Compile Include="Entity\Comments.cs" />
     <Compile Include="Entity\ContentViews.cs" />
     <Compile Include="Entity\LoginAttempts.cs" />

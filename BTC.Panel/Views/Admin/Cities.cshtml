@@ -1,0 +1,62 @@
+﻿@model List<BTC.Model.Entity.Cities>
+@{
+    ViewBag.Title = "Şehirler";
+}
+
+
+<div class="row" style="padding-bottom: 20px;">
+    <div class="col-md-4">
+        <input type="hidden" id="ID" name="ID" value="" class="form-control" />
+        <label for="Name">Şehir Adı</label>
+        <input type="text" id="Name" name="Name" value="" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label for="Uri">Şehir Url</label>
+        <input type="text" id="Uri" name="Uri" value="" class="form-control" />
+    </div>
+    <div class="col-md-4" style="margin-top: 24px;">
+        <button class="btn btn-primary" type="button" onclick="updateOrEditCity()"> Kaydet </button>
+    </div>
+</div>
+
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Url</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody id="cityTableBody">
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name <input id="name_@item.ID" value="@item.Name" type="hidden" /></td>
+                        <td>@item.Uri <input id="uri_@item.ID" value="@item.Uri" type="hidden" /></td>
+                        <td><button class="btn btn-success btn-xs" onclick="editCity(@item.ID)"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="removeCity(@item.ID)"><i class="fa fa-remove"></i></button></td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/Application/Common/city.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            loadCities();
+        });
+    </script>
+
+}

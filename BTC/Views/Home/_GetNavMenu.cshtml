@@ -1,0 +1,27 @@
+﻿@model List<BTC.Model.Entity.MainMenu>
+
+
+@if (Model != null)
+{
+    foreach (var item in Model.Where(x => x.ParentID <= 0).ToList())
+    {
+        <div class="box-list">
+            <p class="sub-title">@item.Title</p>
+            <ul class="list-unstyled components">
+                @foreach (var sub_item in Model.Where(x => x.ParentID == item.ID).ToList())
+                {
+                    <li class="page_id_@sub_item.ID">
+                        <a href="@sub_item.Url"><i class="fas fa-file-archive"></i> @sub_item.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+    }
+}
+
+
+
+
+
+

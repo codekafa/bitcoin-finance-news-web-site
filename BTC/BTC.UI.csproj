@@ -129,6 +129,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1958,6 +1959,11 @@
     <Content Include="Views\News\_GetPartialViewNews.cshtml" />
     <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Product\_GetPartialViewProducts.cshtml" />
+    <Content Include="Views\Home\_GetNavMenu.cshtml" />
+    <Content Include="Views\Supplier\_GlobalSupplierMenuItems.cshtml" />
+    <Content Include="Views\Supplier\_RegionalSupplierMenuItems.cshtml" />
+    <Content Include="Views\Supplier\_GetSupplierDetail.cshtml" />
+    <Content Include="Views\Supplier\_GetSupplierProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

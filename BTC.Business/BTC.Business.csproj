@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\CategoryManager.cs" />
+    <Compile Include="Managers\CitiesManager.cs" />
     <Compile Include="Managers\ContentViewManager.cs" />
     <Compile Include="Managers\MainMenuManager.cs" />
     <Compile Include="Managers\MemoryCacheManager.cs" />

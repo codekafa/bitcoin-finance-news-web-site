@@ -22,6 +22,7 @@ namespace BTC.Panel.Controllers
         MainMenuManager _menuM;
         ProductManager _proM;
         PagesManager _pageM;
+        CitiesManager _cityM;
         public AdminController()
         {
             _userM = new UserManager();
@@ -32,6 +33,7 @@ namespace BTC.Panel.Controllers
             _menuM = new MainMenuManager();
             _proM = new ProductManager();
             _pageM = new PagesManager();
+            _cityM = new CitiesManager();
 
         }
 
@@ -329,6 +331,7 @@ namespace BTC.Panel.Controllers
         public PartialViewResult _GetSubMenus(int menu_id)
         {
             var list = _menuM.GetSubMenuItems(menu_id);
+            ViewBag.MenuID = menu_id;
             return PartialView(list);
         }
 
@@ -353,14 +356,21 @@ namespace BTC.Panel.Controllers
             return Json(_postM.GenerateUriFormat(title), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult addPageMenuItem(int menu_id, int page_id, int row_number, int type_id)
+        {
+            ResponseModel result = new ResponseModel();
 
-        public JsonResult addStaticPageMenu(int menu_id,int page_id, int row_number)
+            result = _menuM.AddSubPageToMenu(menu_id, page_id, row_number, type_id);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult addStaticPageMenu(int menu_id, int page_id, int row_number)
         {
             ResponseModel result = new ResponseModel();
 
             result = _menuM.AddStaticPageToMenu(menu_id, page_id, row_number);
 
-            return Json(result, JsonRequestBehavior.AllowGet) ;
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -405,8 +415,52 @@ namespace BTC.Panel.Controllers
         {
             List<PageUrlItem> list = new List<PageUrlItem>();
             list = _menuM.GetPageUrl(type_id);
+            ViewBag.TypeID = type_id;
             return PartialView(list);
         }
+
+
+        [Route("sehirler")]
+        public ActionResult Cities()
+        {
+            var list = _cityM.GetAllCities();
+            return View(list);
+        }
+
+        [HttpPost]
+        public JsonResult addOrEditCity(Cities city)
+        {
+            ResponseModel result = new ResponseModel();
+
+            if (string.IsNullOrEmpty(city.Uri))
+            {
+                city.Uri = _postM.GenerateUriFormat(city.Name);
+            }
+
+            if (city.ID <= 0)
+            {
+                result = _cityM.AddCity(city);
+            }
+            else
+            {
+                result = _cityM.Update(city);
+            }
+            return Json(result);
+        }
+
+        public JsonResult deleteCity(int city_id)
+        {
+            ResponseModel result = new ResponseModel();
+            result = _cityM.Remove(city_id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult getCities()
+        {
+            return Json(_cityM.GetAllCities(),JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
