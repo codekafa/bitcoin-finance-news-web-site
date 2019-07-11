@@ -22,6 +22,8 @@ namespace BTC.Common.Constants
         private static UserRepository _userRepo;
         private static CategoryRepository _catRepo;
         private static StaticPageRepository _staticRepo;
+        private static MainPageSettingRepository _mainRepo;
+        private static MainSliderSettingRepository _sliderRepo;
         static StaticSettings()
         {
 
@@ -44,6 +46,8 @@ namespace BTC.Common.Constants
             _commentRepo = new CommentRepository();
             _contentRepo = new ContentViewRepository();
             _userRepo = new UserRepository();
+            _mainRepo = new MainPageSettingRepository();
+            _sliderRepo = new MainSliderSettingRepository();
             ReloadSettings();
         }
 
@@ -59,6 +63,10 @@ namespace BTC.Common.Constants
             Categories = _catRepo.GetByCustomQuery("select * from Categories where IsActive = 1", null).ToList();
 
             StaticPages = _staticRepo.GetAll();
+
+            MainPageSetting = _mainRepo.GetAll().FirstOrDefault();
+
+            MainPageSliders = _sliderRepo.GetAll();
 
             if (LastComments == null)
             {
@@ -97,14 +105,26 @@ namespace BTC.Common.Constants
             {
                 StaticPages = new List<StaticPages>();
             }
+
+            if (MainPageSetting == null)
+            {
+                MainPageSetting = new MainPageSettings();
+            }
+
+            if (MainPageSliders == null)
+            {
+                MainPageSliders = new List<MainSliderSettings>();
+            }
+
         }
+        public static List<MainSliderSettings> MainPageSliders { get; set; }
+        public static MainPageSettings MainPageSetting { get; private set; }
         public static SiteSettings SiteSettings { get; private set; }
         public static List<ContentViewListModel> ContentViews { get; private set; }
         public static MailSettings MailSettings { get; private set; }
         public static SmsSettings SmsSettings { get; private set; }
         public static List<Comments> LastComments { get; private set; }
         public static List<Users> Writers { get; private set; }
-
         public static List<StaticPages> StaticPages { get; private set; }
         public static List<Categories> Categories { get; private set; }
         public static StaticSettings Instance

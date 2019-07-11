@@ -59,16 +59,7 @@ namespace BTC.Controllers
         }
 
 
-        [Route("tedarikci-urunleri/{supplier_name}/urunler")]
-        public ActionResult GetSupplierDetailProducts(string supplier_name)
-        {
-            return View();
-        }
-
-        public PartialViewResult _GetSupplierProducts(int supplier_id)
-        {
-            return PartialView();
-        }
+ 
 
     }
 }

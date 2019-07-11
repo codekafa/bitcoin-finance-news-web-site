@@ -3,45 +3,30 @@
     ViewBag.SelectPage = "ana-sayfa";
 }
 
+@{
 
+    var main = BTC.Common.Constants.StaticSettings.MainPageSetting;
+    var sliders =  BTC.Common.Constants.StaticSettings.MainPageSliders;
+}
     <div class="box-slideshow">
         <div class="owl-carousel slideshow">
-            <div class="item item1">
-                <div class="background-img"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="description">
-                            <p class="subtitle-slider">Bitcoin, Ethereum, Ripple & More</p>
-                            <p class="title-slider">In one smart <span>investment</span> product</p>
-                            <a href="" class="btn btn-more">Learn More</a>
+
+            @foreach (var item in sliders)
+            {
+                <div class="item item1">
+                    <div class="background-img" style="background-image:url('/Images/_sliders/@item.PhotoUrl') !important"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="description">
+                                <p class="subtitle-slider">@item.SmallTitle</p>
+                                <p class="title-slider">@item.MediumTitle</p>
+                                <a href="@item.ButtonUrl" class="btn btn-more">@item.ButtonText</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="item item2">
-                <div class="background-img"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="description">
-                            <p class="subtitle-slider">Bitcoin, Ethereum, Ripple & More</p>
-                            <p class="title-slider">In one smart <span>investment</span> product</p>
-                            <a href="" class="btn btn-more">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item item3">
-                <div class="background-img"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="description">
-                            <p class="subtitle-slider">Bitcoin, Ethereum, Ripple & More</p>
-                            <p class="title-slider">In one smart <span>investment</span> product</p>
-                            <a href="" class="btn btn-more">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+
         </div>
         <div class="box-general-desc">
             <section class="box-investment container">
@@ -50,33 +35,29 @@
                         <img src="/assets/images/icon/bitcoin.png" alt="" />
                     </div>
                     <div class="col-md-8 invest-desc">
-                        <h3>Investment Manager? Get your name up here</h3>
-                        <p>We invite you to become a partner and create your own CopyPortfolios with us</p>
+                        <h3>@main.OneStepTitle</h3>
+                        <p>@main.OneStepDescription</p>
                     </div>
                     <div class="col-md-2 button-invest">
-                        <a class="btn btn-more" target="_blank" href="#">LEARN MORE</a>
+                        <a class="btn btn-more" target="_blank" href="@main.OneStepButtonUrl">@main.OneStepButtonText</a>
                     </div>
                 </div>
             </section>
 
             <section class="box-tranding container">
                 <div class="row box-body-about">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-12">
                         <div class="box-single-service">
-                            <h3>Buy, sell and Exchange all you need to know about bitcoin</h3>
+                            <h3 class="text-center">@main.TwoStepTitle</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, odioserunt provident
-                                maiores consectetur adipisicing elit. Aliquam odio dese runtesseu provident maiores
-                                libero porro dolorem est. Velit necessitatibus fugiat error incidunt excepturi doloribus
-                                officia aspernatur quod libero Velit necessitatibus fugiat error incidunt excepturi
-                                doloribus officia
+                               @main.TwoStepDescription
                             </p>
 
-                            <a href="#" class="btn btn-more">Show More</a>
+                            <a href="@main.TwoStepButtonUrl" class="btn btn-more">@main.TwoStepButtonText</a>
 
                         </div>
                     </div>
-                    <div class="col-md-6 hidden-sm">
+                    @*<div class="col-md-6 hidden-sm">
                         <div class="row mb-10">
                             <div class="col-sm-6 col-md-5 pr-5 pr-sm-15 mb-sm-10">
                                 <div class="box-hover-effect effect-barlin">
@@ -121,19 +102,17 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </section>
 
             <section class="box-tranding container">
                 <div class="row">
                     <div class="col-md-12 box-header-tranding">
-                        <h3 class="title">Why Chose <span>Bitcoin</span></h3>
+                        <h3 class="title"><span>@main.ThreeStepTitle</span></h3>
                         <div class="line-centered-circolar"></div>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem voluptatem obcaecati!
-                            <br />
-                            ipsum dolor sit Rem autem voluptatem obcaecati
+                          @main.ThreeStepDescription
                         </p>
                     </div>
                 </div>
@@ -142,28 +121,28 @@
                     <div class="col-12 col-md-4">
                         <div class="box-single-service">
                             <img src="/assets/images/icon/strong-security.png" alt="" />
-                            <h3>STRONG SECURITY</h3>
-                            <p>Bitcoin is one of the most important inventions in all of human history. </p>
+                            <h3>@main.ServiceOneTitle</h3>
+                            <p>@main.ServiceOneDescription </p>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="box-single-service">
                             <img src="/assets/images/icon/mobile-app.png" alt="" />
-                            <h3>MOBILE APP</h3>
-                            <p>Bitcoin is one of the most important inventions in all of human history. </p>
+                            <h3>@main.ServiceTwoTitle</h3>
+                            <p>@main.ServiceTwoDescription</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="box-single-service">
                             <img src="/assets/images/icon/cost-efficiency.png" alt="" />
-                            <h3>PAYMENT OPTIONS</h3>
-                            <p>Bitcoin is one of the most important inventions in all of human history. </p>
+                            <h3>@main.ServiceThreeTitle</h3>
+                            <p>@main.ServiceThreeDescription</p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="row box-body-services">
+                @*<div class="row box-body-services">
 
                     <div class="col-12 col-md-4">
                         <div class="box-single-service">
@@ -187,7 +166,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div>*@
             </section>
 
             @*<section id="statistic">

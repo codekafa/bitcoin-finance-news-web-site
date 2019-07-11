@@ -1,0 +1,33 @@
+﻿@model BTC.Model.View.SupplierListModel
+@{
+    ViewBag.Title = "Tedarikçi - " + Model.Name;
+}
+
+@section  styles{
+
+    <link href="~/Content/Plugins/bxslider/css/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/product.css" rel="stylesheet" />
+}
+
+<div class="feed-content" style="padding-top:50px;">
+    <div class="col-md-12 text-center">
+        <h1 class="text-center">@Model.Name</h1><br>
+        <h3>Ürün Listesi</h3>
+    </div>
+    <div class="container container-top-padding">
+        @Html.Action("_GetSupplierProducts", new { supplier_id = Model.UserID });
+
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Content/Plugins/bxslider/js/jquery.bxslider.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.slider').bxSlider();
+            $('.bx-wrapper').css('max-width', '400px');
+        });
+    </script>
+}

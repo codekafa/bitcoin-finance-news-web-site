@@ -25,6 +25,7 @@ namespace BTC.Model.Entity
         public string Tags { get; set; }
         public decimal? Price { get; set; }
 
+        public int ViewCount { get; set; }
         public DateTime CreateDate { get; set; }
 
         public bool IsPublish { get; set; }

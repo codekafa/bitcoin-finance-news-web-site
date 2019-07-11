@@ -87,6 +87,7 @@ namespace BTC.Business.Managers
                 new_slider.ID = id;
                 result.IsSuccess = true;
                 result.Message = "Slider başarı ile eklendi!";
+                BTC.Common.Constants.StaticSettings.ReloadSettings();
             }
             catch (Exception ex)
             {
@@ -105,6 +106,7 @@ namespace BTC.Business.Managers
                 _sliderRepo.ExecuteQuery("delete from MainSliderSettings where ID =@ID", new { ID = slider_id });
                 result.IsSuccess = true;
                 result.Message = "Slider başarı ile silindi!";
+                BTC.Common.Constants.StaticSettings.ReloadSettings();
                 return result;
             }
             catch (Exception ex)
@@ -141,11 +143,11 @@ namespace BTC.Business.Managers
                 _mainRepo.Update(s);
                 result.IsSuccess = true;
                 result.Message = "Bilgiler başarı ile kaydedilmiştir!";
+                BTC.Common.Constants.StaticSettings.ReloadSettings();
             }
             catch (Exception ex)
             {
                 result.Message = ex.Message;
-                throw;
             }
             return result;
         }

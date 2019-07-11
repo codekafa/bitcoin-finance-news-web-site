@@ -1776,11 +1776,14 @@
     <Content Include="Content\jquery.mCustomScrollbar.min.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.theme.default.css" />
+    <Content Include="Content\Plugins\bxslider\css\jquery.bxslider.css" />
+    <Content Include="Content\Plugins\bxslider\js\jquery.bxslider.js" />
     <Content Include="Content\Plugins\editor\css\quill.css" />
     <Content Include="Content\Plugins\editor\js\quill.js" />
     <Content Include="Content\Plugins\phoneFormat\jquery-input-mask-phone-number.min.js" />
     <Content Include="Content\Plugins\toastr\css\toastr.min.css" />
     <Content Include="Content\Plugins\toastr\js\toastr.min.js" />
+    <Content Include="Content\product.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1957,16 +1960,15 @@
     <Content Include="Views\News\News.cshtml" />
     <Content Include="Views\News\NewsDetail.cshtml" />
     <Content Include="Views\News\_GetPartialViewNews.cshtml" />
-    <Content Include="Views\Product\Products.cshtml" />
-    <Content Include="Views\Product\_GetPartialViewProducts.cshtml" />
     <Content Include="Views\Home\_GetNavMenu.cshtml" />
     <Content Include="Views\Supplier\_GlobalSupplierMenuItems.cshtml" />
     <Content Include="Views\Supplier\_RegionalSupplierMenuItems.cshtml" />
     <Content Include="Views\Supplier\_GetSupplierDetail.cshtml" />
-    <Content Include="Views\Supplier\_GetSupplierProducts.cshtml" />
     <Content Include="Views\Supplier\GetSupplierByCity.cshtml" />
     <Content Include="Views\Supplier\GetSupplierDetail.cshtml" />
-    <Content Include="Views\Supplier\GetSupplierDetailProducts.cshtml" />
+    <Content Include="Views\Product\GetSupplierDetailProducts.cshtml" />
+    <Content Include="Views\Product\_GetSupplierProducts.cshtml" />
+    <Content Include="Views\Product\GetProductDetailByUri.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

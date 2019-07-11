@@ -216,7 +216,7 @@
             </div>
         </nav>
 
-        <div class="box-slideshow">
+        <div class="box-slideshow" style="width:100%">
 
             <div id="content" style="margin-top: 50px;">
                 @RenderBody()
@@ -256,15 +256,15 @@
                             <div class="col-lg-3">
                                 <h3>Sosyal Meda</h3>
                                 @*<div class="newsletter-bx">
-                                        <form role="search" method="post">
-                                            <div class="input-group">
-                                                <input name="news-letter" class="form-control" placeholder="ENTER YOUR EMAIL" type="text">
-                                                <span class="input-group-btn">
-                                                    <button type="submit" class="site-button"><i class="far fa-paper-plane"></i></button>
-                                                </span>
-                                            </div>
-                                        </form>
-                                    </div>*@
+                            <form role="search" method="post">
+                                <div class="input-group">
+                                    <input name="news-letter" class="form-control" placeholder="ENTER YOUR EMAIL" type="text">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="site-button"><i class="far fa-paper-plane"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>*@
 
                                 <div class="social">
                                     <ul>
@@ -277,63 +277,63 @@
                             </div>
                         </div>
 
-                        <div class="row row-box-info">
-                            <div class="col-md-3 block-info">
-                                <div class="box-info-footer">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </div>
-                                        <div class="col-md-8 p-0">
-                                            <h3>Adres</h3>
-                                            <p>@BTC.Common.Constants.StaticSettings.SiteSettings.Address  </p>
-                                        </div>
-                                    </div>
+                        @*<div class="row row-box-info">
+                    <div class="col-md-3 block-info">
+                        <div class="box-info-footer">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <i class="fas fa-map-marker-alt"></i>
                                 </div>
-                            </div>
-
-                            <div class="col-md-3 block-info">
-                                <div class="box-info-footer">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <i class="fas fa-mobile-alt"></i>
-                                        </div>
-                                        <div class="col-md-8 p-0">
-                                            <h3>Telefon</h3>
-                                            <p>@BTC.Common.Constants.StaticSettings.SiteSettings.Phone</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 block-info">
-                                <div class="box-info-footer">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <i class="fas fa-fax"></i>
-                                        </div>
-                                        <div class="col-md-8 p-0">
-                                            <h3>Fax</h3>
-                                            <p>@BTC.Common.Constants.StaticSettings.SiteSettings.Fax </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 block-info">
-                                <div class="box-info-footer">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <i class="fas fa-at"></i>
-                                        </div>
-                                        <div class="col-md-8 p-0">
-                                            <h3>Email</h3>
-                                            <p>@BTC.Common.Constants.StaticSettings.SiteSettings.ComtactEmail</p>
-                                        </div>
-                                    </div>
+                                <div class="col-md-8 p-0">
+                                    <h3>Adres</h3>
+                                    <p>@BTC.Common.Constants.StaticSettings.SiteSettings.Address  </p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-md-3 block-info">
+                        <div class="box-info-footer">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="col-md-8 p-0">
+                                    <h3>Telefon</h3>
+                                    <p>@BTC.Common.Constants.StaticSettings.SiteSettings.Phone</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 block-info">
+                        <div class="box-info-footer">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <i class="fas fa-fax"></i>
+                                </div>
+                                <div class="col-md-8 p-0">
+                                    <h3>Fax</h3>
+                                    <p>@BTC.Common.Constants.StaticSettings.SiteSettings.Fax </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 block-info">
+                        <div class="box-info-footer">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <i class="fas fa-at"></i>
+                                </div>
+                                <div class="col-md-8 p-0">
+                                    <h3>Email</h3>
+                                    <p>@BTC.Common.Constants.StaticSettings.SiteSettings.ComtactEmail</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
                     </div>
                     <div class="box-copyright">
                         <p class="copy">
@@ -342,6 +342,7 @@
                     </div>
                 </footer>
             </div>
+
         </div>
         <div id="back-to-top">
             <a class="top arrow" href="#top">
@@ -359,12 +360,6 @@
     @Scripts.Render("~/bundles/theme")
     @Scripts.Render("~/bundles/js/global")
     @RenderSection("scripts", required: false)
-
-    <script type="text/javascript">
-
-
-
-    </script>
 
 </body>
 </html>

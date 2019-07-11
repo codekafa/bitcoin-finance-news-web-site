@@ -7,6 +7,7 @@
 <form action="saveMainPage" id="mainPageSettingForm" method="post">
     <div class="col-md-12">
         <div class="col-md-4">
+            <input type="hidden" id="ID" name="ID" value="@Model.ID" />
             <div class="panel panel-default">
                 <div class="panel-heading">Step 1</div>
                 <div class="panel-body">
@@ -20,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Açıklama</label>
-                        <textarea class="form-control" id="OneStepDescription" name="OneStepDescription">@Model.OneStepDescription</textarea>
+                        <textarea class="form-control" id="OneStepDescription" name="OneStepDescription" maxlength="500">@Model.OneStepDescription</textarea>
                     </div>
                 </div>
 

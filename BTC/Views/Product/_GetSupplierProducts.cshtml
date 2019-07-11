@@ -1,0 +1,69 @@
+﻿@model List<BTC.Model.Entity.UserProducts>
+
+
+@{
+    BTC.Business.Managers.ProductManager pM = new BTC.Business.Managers.ProductManager();
+}
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="    padding: 10px;">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <div class="col-md-6">
+                        <div class="slider">
+
+                            @{
+                                var photoList = pM.GetProductPhotos(item.ID);
+                                if (photoList != null)
+                                {
+                                    foreach (var photo in photoList)
+                                    {
+                                        <div><img src="~/Images/_products/@photo.Photo" style="width:400px;" /></div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="details col-md-6">
+                        <h3 class="product-title">@item.Name</h3>
+                        <div class="rating">
+                            @*<div class="stars">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>*@
+                            <span class="review-no">@item.ViewCount Görüntüleme</span>
+                        </div>
+                        <p class="product-description">@item.Description</p>
+                        <h4 class="price">Güncel Fiyat: <span>@item.Price</span></h4>
+                        @*<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>*@
+                        @*<h5 class="sizes">
+                                sizes:
+                                <span class="size" data-toggle="tooltip" title="small">s</span>
+                                <span class="size" data-toggle="tooltip" title="medium">m</span>
+                                <span class="size" data-toggle="tooltip" title="large">l</span>
+                                <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+                            </h5>
+                            <h5 class="colors">
+                                colors:
+                                <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+                                <span class="color green"></span>
+                                <span class="color blue"></span>
+                            </h5>*@
+                        <div class="action">
+                            <button class="add-to-cart btn btn-more" type="button">Tedarikçi İle İletişime Geç</button>
+                            @*<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+

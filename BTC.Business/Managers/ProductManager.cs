@@ -25,6 +25,11 @@ namespace BTC.Business.Managers
         }
 
 
+        public List<ProductPhotos> GetProductPhotos(int product_id)
+        {
+            return _photoRepo.GetByCustomQuery("select * from ProductPhotos where ProductID =@ID", new { ID = product_id });
+        }
+
         public ResponseModel ValidateAddProduct(AddProductModel product)
         {
             ResponseModel result = new ResponseModel();
@@ -234,5 +239,16 @@ namespace BTC.Business.Managers
 
         }
 
+        public void UpdateProductViews(int supplier_id)
+        {
+            try
+            {
+                _proRepo.ExecuteQuery("update UserProducts set ViewCount = ViewCount + 1 where UserID = @ID", new { ID = supplier_id });
+            }
+            catch (Exception ex)
+            {
+            }
+           
+        }
     }
 }

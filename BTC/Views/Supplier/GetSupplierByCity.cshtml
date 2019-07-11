@@ -10,7 +10,7 @@
 
             @foreach (var item in Model)
             {
-                <div class="box-about">
+                <div class="box-about" style="padding-bottom:50px">
                     <div class="row box-exchange">
                         <div class="col-md-6 box-about-img">
                             <div class="gdlr-core-zoom-on-hover">
@@ -20,7 +20,17 @@
                         <div class="col-md-6 box-desc-about">
                             <h3>@item.Name</h3>
                             <p>
-                                @item.Description
+
+                                @if (!string.IsNullOrWhiteSpace(item.Description) && item.Description.Length > 300)
+                                {
+                                    @item.Description.Substring(0, 200)<span>...</span>
+                                }
+                                else
+                                {
+                                    @item.Description
+                                }
+
+
                             </p>
                             <p>
                                 Ürün Sayısı : @item.ProductCount

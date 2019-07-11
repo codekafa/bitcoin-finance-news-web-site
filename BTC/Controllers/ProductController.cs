@@ -13,35 +13,44 @@ using System.Web.Mvc;
 
 namespace BTC.Controllers
 {
-    [AuthAttribute(new int[] { (int)EnumVariables.Roles.Admin, (int)EnumVariables.Roles.Supplier })]
     public class ProductController : BaseController
     {
         ProductManager _proM;
+        SupplierManager _supM;
         public ProductController()
         {
             _proM = new ProductManager();
-            //_imgM = new ImageManager();
+            _supM = new SupplierManager();
         }
 
 
-        [Route("~/urun-listesi")]
-        public ActionResult Products()
+        [Route("tedarikci-urunleri/{supplier_name}/urunler")]
+        public ActionResult GetSupplierDetailProducts(string supplier_name)
         {
-            return View();
+            var supplier = _supM.GetSupplierByUri(supplier_name);
+
+            if (supplier == null)
+            {
+                RedirectToErrorPage(new ResponseModel { IsSuccess = false, Message = "Tedarikçi bulunamadı!" });
+            }
+
+            _proM.UpdateProductViews(supplier.UserID);
+            return View(supplier);
         }
 
-        public PartialViewResult _GetPartialViewProducts(int supplier_id)
+        public PartialViewResult _GetSupplierProducts(int supplier_id)
         {
-            List<UserProducts> productList = _proM.GetProductByUserID(supplier_id);
-            return PartialView(productList);
+            var list = _proM.GetProductByUserID(supplier_id);
+            return PartialView(list);
         }
 
-        [Route("~/urun-detay/{productUri}")]
-        public ActionResult ProductDetails(string productUri)
+        [Route("urun-detay/{product_uri}")]
+        public ActionResult GetProductDetailByUri(string product_uri)
         {
-            UserProducts item = _proM.GetProductByUri(productUri);
-            return View();
+            var product = _proM.GetProductByUri(product_uri);
+            return View(product);
         }
+
 
 
     }
