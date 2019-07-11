@@ -1,5 +1,5 @@
 ﻿@model List<BTC.Model.Entity.MainMenu>
-
+@using BTC.Common.Constants
 
 @if (Model != null)
 {
@@ -10,9 +10,31 @@
             <ul class="list-unstyled components">
                 @foreach (var sub_item in Model.Where(x => x.ParentID == item.ID).ToList())
                 {
-                    <li class="page_id_@sub_item.ID">
-                        <a href="@sub_item.Url"><i class="fas fa-file-archive"></i> @sub_item.Title</a>
-                    </li>
+
+                    if (sub_item.IsStatic)
+                    {
+                        BTC.Model.Entity.StaticPages page = StaticSettings.StaticPages.Where(x => x.Name == sub_item.Title).FirstOrDefault();
+
+                        if (page != null)
+                        {
+                            if (!string.IsNullOrWhiteSpace(page.PartialViewName))
+                            {
+                                @Html.Action(page.PartialViewName, "Supplier");
+                            }
+                            else
+                            {
+                                <li class="page_id_@sub_item.ID">
+                                    <a href="@sub_item.Url"><i class="fas fa-file-archive"></i> @sub_item.Title</a>
+                                </li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <li class="page_id_@sub_item.ID">
+                            <a href="@sub_item.Url"><i class="fas fa-file-archive"></i> @sub_item.Title</a>
+                        </li>
+                    }
                 }
             </ul>
         </div>

@@ -273,6 +273,11 @@ namespace BTC.Business.Managers
 
         }
 
+        public List<PageUrlItem> GetCitiesMenuItems(bool is_regional)
+        {
+            var list = _pagerepo.GetCityPageList(is_regional);
+            return list;
+        }
 
     }
 }

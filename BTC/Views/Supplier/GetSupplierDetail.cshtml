@@ -1,0 +1,45 @@
+﻿@model BTC.Model.View.SupplierListModel
+@{
+    ViewBag.Title = "Tedarikçi Detay";
+}
+
+<div class="feed-content" style="padding-top:50px;">
+    <h1 class="text-center">@Model.Name</h1>
+    <div class="container container-top-padding">
+        <div class="row">
+                <div class="box-about">
+                    <div class="row box-exchange">
+                        <div class="col-md-6 box-about-img">
+                            <div class="gdlr-core-zoom-on-hover">
+                                <img src="/assets/images/about/a7.jpg" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 box-desc-about">
+                            <h3>@Model.Name</h3>
+                            <p>
+                                @Model.Description
+                            </p>
+                            <a href="/tedarikci-urunleri/@Model.Uri/urunler" class="btn btn-more">Ürün Listesine Git</a>
+                        </div>
+                        <div class="col-md-12 box-desc-about">
+                            <p>
+                                <b>Yetkili:</b> @Model.FirstName @Model.LastName
+                            </p>
+                            <p>
+                                <b>Adres:</b> @Model.Address
+                            </p>
+                            <p>
+                                <b>Telefon:</b> @Model.Phone
+                            </p>
+                            <p>
+                                <b>Ürün Sayısı:</b> @Model.ProductCount
+                            </p>
+                      
+                       
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+

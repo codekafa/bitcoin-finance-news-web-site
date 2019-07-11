@@ -1,1 +1,15 @@
-﻿
+﻿@model List<BTC.Model.View.PageUrlItem>
+
+
+<div class="box-list">
+    <p class="sub-title">Yurt Dışı Tedarikçiler</p>
+    <ul class="list-unstyled components">
+        @foreach (var item in Model)
+        {
+            <li class="page_id_@item.ID">
+                <a href="/tedarikciler/yurt-disi-tedarikciler/@item.Uri"><i class="fa fa-angle-double-right"></i> @item.Name</a>
+            </li>
+        }
+    </ul>
+</div>
+

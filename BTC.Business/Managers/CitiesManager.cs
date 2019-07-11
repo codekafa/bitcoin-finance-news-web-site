@@ -28,6 +28,10 @@ namespace BTC.Business.Managers
             return _cityRepo.GetByID(city_id);
         }
 
+        public Cities GetCityUri(string uri)
+        {
+            return _cityRepo.GetByCustomQuery("select * from Cities where Uri = @Uri", new { Uri = uri }).FirstOrDefault();
+        }
         public ResponseModel AddCity(Cities city)
         {
             ResponseModel result = new ResponseModel();

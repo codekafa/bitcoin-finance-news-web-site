@@ -1,0 +1,38 @@
+﻿@model List<BTC.Model.View.SupplierListModel>
+@{
+    ViewBag.Title = "Tedarikçi Listesi - " + ViewBag.CityName;
+}
+
+<div class="feed-content" style="padding-top:50px;">
+    <h1 class="text-center">Tedarikçiler</h1>
+    <div class="container container-top-padding">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="box-about">
+                    <div class="row box-exchange">
+                        <div class="col-md-6 box-about-img">
+                            <div class="gdlr-core-zoom-on-hover">
+                                <img src="/assets/images/about/a7.jpg" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 box-desc-about">
+                            <h3>@item.Name</h3>
+                            <p>
+                                @item.Description
+                            </p>
+                            <p>
+                                Ürün Sayısı : @item.ProductCount
+                            </p>
+                            <a href="/tedarikci-urunleri/@item.Uri/urunler" class="btn btn-more">Ürün Listesine Git</a>
+                            <a href="/tedarikci-detaylari/@item.Uri" class="btn btn-more">Firma Detayları</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

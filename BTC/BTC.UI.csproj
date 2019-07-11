@@ -1964,6 +1964,9 @@
     <Content Include="Views\Supplier\_RegionalSupplierMenuItems.cshtml" />
     <Content Include="Views\Supplier\_GetSupplierDetail.cshtml" />
     <Content Include="Views\Supplier\_GetSupplierProducts.cshtml" />
+    <Content Include="Views\Supplier\GetSupplierByCity.cshtml" />
+    <Content Include="Views\Supplier\GetSupplierDetail.cshtml" />
+    <Content Include="Views\Supplier\GetSupplierDetailProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

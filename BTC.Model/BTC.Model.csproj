@@ -90,6 +90,7 @@
     <Compile Include="View\PostModel.cs" />
     <Compile Include="View\ProdcutSearchModel.cs" />
     <Compile Include="View\RegisterUserModel.cs" />
+    <Compile Include="View\SupplierListModel.cs" />
     <Compile Include="View\UpdateUserModel.cs" />
     <Compile Include="View\UserListModel.cs" />
     <Compile Include="View\UserSelectListModel.cs" />

@@ -21,6 +21,7 @@ namespace BTC.Common.Constants
         private static ContentViewRepository _contentRepo;
         private static UserRepository _userRepo;
         private static CategoryRepository _catRepo;
+        private static StaticPageRepository _staticRepo;
         static StaticSettings()
         {
 
@@ -33,8 +34,10 @@ namespace BTC.Common.Constants
             LastComments = new List<Comments>();
             ContentViews = new List<ContentViewListModel>();
             Writers = new List<Users>();
+            StaticPages = new List<StaticPages>();
             Categories = new List<Categories>();
             _catRepo = new CategoryRepository();
+            _staticRepo = new StaticPageRepository();
             _siteRepo = new SiteSettingsRepository();
             _mailRepo = new MailSettingRepository();
             _smsRepo = new SmsSettingsRepository();
@@ -54,6 +57,8 @@ namespace BTC.Common.Constants
             Writers = _userRepo.GetByCustomQuery("select * from Users where (select COUNT(*) from UserRoleRels ur where ur.RoleID = 2) > 0 and IsActive = 1 and IsApproved = 1", null).ToList();
 
             Categories = _catRepo.GetByCustomQuery("select * from Categories where IsActive = 1", null).ToList();
+
+            StaticPages = _staticRepo.GetAll();
 
             if (LastComments == null)
             {
@@ -87,6 +92,11 @@ namespace BTC.Common.Constants
             {
                 Categories = new List<Categories>();
             }
+
+            if (StaticPages == null)
+            {
+                StaticPages = new List<StaticPages>();
+            }
         }
         public static SiteSettings SiteSettings { get; private set; }
         public static List<ContentViewListModel> ContentViews { get; private set; }
@@ -95,6 +105,7 @@ namespace BTC.Common.Constants
         public static List<Comments> LastComments { get; private set; }
         public static List<Users> Writers { get; private set; }
 
+        public static List<StaticPages> StaticPages { get; private set; }
         public static List<Categories> Categories { get; private set; }
         public static StaticSettings Instance
         {

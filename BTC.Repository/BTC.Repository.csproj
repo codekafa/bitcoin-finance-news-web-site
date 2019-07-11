@@ -72,6 +72,7 @@
     <Compile Include="ViewRepository\PageModelRepository.cs" />
     <Compile Include="ViewRepository\PageUrlItemRepository.cs" />
     <Compile Include="ViewRepository\PostModelRepository.cs" />
+    <Compile Include="ViewRepository\SupplierListModelRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Core\BTC.Core.csproj">

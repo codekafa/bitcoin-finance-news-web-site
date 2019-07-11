@@ -23,6 +23,7 @@ namespace BTC.Business.Managers
         UserRoleRelRepository _userRoleRepo;
         ImageManager _imageM;
         UserCompanyRepository _companyRepo;
+
         public UserManager()
         {
             _userRepo = new UserRepository();
@@ -274,7 +275,6 @@ namespace BTC.Business.Managers
             return result;
         }
 
-
         public List<UserSelectListModel> GetSelectedUsers(int role_id)
         {
             var viewRepo = new BaseDapperRepository<BTCConnection, UserSelectListModel>();
@@ -284,7 +284,6 @@ namespace BTC.Business.Managers
                             where ur.RoleID = @RoleID", new { RoleID = role_id }).ToList();
             return list;
         }
-
 
         public UserCompanies GetUserCompanyByUserID(int user_id)
         {

@@ -62,6 +62,7 @@
     <Compile Include="Managers\SiteSettingManager.cs" />
     <Compile Include="Managers\MainPageManager.cs" />
     <Compile Include="Managers\SmsManager.cs" />
+    <Compile Include="Managers\SupplierManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

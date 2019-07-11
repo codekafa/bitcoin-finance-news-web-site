@@ -44,5 +44,13 @@ where IsActive = 1 and IsPublish = 1 and (@PageID is null or ID = @PageID) ", ne
 where  IsPublish = 1  and (@ID is null  or ID =@ID)", new { ID = content_id });
         }
 
+        public List<PageUrlItem> GetCityPageList(bool is_regional)
+        {
+            return this.GetByCustomQuery(@"select c.ID,c.Name,c.Uri from Cities c
+inner join Countries co on co.ID = c.CountryID
+inner join UserCompanies com on com.CityID = c.ID
+where co.IsRegional = @IsRegional and com.IsActive = 1", new { IsRegional = is_regional });
+        }
+
     }
 }

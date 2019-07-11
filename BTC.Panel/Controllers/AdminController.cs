@@ -455,7 +455,6 @@ namespace BTC.Panel.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
         public JsonResult getCities()
         {
             return Json(_cityM.GetAllCities(),JsonRequestBehavior.AllowGet);
