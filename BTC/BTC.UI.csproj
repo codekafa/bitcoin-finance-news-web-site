@@ -126,6 +126,7 @@
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
@@ -1970,6 +1971,7 @@
     <Content Include="Views\Product\GetSupplierDetailProducts.cshtml" />
     <Content Include="Views\Product\_GetSupplierProducts.cshtml" />
     <Content Include="Views\Product\GetProductDetailByUri.cshtml" />
+    <Content Include="Views\Page\GetPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

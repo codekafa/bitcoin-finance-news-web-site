@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = Model.Title;
+}
+@model BTC.Model.View.PageModel
+
+<div class="feed-content blog-single">
+    @*<div class="box-single-img">
+        <div class="gr-back"></div>
+        <div class="container info-blog">
+            <div class="row">
+                <div class="col-md-12">
+                    <i class="far fa-clock"></i>
+                    <span>@Model.CreateDate.ToShortDateString()</span>
+                    <i class="far fa-eye"></i>
+                    <span>@Model.ViewCount</span>
+                    <h3>@Model.Title</h3>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <div class="container content-single-art">
+        <div class="row">
+
+            <div class="col-md-12 box-blog-single">
+                <div class="box-article">
+
+                    @Html.Raw(Model.Body)
+
+                    <br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

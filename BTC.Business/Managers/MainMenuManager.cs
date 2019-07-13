@@ -244,7 +244,7 @@ namespace BTC.Business.Managers
                     url = "/tedarikciler/" + item.Uri;
                     break;
                 case 4:
-                    url = "/" + parentMenu.Url + "/" + item.Uri;
+                    url = "/sayfalar/" + parentMenu.Url + "/" + item.Uri;
                     break;
                 case 5:
                     url = "/icerik/" + item.Uri;
