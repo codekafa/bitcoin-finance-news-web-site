@@ -2,10 +2,10 @@
 
 function HandleOperation() {
 
-    $('#contact-form').on('submit', function (e) {
+    $('#comment-form').on('submit', function (e) {
         e.preventDefault();
         var dat = new FormData($('#contact-form').get(0));
-
+        console.log(dat);
         $.ajax({
             data: dat,
             type: 'post',
