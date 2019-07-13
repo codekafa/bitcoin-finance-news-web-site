@@ -67,7 +67,34 @@ namespace BTC.Business.Managers
             return result;
         }
 
+        public RegisterMessages GetRegisterMessageBySmsCode(string phone, string sms_code)
+        {
 
+            var reg = regRepo.GetByCustomQuery(@"select * from Users u 
+inner join RegisterMessages rm on rm.UserID = u.ID
+where u.Phone = @Phone and rm.MessageCode = @SmsCode and u.IsApproved = 0", new { Phone = phone, SmsCode = sms_code }).FirstOrDefault();
+
+            return reg;
+
+        }
+
+        public bool UpdateRegisterMessage(RegisterMessages reg)
+        {
+            return regRepo.Update(reg);
+        }
+
+        internal List<RegisterMessages> GetRegisterMessagesByUserPhone(string phone)
+        {
+
+            var user = userM.GetUserByPhone(phone);
+
+            var messages = regRepo.GetByCustomQuery(@"
+                    select rm.* from Users u
+                    inner join RegisterMessages rm on rm.UserID = u.ID
+                    where u.Phone = @Phone and u.IsApproved = 0", new { Phone = user.Phone });
+
+            return messages;
+        }
     }
 }
 

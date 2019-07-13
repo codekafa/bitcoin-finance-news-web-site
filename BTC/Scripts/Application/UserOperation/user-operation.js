@@ -56,8 +56,8 @@ function registerUser() {
         success: function (data) {
             console.log(data);
             if (data.IsSuccess == true) {
-                $('#login').css('display', 'none');
-                $('#' + data.Message).css('display', 'block');
+                $('#login').addClass('show-false');
+                $('#' + data.Message).addClass('show-true');
             } else {
                 dangerAlert(data.Message)
             }
@@ -150,11 +150,63 @@ function changePassword() {
 
 }
 
-
 function photoChange() {
     $('#ProfilePhotoUrl').on('change', function () {
         $('#IsChangeProfilePhoto').val(true);
     });
 }
+
+function approveSms() {
+
+    var smsCode = $('#SmsCode').val();
+    var phone_number = $('#Phone').val();
+    if (smsCode == null || smsCode == undefined || smsCode == "" ) {
+        dangerAlert("Lütfen girdiğiniz telefon numarasına gönderilen sms kodunu giriniz!");
+        return false;
+    }
+
+    $.ajax({
+        url: "/Security/approveSmsCode",
+        dataType: "json",
+        type: 'get',
+        data: {
+            phone: phone_number,
+            sms_code: smsCode
+        },
+        success: function (data) {
+            alertResponse(data);
+
+            if (data.IsSuccess == true) {
+                setTimeout(function () {
+                    location.href = "/";
+                }, 3000)      
+            }        
+        }
+    });
+}
+
+function sendSmsAgain() {
+
+    var phone_number = $('#Phone').val();
+    if (phone_number != null && phone_number != "") {
+        $.ajax({
+            url: "/Security/sendSmsCodeAgain",
+            dataType: "json",
+            type: 'get',
+            data: {
+                phone: phone_number
+            },
+            success: function (data) {
+                alertResponse(data);
+            }
+        });
+    }
+
+
+
+
+}
+
+
 
 

@@ -142,5 +142,22 @@ namespace BTC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+
+
+        public JsonResult approveSmsCode(string phone, string sms_code)
+        {
+            ResponseModel result = new ResponseModel();
+            result = _regM.ApproveUserBySmsCode(phone, sms_code);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult sendSmsCodeAgain(string phone)
+        {
+            ResponseModel result = new ResponseModel();
+            result = _regM.SendApproveSmsAgain(phone);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using BTC.Model.Response;
 using BTC.Model.View;
 using BTC.Repository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 
@@ -106,7 +107,7 @@ namespace BTC.Business.Managers
                     if (_smsM.IsRequiredRegisterSmsSendClient())
                     {
                         // sms gönderimi
-
+                        _smsM.SendRegisterSmsToClient(new_user.ID);
                         result.IsSuccess = true;
                         result.Message = "login-approve-sms";
                     }
@@ -138,6 +139,45 @@ namespace BTC.Business.Managers
                 }
             }
 
+            return result;
+
+        }
+
+        public ResponseModel SendApproveSmsAgain(string phone)
+        {
+            ResponseModel result = new ResponseModel();
+
+
+            var user = _userM.GetUserByPhone(phone);
+
+            if (user == null || user.IsApproved)
+            {
+                result.Message = "Kullanıcı bulunamadı!";
+                return result;
+            }
+
+            var reg_list = _smsM.GetRegisterMessagesByUserPhone(phone);
+
+            if (reg_list == null)
+            {
+                reg_list = new List<RegisterMessages>();
+            }
+
+            DateTime control_date = DateTime.Now.AddMinutes(-3);
+
+            var is_res = reg_list.Where(x => x.CreateDate > control_date).FirstOrDefault();
+
+            if (is_res != null)
+            {
+                TimeSpan ts = new TimeSpan();
+                ts = is_res.CreateDate - control_date;
+                result.Message = "Tekrar sms talep edebilmek için " + String.Format("{0:0.00}", ts.TotalMinutes) + " dakika beklemeniz gerekmektedir!";
+                return result;
+            }
+
+            result = _smsM.SendRegisterSmsToClient(user.ID);
+            result.Message = "Tekrar sms gönderim işlemi aşarılı!";
+            result.IsSuccess = true;
             return result;
 
         }
@@ -394,7 +434,6 @@ namespace BTC.Business.Managers
             return result;
         }
 
-
         public ResponseModel ChangePasswordUser(PasswordChangeModel obj)
         {
             ResponseModel result = new ResponseModel();
@@ -417,5 +456,49 @@ namespace BTC.Business.Managers
             result.Message = "Şifreniz başarı ile değiştirilmiştir.";
             return result;
         }
+
+
+        public ResponseModel ApproveUserBySmsCode(string phone, string sms_code)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                var reg = _smsM.GetRegisterMessageBySmsCode(phone, sms_code);
+
+                if (reg == null || reg.ID <= 0 || !reg.IsActive)
+                {
+                    result.Message = "Girdiğiniz üyelik doğrulama kodu hatalı!";
+                    return result;
+                }
+
+                bool res_update = false;
+
+                var user = _userM.GetUserByPhone(phone);
+                user.IsApproved = true;
+                reg.IsActive = false;
+                res_update = _userM.UpdateUser(user) && _smsM.UpdateRegisterMessage(reg);
+
+                if (res_update)
+                    _lM.LoginUser(user.ID);
+                else
+                {
+                    result.Message = "Veritabanı işlemleri gerçekleştirilirken hata oluştu.";
+                    return result;
+                }
+
+                result.IsSuccess = true;
+                result.Message = "Üyelik doğrulama işleminiz başarı ile tamamlanmıştır.";
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+
+            return result;
+
+        }
+
     }
 }

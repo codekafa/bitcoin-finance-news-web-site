@@ -4278,3 +4278,433 @@ perspective effects (not including the modals and the overlay).
 .container-top-padding {
    padding-top: 50px;
 }
+
+/*login approve sms*/
+
+
+
+#login-approve-sms {
+    padding: 160px 0;
+    /* Register section */
+}
+
+    #login-approve-sms.register-form {
+        padding: 160px 0;
+    }
+
+@media only screen and (max-width: 995px) {
+    #login-approve-sms.register-form {
+        display: block !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms.register-form {
+        padding: 120px 0;
+    }
+}
+
+#login-approve-sms .box-login {
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 1300px) {
+    #login-approve-sms .box-login {
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    #login-approve-sms .box-login {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media only screen and (max-width: 995px) {
+    #login-approve-sms .box-login {
+        flex: 0 0 80%;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms .box-login {
+        flex: 0 0 95%;
+        max-width: 95%;
+        padding: 15px;
+    }
+}
+
+#login-approve-sms .box-login.registration {
+    padding: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms .box-login.registration {
+        padding: 20px 15px;
+    }
+}
+
+#login-approve-sms .box-login .content-login {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff;
+    padding: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms .box-login .content-login {
+        padding: 20px 10px;
+    }
+}
+
+@media only screen and (max-width: 995px) {
+    #login-approve-sms .box-login .auth-bg {
+        display: none;
+    }
+}
+
+#login-approve-sms .box-login .auth-bg .r {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+    #login-approve-sms .box-login .auth-bg .r:first-child {
+        top: -100px;
+        right: -100px;
+        background: linear-gradient(-135deg, #6591d8 0%, #101825 100%);
+    }
+
+    #login-approve-sms .box-login .auth-bg .r:last-child {
+        left: -100px;
+        bottom: -100px;
+        background: linear-gradient(-135deg, #6b5833 0%, #ffae11 100%);
+    }
+
+    #login-approve-sms .box-login .auth-bg .r.s {
+        width: 20px;
+        height: 20px;
+    }
+
+        #login-approve-sms .box-login .auth-bg .r.s:nth-child(2) {
+            top: 150px;
+            right: -150px;
+            background: #ffae11;
+        }
+
+        #login-approve-sms .box-login .auth-bg .r.s:nth-child(3) {
+            left: -150px;
+            bottom: 150px;
+            background: #6591d8;
+        }
+
+    #login-approve-sms .box-login .auth-bg .r:nth-child(odd) {
+        -webkit-animation: floating 7s infinite;
+        animation: floating 7s infinite;
+    }
+
+    #login-approve-sms .box-login .auth-bg .r:nth-child(even) {
+        -webkit-animation: floating 9s infinite;
+        animation: floating 9s infinite;
+    }
+
+#login-approve-sms .box-info-reg {
+    padding: 40px;
+}
+
+@media only screen and (max-width: 1100px) {
+    #login-approve-sms .box-info-reg {
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+}
+
+@media only screen and (max-width: 995px) {
+    #login-approve-sms .box-info-reg {
+        flex: 0 0 90%;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms .box-info-reg {
+        padding: 15px;
+        flex: 0 0 95%;
+        max-width: 95%;
+    }
+}
+
+#login-approve-sms .title-form h3 {
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+    #login-approve-sms .title-form h3.reg-title {
+        margin-bottom: 15px;
+    }
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms .title-form h3 {
+        font-size: 20px;
+    }
+}
+
+#login-approve-sms .login-main-form input.input-stl {
+    -webkit-transition: border-color 0.3s ease-in-out;
+    -moz-transition: border-color 0.3s ease-in-out;
+    -o-transition: border-color 0.3s ease-in-out;
+    outline: none;
+    border: 1px solid #e5e5e5;
+    background-color: #fafafa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    font-size: 16px;
+    padding: 11px 10px;
+    width: 100%;
+    margin: 15px 0 0 0;
+}
+
+#login-approve-sms .login-more {
+    margin-top: 20px;
+}
+
+    #login-approve-sms .login-more label,
+    #login-approve-sms .login-more a {
+        color: #0079b9;
+        margin-left: 20px;
+    }
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms .login-more label,
+    #login-approve-sms .login-more a {
+        font-size: 13px;
+    }
+}
+
+#login-approve-sms .login-more .e-cb-label:before,
+#login-approve-sms .login-more .terms-cond:before,
+#login-approve-sms .login-more .policy-terms:before {
+    background-image: url(../assets/images/sprite-checkbox.png);
+    content: "";
+    height: 30px;
+    width: 30px;
+    background-position: 0px 1px;
+    position: absolute;
+    left: 13px;
+    top: -5px;
+}
+
+#login-approve-sms .login-more .terms-cond:before,
+#login-approve-sms .login-more .policy-terms:before {
+    top: 6px;
+}
+
+#login-approve-sms .login-more .e-cb-input:checked + .e-cb-label:before {
+    background-position: 0px 30px;
+}
+
+#login-approve-sms .login-more .login-more-forgot {
+    text-align: right;
+}
+
+#login-approve-sms .login-btn-wrapp button {
+    border-radius: 25px;
+    padding: 7px 30px;
+    width: 100%;
+    background: linear-gradient(-145deg, #314c78 0%, #101825 100%);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #3F9ADB;
+    text-align: center;
+    font-size: 22px;
+    border: 0px;
+    color: #fff;
+    margin: 15px 0 0;
+    cursor: pointer;
+}
+
+#login-approve-sms .social-wrapper-title {
+    text-align: center;
+}
+
+    #login-approve-sms .social-wrapper-title:before {
+        content: "";
+        display: block;
+        margin-top: 25px;
+        margin-bottom: -13px;
+        border-bottom: 1px solid #eee;
+    }
+
+    #login-approve-sms .social-wrapper-title span {
+        background-color: #fff;
+        padding: 0 10px;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #777;
+        text-align: center;
+        margin-top: -5px;
+    }
+
+#login-approve-sms .social-login {
+    margin-top: 20px;
+}
+
+    #login-approve-sms .social-login button {
+        background: #fff;
+        border: solid 1px #e1e1e1;
+        background-color: #fff;
+        color: #2c2c2c;
+        width: 48%;
+        font-size: 18px;
+        display: inline-block;
+        height: 45px;
+    }
+
+@media only screen and (max-width: 767px) {
+    #login-approve-sms .social-login button {
+        width: 43%;
+        font-size: 13px;
+    }
+}
+
+#login-approve-sms .social-login button.facebook-button {
+    margin-right: 10px;
+}
+
+#login-approve-sms .sign-up-button .sign-up-button {
+    cursor: pointer;
+}
+
+    #login-approve-sms .sign-up-button .sign-up-button:before {
+        background-image: url(../assets/images/sprite-social.png);
+        content: "";
+        height: 25px;
+        width: 25px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 25px;
+        margin-top: -3px;
+    }
+
+#login-approve-sms .google-button::before {
+    background-position: -37px -655px;
+}
+
+#login-approve-sms .facebook-button:before {
+    background-position: -4px -655px;
+}
+
+#login-approve-sms .sign-info-page {
+    float: left;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+    #login-approve-sms .sign-info-page h3 {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 28px;
+        margin-top: 0;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 20px;
+    }
+
+    #login-approve-sms .sign-info-page ul {
+        padding-left: 0;
+    }
+
+        #login-approve-sms .sign-info-page ul img {
+            height: 50px;
+            width: 50px;
+            float: left;
+            margin-right: 20px;
+        }
+
+        #login-approve-sms .sign-info-page ul li {
+            list-style: none;
+            padding: 10px 0;
+            width: 100%;
+            float: left;
+        }
+
+            #login-approve-sms .sign-info-page ul li p {
+                margin: 0;
+                color: #6d6c6c;
+            }
+
+#login-approve-sms .risk-disclaimer {
+    float: left;
+    width: 100%;
+}
+
+    #login-approve-sms .risk-disclaimer.seperator {
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
+
+    #login-approve-sms .risk-disclaimer p {
+        color: #6d6c6c;
+    }
+
+#login-approve-sms .marketing-consent p {
+    color: #6d6c6c;
+}
+
+#login-approve-sms #login-approve-sms-remember-me,
+#login-approve-sms .login-more-forgot {
+    position: relative;
+}
+
+    #login-approve-sms #login-approve-sms-remember-me a,
+    #login-approve-sms .login-more-forgot a {
+        margin: 0;
+    }
+
+    #login-approve-sms #login-approve-sms-remember-me.register-policy,
+    #login-approve-sms .login-more-forgot.register-policy {
+        text-align: left;
+    }
+
+    #login-approve-sms #login-approve-sms-remember-me .terms,
+    #login-approve-sms .login-more-forgot .terms,
+    #login-approve-sms #login-approve-sms-remember-me .policy,
+    #login-approve-sms .login-more-forgot .policy {
+        margin-left: 20px;
+        visibility: hidden;
+    }
+
+    #login-approve-sms #login-approve-sms-remember-me .e-cb-input.terms:checked + .terms-cond:before,
+    #login-approve-sms .login-more-forgot .e-cb-input.terms:checked + .terms-cond:before {
+        background-position: 0px 30px;
+    }
+
+    #login-approve-sms #login-approve-sms-remember-me .e-cb-input.policy:checked + .policy-terms:before,
+    #login-approve-sms .login-more-forgot .e-cb-input.policy:checked + .policy-terms:before {
+        background-position: 0px 30px;
+    }
+
+#login-approve-sms .terms-cond,
+#login-approve-sms .policy-terms {
+    width: 80%;
+    font-size: 13px;
+}
+
+
+.show-false{
+    display:none !important;
+}
+
+.show-true {
+    display: block !important;
+}
+
+/*login approve sms*/
