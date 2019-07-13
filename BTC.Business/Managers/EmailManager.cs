@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Configuration;
 
 namespace BTC.Business.Managers
@@ -52,7 +53,13 @@ namespace BTC.Business.Managers
             result.IsSuccess = true;
             var mailLog = CreateRegisterEmail(user_id);
             var user = _userRepo.GetByID(user_id);
-            result = SendMail("BTC Finans - Üyelik Onaylama", new string[] { user.Email }, mailLog.RegisterUrl);
+
+            string path = HttpContext.Current.Server.MapPath("~/Content/Templates/VerifyEmail.html");
+            string content = System.IO.File.ReadAllText(path);
+
+            content = content.Replace("$verify-email-url", mailLog.RegisterUrl);
+
+            result = SendMail("BTC Finans - Üyelik Onaylama", new string[] { user.Email }, content);
             return result;
         }
 
@@ -70,6 +77,7 @@ namespace BTC.Business.Managers
                 email.To.Add(item.ToString());
             }
             email.Subject = subject;
+            email.IsBodyHtml = true;
             email.Body = body;
             SmtpClient smtp = new SmtpClient();
             smtp.Credentials = new System.Net.NetworkCredential(emailSetting.Mail, emailSetting.Password);
