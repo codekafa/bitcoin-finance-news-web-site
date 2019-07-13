@@ -162,11 +162,20 @@ namespace BTC.Business.Managers
             return list;
         }
 
-        public List<UserListModel> GetUserListModel()
+        public List<UserListModel> GetUserListModel(string search_key = null)
         {
             List<UserListModel> list = new List<UserListModel>();
 
             var u_repo = new BaseDapperRepository<BTCConnection, UserListModel>();
+
+            if (!string.IsNullOrWhiteSpace(search_key))
+            {
+                search_key = "%" + search_key + "%";
+            }
+            else
+            {
+                search_key = null;
+            }
 
             list = u_repo.GetByCustomQuery(@"select 
                                     u.Email,
@@ -181,7 +190,7 @@ namespace BTC.Business.Managers
                                     (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 2) as [IsWriter],
                                     (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 3) as [IsMember],
                                     (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 4) as [IsSupplier]
-                                    from Users u", null).ToList();
+                                    from Users u where (@Key is null or (u.Email like @Key or u.FirstName like @Key or u.LastName like @Key or u.Email like @Key))", new {  Key = search_key}).ToList();
 
             return list;
 

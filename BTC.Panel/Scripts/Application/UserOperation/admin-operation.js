@@ -145,6 +145,20 @@ function updateIsApprove(id, state) {
     }
 }
 
+function getUserlist() {
+
+   var key = $('#search_key').val();
+
+    $.ajax('/Admin/_GetUsers', {
+        type: "Post",
+        dataType: "html",
+        data: { search_key: key },
+        success: function (result) {
+            $('#userList').html(result);
+        }
+    });
+}
+
 /*users*/
 
 /*posts*/
@@ -718,7 +732,6 @@ function getProductList() {
         dataType: "html",
         data: obj,
         success: function (result) {
-            console.log(result);
             $('#productList').html(result);
         }
     });

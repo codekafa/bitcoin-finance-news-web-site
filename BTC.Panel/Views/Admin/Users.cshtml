@@ -4,60 +4,22 @@
     ViewBag.SelectPage = "tum-uyeler";
 }
 
-
-@model List<UserListModel>
-
-<table id="userListTable" class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Ad</th>
-            <th>Email</th>
-            <th>Tel</th>
-            <th>Üyelik Tarihi</th>
-            <th>Vip</th>
-            <th>Aktif</th>
-            <th>Onaylı</th>
-            <th>Üye</th>
-            <th>Yazar</th>
-            <th>Tedarikçi</th>
-            <th>Admin</th>
-        </tr>
-    </thead>
-    <tbody id="usersListBody">
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.FullName</td>
-                <td>@item.Email</td>
-                <td>@item.Phone</td>
-                <td>@item.CreateDate.ToLongDateString() @item.CreateDate.ToLongTimeString()</td>
-                <td>
-                    <input type="checkbox" class="form-control is_vip_user" user-id="@item.ID" @(item.IsVip ? "checked" : "") />
-                </td>
-                <td>
-                    <input type="checkbox" class="form-control is_active_user" user-id="@item.ID" @(item.IsActive ? "checked" : "") />
-                </td>
-                <td>
-                    <input type="checkbox" class="form-control is_approve_user" user-id="@item.ID" @(item.IsApproved ? "checked" : "") />
-                </td>
-                <td>
-                    <input type="checkbox" class="form-control is_member" user-id="@item.ID" @(item.IsMember ? "checked" : "") />
-                </td>
-                <td>
-                    <input type="checkbox" class="form-control is_writer" user-id="@item.ID" @(item.IsWriter ? "checked" : "") />
-                </td>
-                <td>
-                    <input type="checkbox" class="form-control is_supplier" user-id="@item.ID" @(item.IsSupplier ? "checked" : "") />
-                </td>
-                <td>
-                    <input type="checkbox" class="form-control is_admin" user-id="@item.ID" @(item.IsAdmin ? "checked" : "") />
-                </td>
-            </tr>
-        }
-
-    </tbody>
-</table>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="search_key">Kullanıcı Ad/Soyad/Email</label>
+            <input id="search_key" name="search_key" class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-4" style="margin-top: 28px;">
+        <button type="button" onclick="getUserlist()" class="btn btn-primary">Ara</button>
+    </div>
+</div>
+<div class="col-md-12">
+    <div id="userList">
+        @Html.Action("_GetUsers")
+    </div>
+</div>
 
 
 

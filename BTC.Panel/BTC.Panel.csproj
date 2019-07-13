@@ -2929,6 +2929,7 @@
     <Content Include="Views\Admin\_GetStaticPages.cshtml" />
     <Content Include="Views\Admin\GetPageUrls.cshtml" />
     <Content Include="Views\Admin\Cities.cshtml" />
+    <Content Include="Views\Admin\_GetUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BTC.Business\BTC.Business.csproj">

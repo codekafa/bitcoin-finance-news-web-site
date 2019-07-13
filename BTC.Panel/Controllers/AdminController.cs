@@ -46,10 +46,14 @@ namespace BTC.Panel.Controllers
         [Route("~/kullanicilar")]
         public ActionResult Users()
         {
-            var user_List = _userM.GetUserListModel();
-            return View(user_List);
+            return View();
         }
 
+        public PartialViewResult _GetUsers(string search_key)
+        {
+            var user_List = _userM.GetUserListModel(search_key);
+            return PartialView(user_List);
+        }
         public JsonResult updateUserStatus(int user_id, bool state, int operation_type)
         {
             ResponseModel result = new ResponseModel();
