@@ -41,88 +41,97 @@
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="./"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
-                    </li>
-
-                    @*Sadece Admin*@
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Site Ayarları</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-share-square-o"></i><a href="~/site-ayarlari">Site Ayarları</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="~/mail-ayarlari">Mail Ayarları</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="~/sms-ayarlari">Sms Ayarları</a></li>
-                            @*<li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Üyelik Ayarları</a></li>
-        <li><i class="fa fa-fire"></i><a href="ui-modals.html">Site Bilgileri</a></li>*@
-                            <li><i class="fa fa-share-square-o"></i><a href="~/kullanicilar">Kullanıcı Listesi</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="~/makale-listesi">Makale Listesi</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="~/urun-listesi">Ürün Listesi</a></li>
-                            @*<li><i class="fa fa-id-card-o"></i><a href="~/menu-icerikleri">İçerik Listesi</a></li>*@
-                            @*<li><i class="fa fa-id-card-o"></i><a href="~/haberler">Haber Listesi</a></li>*@
-                            <li><i class="fa fa-share-square-o"></i><a href="~/yorum-listesi">Yorum Listesi</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="~/kategori-listesi">Kategori Listesi</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="~/menu-ayarlari">Menü Ayarları</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="~/sehirler">Şehir Ayarları</a></li>
-                        </ul>
-                    </li>
-
-                    @*Sadece Admin*@
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>İçerik Bilgileri</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="/menu-icerikleri">İçerik Listesi</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/icerik-olustur">İçerik Ekle</a></li>
-                        </ul>
-                    </li>
-
-                    @*Sadece Admin*@
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Haber Bilgileri</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="/haberler">Haber Listesi</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-haber-ekle">Haber Ekle</a></li>
-                        </ul>
-                    </li>
-
-                    @*Sadece Admin*@
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Anasayfa Bilgileri</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="/slider-ayarlari">Slider</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/ana-sayfa-ayarlari">İçerikler</a></li>
-                        </ul>
-                    </li>
-
-
-                    @*Sadece Yazar*@
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Makale Bilgileri</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="/makalelerim">Makale Listesi</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-makale-ekle">Makale Ekle</a></li>
-                        </ul>
-                    </li>
 
 
 
-                    @*Sadece Admin*@
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Sayfa Bilgileri</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="/sayfalar">Sayfa Listesi</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-sayfa-ekle">Sayfa Ekle</a></li>
-                        </ul>
-                    </li>
+                    @if (currentUser.IsAdmin)
+                    {
+                        @*Sadece Admin*@
+                        <li class="active">
+                            <a href="./"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        </li>
+
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Site Ayarları</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-share-square-o"></i><a href="~/site-ayarlari">Site Ayarları</a></li>
+                                <li><i class="fa fa-id-card-o"></i><a href="~/mail-ayarlari">Mail Ayarları</a></li>
+                                <li><i class="fa fa-exclamation-triangle"></i><a href="~/sms-ayarlari">Sms Ayarları</a></li>
+                                @*<li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Üyelik Ayarları</a></li>
+                    <li><i class="fa fa-fire"></i><a href="ui-modals.html">Site Bilgileri</a></li>*@
+                                <li><i class="fa fa-share-square-o"></i><a href="~/kullanicilar">Kullanıcı Listesi</a></li>
+                                <li><i class="fa fa-id-card-o"></i><a href="~/makale-listesi">Makale Listesi</a></li>
+                                <li><i class="fa fa-exclamation-triangle"></i><a href="~/urun-listesi">Ürün Listesi</a></li>
+                                @*<li><i class="fa fa-id-card-o"></i><a href="~/menu-icerikleri">İçerik Listesi</a></li>*@
+                                @*<li><i class="fa fa-id-card-o"></i><a href="~/haberler">Haber Listesi</a></li>*@
+                                <li><i class="fa fa-share-square-o"></i><a href="~/yorum-listesi">Yorum Listesi</a></li>
+                                <li><i class="fa fa-id-card-o"></i><a href="~/kategori-listesi">Kategori Listesi</a></li>
+                                <li><i class="fa fa-exclamation-triangle"></i><a href="~/menu-ayarlari">Menü Ayarları</a></li>
+                                <li><i class="fa fa-exclamation-triangle"></i><a href="~/sehirler">Şehir Ayarları</a></li>
+                            </ul>
+                        </li>
+
+                        @*Sadece Admin*@
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>İçerik Bilgileri</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-id-badge"></i><a href="/menu-icerikleri">İçerik Listesi</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="/icerik-olustur">İçerik Ekle</a></li>
+                            </ul>
+                        </li>
+
+                        @*Sadece Admin*@
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Haber Bilgileri</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-id-badge"></i><a href="/haberler">Haber Listesi</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-haber-ekle">Haber Ekle</a></li>
+                            </ul>
+                        </li>
+
+                        @*Sadece Admin*@
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Anasayfa Bilgileri</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-id-badge"></i><a href="/slider-ayarlari">Slider</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="/ana-sayfa-ayarlari">İçerikler</a></li>
+                            </ul>
+                        </li>
+                        @*Sadece Admin*@
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Sayfa Bilgileri</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-id-badge"></i><a href="/sayfalar">Sayfa Listesi</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-sayfa-ekle">Sayfa Ekle</a></li>
+                            </ul>
+                        </li>
+                    }
 
 
-                    @*Sadece VİP*@
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Ürün Bilgileri</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="/urunlerim">Ürün Listesi</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-urun-ekle">Ürün Ekle</a></li>
-                        </ul>
-                    </li>
+
+                    @if (currentUser.IsWriter)
+                    {
+                        @*Sadece Yazar*@
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Makale Bilgileri</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-id-badge"></i><a href="/makalelerim">Makale Listesi</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-makale-ekle">Makale Ekle</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (currentUser.IsSupplier)
+                    {
+                        @*Sadece VİP*@
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Ürün Bilgileri</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-id-badge"></i><a href="/urunlerim">Ürün Listesi</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="/yeni-urun-ekle">Ürün Ekle</a></li>
+                            </ul>
+                        </li>
+                    }
 
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Profil Bilgileri</a>
