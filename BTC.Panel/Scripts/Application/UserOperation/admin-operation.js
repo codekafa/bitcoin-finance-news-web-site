@@ -51,6 +51,40 @@ function loadUserHandlers() {
         }
     });
 
+    $('.is_supplier').on('change', function () {
+
+        var c_h = $(this);
+        var id = c_h.attr("user-id");
+        if (c_h.is(":checked") == true) {
+            updateIsSupplier(id, true);
+        } else {
+            updateIsSupplier(id, false);
+        }
+    });
+
+    
+}
+
+function updateIsSupplier(id, state) {
+
+    var message = "";
+
+    if (state == true) {
+        message = "Seçili kullanıcı tedarikçi olarak kaydedilecektir.Onaylıyor musunuz?";
+    } else {
+        message = "Seçili kullanıcı tedarikçi statüsünden çıkacaktır.Onaylıyor musunuz?";
+    }
+
+    if (confirm(message) == true) {
+        $.ajax('/Admin/updateUserRole', {
+            type: "GET",
+            dataType: "json",
+            data: { user_id: id, state: state, operation_type: 1002 },
+            success: function (result) {
+                alertResponse(result);
+            }
+        });
+    }
 }
 
 function updateIsMember(id, state) {
@@ -155,6 +189,7 @@ function getUserlist() {
         data: { search_key: key },
         success: function (result) {
             $('#userList').html(result);
+            loadUserHandlers();
         }
     });
 }

@@ -2158,6 +2158,7 @@
     <Content Include="Scripts\Application\Editor\add-post.js" />
     <Content Include="Scripts\Application\Editor\edit-post.js" />
     <Content Include="Scripts\Application\Global\app-global.js" />
+    <Content Include="Scripts\Application\jquery.mask.min.js" />
     <Content Include="Scripts\Application\MainPage\main-page.js" />
     <Content Include="Scripts\Application\News\add-news.js" />
     <Content Include="Scripts\Application\News\edit-news.js" />

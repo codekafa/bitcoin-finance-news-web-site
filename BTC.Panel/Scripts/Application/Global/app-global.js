@@ -39,3 +39,10 @@ function alertResponse(responseModel) {
     }
 
 }
+
+
+
+$(document).ready(function () {
+    $('.phoneMask').mask('(000) 000-0000');
+    selectPage();
+});

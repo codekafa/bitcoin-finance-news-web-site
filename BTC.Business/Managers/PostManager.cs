@@ -316,10 +316,8 @@ namespace BTC.Business.Managers
             List<PostModel> list = new List<PostModel>();
             list = _postModelRepo.GetByCustomQuery(@"select 
                                 u.FirstName + ' ' + u.LastName as [Writer],
-                                c.Name as [Category],
                                 us.*
                                 from UserPosts us
-                                inner join Categories c on c.ID = us.CategoryID
                                 inner join Users u on u.ID = us.UserID
                                 where u.ID = @UserID and us.IsActive = 1 and us.IsNews = 1", new { UserID = user_id }).ToList();
             return list;
@@ -370,10 +368,8 @@ namespace BTC.Business.Managers
             List<PostModel> postList = new List<PostModel>();
             postList = _postModelRepo.GetByCustomQuery(@"select  TOP 20
                                 u.FirstName + ' ' + u.LastName as [Writer],
-                                c.Name as [Category],
                                 us.*
                                 from UserPosts us
-                                inner join Categories c on c.ID = us.CategoryID
                                 inner join Users u on u.ID = us.UserID
                                 where   us.IsPublish = 1 and us.IsActive = 1 and IsNews = 1", null).ToList();
             return postList;

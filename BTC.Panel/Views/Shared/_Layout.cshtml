@@ -58,7 +58,7 @@
                                 <li><i class="fa fa-id-card-o"></i><a href="~/mail-ayarlari">Mail Ayarları</a></li>
                                 <li><i class="fa fa-exclamation-triangle"></i><a href="~/sms-ayarlari">Sms Ayarları</a></li>
                                 @*<li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Üyelik Ayarları</a></li>
-                    <li><i class="fa fa-fire"></i><a href="ui-modals.html">Site Bilgileri</a></li>*@
+                                    <li><i class="fa fa-fire"></i><a href="ui-modals.html">Site Bilgileri</a></li>*@
                                 <li><i class="fa fa-share-square-o"></i><a href="~/kullanicilar">Kullanıcı Listesi</a></li>
                                 <li><i class="fa fa-id-card-o"></i><a href="~/makale-listesi">Makale Listesi</a></li>
                                 <li><i class="fa fa-exclamation-triangle"></i><a href="~/urun-listesi">Ürün Listesi</a></li>
@@ -136,7 +136,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Profil Bilgileri</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-user"></i><a href="~/profilim">Profilim</a></li>
+                            @*<li><i class="menu-icon fa fa-user"></i><a href="~/profilim">Profilim</a></li>*@
                             <li><i class="menu-icon fa fa-code"></i><a href="~/sifre-degistir">Şifre Değiştir</a></li>
                             <li><i class="menu-icon fa fa-sign-out"></i><a href="~/cikis-yap">Çıkış</a></li>
                         </ul>
@@ -194,6 +194,9 @@
 
         </div>
     </div>
+
+
+    <script src="~/Scripts/Application/jquery.mask.min.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/themescript")

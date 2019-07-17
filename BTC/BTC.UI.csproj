@@ -1786,6 +1786,7 @@
     <Content Include="Content\Plugins\toastr\js\toastr.min.js" />
     <Content Include="Content\product.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\Templates\ChangePassword.html" />
     <Content Include="Content\Templates\VerifyEmail.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

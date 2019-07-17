@@ -23,13 +23,14 @@ namespace BTC.Business.Managers
         UserRoleRelRepository _userRoleRepo;
         ImageManager _imageM;
         UserCompanyRepository _companyRepo;
-
+        //LoginManager _lM;
         public UserManager()
         {
             _userRepo = new UserRepository();
             _userRoleRepo = new UserRoleRelRepository();
             _imageM = new ImageManager();
             _companyRepo = new UserCompanyRepository();
+            //_lM = new LoginManager();
         }
         public Users CreateUser(Users userModel)
         {
@@ -63,6 +64,37 @@ namespace BTC.Business.Managers
             }
 
             return result;
+        }
+
+        public ResponseModel UpdateUserRole(int user_id, bool state, int role_id)
+        {
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                if (state)
+                {
+                    UserRoleRels new_role = new UserRoleRels();
+                    new_role.RoleID = role_id;
+                    new_role.UserID = user_id;
+                    _userRoleRepo.Insert(new_role);
+                }
+                else
+                {
+                    _userRoleRepo.ExecuteQuery("delete from UserRoleRels where UserID = @UserID and RoleID = @RoleID", new { UserID = user_id, RoleID = role_id });
+                }
+
+                result.Message = "Güncelleme başarı ile gerçekleşti!";
+                result.IsSuccess = true;
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                return result;
+            }
+           
+
         }
 
         public ResponseModel UpdateUserIsVipField(int user_id, bool state)
@@ -115,38 +147,44 @@ namespace BTC.Business.Managers
             result.CurrentUser = user;
             result.Roles = _userRoleRepo.GetByCustomQuery("select * from UserRoleRels where UserID = @UserID", new { UserID = user.ID }).ToList();
             result.Company = _companyRepo.GetCompanyByUserId(user.ID);
-            foreach (var item in StaticSettings.ContentViews)
+
+            if (result.Company == null)
             {
-                if (result.CurrentUser.IsVip && item.CanSeeVip)
-                {
-                    result.ContentViews.Add(item);
-                    continue;
-                }
-
-                if (result.IsMember && item.CanSeeMember)
-                {
-                    result.ContentViews.Add(item);
-                    continue;
-                }
-
-                if (result.IsWriter && item.CanSeeWriter)
-                {
-                    result.ContentViews.Add(item);
-                    continue;
-                }
-
-                if (result.IsSupplier && item.CanSeeTrader)
-                {
-                    result.ContentViews.Add(item);
-                    continue;
-                }
-
-                if (result.IsAdmin)
-                {
-                    result.ContentViews.Add(item);
-                    continue;
-                }
+                result.Company = new UserCompanies();
             }
+
+            //foreach (var item in StaticSettings.ContentViews)
+            //{
+            //    if (result.CurrentUser.IsVip && item.CanSeeVip)
+            //    {
+            //        result.ContentViews.Add(item);
+            //        continue;
+            //    }
+
+            //    if (result.IsMember && item.CanSeeMember)
+            //    {
+            //        result.ContentViews.Add(item);
+            //        continue;
+            //    }
+
+            //    if (result.IsWriter && item.CanSeeWriter)
+            //    {
+            //        result.ContentViews.Add(item);
+            //        continue;
+            //    }
+
+            //    if (result.IsSupplier && item.CanSeeTrader)
+            //    {
+            //        result.ContentViews.Add(item);
+            //        continue;
+            //    }
+
+            //    if (result.IsAdmin)
+            //    {
+            //        result.ContentViews.Add(item);
+            //        continue;
+            //    }
+            //}
 
 
             return result;
@@ -190,7 +228,7 @@ namespace BTC.Business.Managers
                                     (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 2) as [IsWriter],
                                     (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 3) as [IsMember],
                                     (select COUNT(*) from UserRoleRels ur where ur.UserID = u.ID and ur.RoleID = 4) as [IsSupplier]
-                                    from Users u where (@Key is null or (u.Email like @Key or u.FirstName like @Key or u.LastName like @Key or u.Email like @Key))", new {  Key = search_key}).ToList();
+                                    from Users u where (@Key is null or (u.Email like @Key or u.FirstName like @Key or u.LastName like @Key or u.Email like @Key))", new { Key = search_key }).ToList();
 
             return list;
 
@@ -235,32 +273,34 @@ namespace BTC.Business.Managers
 
             if (result.IsSuccess)
             {
+                var company = _companyRepo.GetByCustomQuery("select * from UserCompanies where UserID = @UserID", new { UserID = user.ID }).FirstOrDefault();
 
-                if (user.Company == null)
-                    user.Company = new UserCompanies();
+                if (company == null)
+                    company = new UserCompanies();
 
-                user.Company.ID = user.CompanyID;
-                user.Company.IsActive = true;
-                user.Company.Name = user.CompanyName;
-                user.Company.Phone = user.CompanyPhone;
-                user.Company.Address = user.CompanyAddress;
-                user.Company.CityID = user.CompanyCity;
-                user.Company.Email = user.CompanyEmail;
-                user.Company.UserID = user.ID;
-                user.Company.UpdateDate = DateTime.Now;
-                user.Company.Description = user.CompanyDescription;
+                company.IsActive = true;
+                company.Name = user.CompanyName;
+                company.Phone = user.CompanyPhone;
+                company.Address = user.CompanyAddress;
+                company.CityID = user.CompanyCity;
+                company.Email = user.CompanyEmail;
+                company.UserID = user.ID;
+                company.UpdateDate = DateTime.Now;
+                company.Description = user.CompanyDescription;
 
 
-                if (user.CompanyID > 0)
+                if (company.ID > 0)
                 {
-                    _companyRepo.ExecuteQuery("update UserCompanies set Name = @Name, Description = @Description, Phone = @Phone, Email = @Email , Address = @Address, CityID = @CityID , UpdateDate = GETDATE()", user.Company);
+                    _companyRepo.ExecuteQuery("update UserCompanies set Name = @Name, Description = @Description, Phone = @Phone, Email = @Email , Address = @Address, CityID = @CityID , UpdateDate = GETDATE()", company);
                 }
                 else
                 {
-                    user.CompanyID = _companyRepo.Insert(user.Company);
+                    user.CompanyID = _companyRepo.Insert(company);
                 }
                 result.ResultData = user;
                 result.Message = "Profil bilgileri başarı ile güncellenmiştir.";
+                new LoginManager().ResetSessionUser(user.ID);
+
 
             }
             else

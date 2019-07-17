@@ -54,6 +54,15 @@ namespace BTC.Panel.Controllers
             var user_List = _userM.GetUserListModel(search_key);
             return PartialView(user_List);
         }
+
+        public JsonResult updateUserRole(int user_id, bool state , int operation_id)
+        {
+
+            ResponseModel result = new ResponseModel();
+            result = _userM.UpdateUserRole(user_id,  state, operation_id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
         public JsonResult updateUserStatus(int user_id, bool state, int operation_type)
         {
             ResponseModel result = new ResponseModel();

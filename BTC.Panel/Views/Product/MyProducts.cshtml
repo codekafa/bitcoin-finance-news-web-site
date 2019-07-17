@@ -8,7 +8,19 @@
 <input type="hidden" id="LastId" value="">
 
 <div class="col-md-12 box-body-feed">
-    <a class="btn btn-xs btn-primary pull-right" href="/yeni-urun-ekle" target="_blank" >Yeni ürün Ekle</a>
+
+
+    @if (!BTC.Common.Session.SessionVariables.User.CurrentUser.IsVip)
+    {
+        <label class="alert alert-warning alert-xs btn-xs" >VİP üye olmadığınızdan dolayı  3 adet ürün ekleyebilirisiniz.VİP üye olmak için <a href="@BTC.Common.Constants.ConstantProxy.BaseSiteUrl/iletisim" target="_blank">tıklayınız.</a></label>
+    }
+
+    <a class="btn btn-xs btn-primary pull-right" href="/yeni-urun-ekle" target="_blank">Yeni ürün Ekle</a>
     @Html.Action("_GetPartialViewMyProducts")
 </div>
 
+
+
+@section scripts{
+    <script src="~/Scripts/Application/Product/my-product-list.js"></script>
+}

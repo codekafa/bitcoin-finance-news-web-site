@@ -11,4 +11,3 @@ C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.csproj.CoreCompileInputs.cache
 C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.csproj.CopyComplete
 C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.dll
 C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.pdb
-C:\WorkSpaces\BTC\BTC\BTC.Core\obj\Debug\BTC.Core.csprojAssemblyReference.cache

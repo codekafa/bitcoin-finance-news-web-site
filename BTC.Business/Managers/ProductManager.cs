@@ -17,11 +17,13 @@ namespace BTC.Business.Managers
         UserProductRepository _proRepo;
         ProductPhotoRepository _photoRepo;
         ImageManager _imM;
+        UserManager _userM;
         public ProductManager()
         {
             _proRepo = new UserProductRepository();
             _photoRepo = new ProductPhotoRepository();
             _imM = new ImageManager();
+            _userM = new UserManager();
         }
 
 
@@ -40,6 +42,19 @@ namespace BTC.Business.Managers
                 return result;
             }
 
+            var user = _userM.GetUserByID(product.UserID);
+
+            if (user != null && !user.IsVip)
+            {
+                var list = _proRepo.GetByCustomQuery("select * from UserProducts where UserID = @UserID", new { UserID = product.UserID });
+
+                if (list != null && list.Count == 3)
+                {
+                    result.Message = "VİP üye olmadığınız için en fazla 3 adet ürün ekleyebilirsiniz!";
+                    return result;
+                }
+            }
+
             result.IsSuccess = true;
             return result;
         }
@@ -53,7 +68,6 @@ namespace BTC.Business.Managers
                 result.Message = "Ürün ismi, açıklaması ve url bilgisi zorunludur!";
                 return result;
             }
-
 
             result.IsSuccess = true;
             return result;
@@ -200,11 +214,11 @@ namespace BTC.Business.Managers
             return result;
         }
 
-        public ResponseModel EditProduct(AddProductModel editProduct)
+        public ResponseModel EditProduct(EditProductModel editProduct)
         {
             ResponseModel result = new ResponseModel();
 
-            result = ValidateAddProduct(editProduct);
+            result = ValidateEditProduct(editProduct);
 
             if (!result.IsSuccess)
                 return result;
@@ -213,11 +227,18 @@ namespace BTC.Business.Managers
             {
                 try
                 {
-
-
-
-
+                    var product = _proRepo.GetByID(editProduct.ID);
+                    product.IsPublish = editProduct.IsPublish;
+                    product.Keywords = editProduct.Keywords;
+                    product.Name = editProduct.Name;
+                    product.Price = editProduct.Price;
+                    product.Tags = editProduct.Tags;
+                    product.Uri = editProduct.Uri;
+                    product.Description = editProduct.Description;
+                    _proRepo.Update(product);
                     t.Complete();
+                    result.IsSuccess = true;
+                    result.Message = "Ürün bilgileri başarı ile güncellendi!";
                 }
                 catch (Exception ex)
                 {

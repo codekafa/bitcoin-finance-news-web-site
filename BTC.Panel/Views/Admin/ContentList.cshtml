@@ -5,7 +5,7 @@
 }
 @model List<ContentViews>
 
-<div class="col-md-12">  <a href="~/icerik-olustur" class="btn btn-primary btn-xs pull-right"  target="_blank">Yeni İçerik Oluştur</a></div>
+<div class="col-md-12">  <a href="~/icerik-olustur" class="btn btn-primary btn-xs pull-right" target="_blank">Yeni İçerik Oluştur</a></div>
 
 <table class="table table-bordered">
     <thead>
@@ -17,11 +17,11 @@
             <th>Sıra No</th>
             <th>Başlık</th>
             <th>Yayın</th>
-            <th>Anonim</th>
-            <th>Üyeler</th>
-            <th>Yazarlar</th>
-            <th>Tedarikçiler</th>
-            <th>Vip</th>
+            @*<th>Anonim</th>
+                <th>Üyeler</th>
+                <th>Yazarlar</th>
+                <th>Tedarikçiler</th>
+                <th>Vip</th>*@
             <th>İşlemler</th>
         </tr>
     </thead>
@@ -33,11 +33,11 @@
                 <td> @item.RowNumber</td>
                 <td>@item.Title</td>
                 <td><input type="checkbox" content-id="@item.ID" class="form-control is_publish" @(item.IsPublish ? "checked" : "") /></td>
-                <td><input type="checkbox" content-id="@item.ID" class="form-control is_anonim" @(item.CanSeeUser ? "checked" : "") /></td>
-                <td><input type="checkbox" content-id="@item.ID" class="form-control is_member" @(item.CanSeeMember ? "checked" : "") /></td>
-                <td><input type="checkbox" content-id="@item.ID" class="form-control is_writer" @(item.CanSeeWriter ? "checked" : "") /></td>
-                <td><input type="checkbox" content-id="@item.ID" class="form-control is_supplier" @(item.CanSeeTrader ? "checked" : "") /></td>
-                <td><input type="checkbox" content-id="@item.ID" class="form-control is_vip" @(item.CanSeeVip ? "checked" : "") /></td>
+                @* <td><input type="checkbox" content-id="@item.ID" class="form-control is_anonim" @(item.CanSeeUser ? "checked" : "") /></td>
+                    <td><input type="checkbox" content-id="@item.ID" class="form-control is_member" @(item.CanSeeMember ? "checked" : "") /></td>
+                    <td><input type="checkbox" content-id="@item.ID" class="form-control is_writer" @(item.CanSeeWriter ? "checked" : "") /></td>
+                    <td><input type="checkbox" content-id="@item.ID" class="form-control is_supplier" @(item.CanSeeTrader ? "checked" : "") /></td>
+                    <td><input type="checkbox" content-id="@item.ID" class="form-control is_vip" @(item.CanSeeVip ? "checked" : "") /></td>*@
                 <td><a class="btn btn-primary btn-xs" href="~/icerik-duzenle/@item.ID" target="_blank"><i class="fa fa-edit"></i></a></td>
             </tr>
         }

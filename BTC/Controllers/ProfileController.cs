@@ -19,10 +19,12 @@ namespace BTC.Controllers
     {
         RegisterManager _regM;
         UserManager _userM;
+        CitiesManager _cityM;
         public ProfileController()
         {
             _regM = new RegisterManager();
             _userM = new UserManager();
+            _cityM = new CitiesManager();
         }
 
         [Route("~/profilim")]
@@ -39,7 +41,13 @@ namespace BTC.Controllers
             result.Phone = SessionVariables.User.CurrentUser.Phone;
             result.Summary = SessionVariables.User.CurrentUser.Summary;
             result.PhotoName = SessionVariables.User.CurrentUser.ProfilePhotoUrl;
-            ViewBag.CityIDForUser = SessionVariables.User.Company.CityID;
+            result.Company = SessionVariables.User.Company;
+            if (SessionVariables.User.Company != null)
+            {
+                ViewBag.CityIDForUser = SessionVariables.User.Company.CityID;
+            }
+
+
             return View(result);
         }
 
@@ -79,6 +87,9 @@ namespace BTC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        public JsonResult getCities()
+        {
+            return Json(_cityM.GetAllCities(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

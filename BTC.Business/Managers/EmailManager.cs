@@ -123,7 +123,13 @@ namespace BTC.Business.Managers
             {
                 result.IsSuccess = true;
                 var mailLog = CreatePasswordChangeEmail(user.ID);
-                result = SendMail("BTC Finans - Şifre Değiştirme", new string[] { user.Email }, mailLog.ChangeUrl);
+
+                string path = HttpContext.Current.Server.MapPath("~/Content/Templates/ChangePassword.html");
+                string content = System.IO.File.ReadAllText(path);
+
+                content = content.Replace("$change-password-url", mailLog.ChangeUrl);
+
+                result = SendMail("BTC Finans - Şifre Yenileme", new string[] { user.Email }, content);
                 return result;
             }
             else

@@ -208,5 +208,27 @@ function sendSmsAgain() {
 }
 
 
+function getCities() {
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/Profile/getCities',
+        success: function (d) {
+            var city_val = $('#CompanyCityID').val();
+            $(d).each(function (index, val) {
+                var opt = "";
+                if (city_val == val.ID) {
+                    opt = "<option value='" + val.ID + "' selected>" + val.Name + "</option>";
+                } else {
+                    opt = "<option value='" + val.ID + "' >" + val.Name + "</option>";
+                }
+                $('#CompanyCity').append(opt);
+            });
+
+
+        }
+    });
+}
+
 
 

@@ -39,9 +39,9 @@ function getMyPosts() {
 
 function publishPost(id) {
 
-    $.ajax('/News/updatePublishNews', {
+    $.ajax('/Product/updateIsActiveProduct', {
         type: "GET",
-        data: {post_id:id,p:true},
+        data: {product_id:id,p:true},
         success: function (result) {
             successAlert("Güncelleme başarılı!");
             getMyPosts();
@@ -52,9 +52,9 @@ function publishPost(id) {
 }
 
 function unPublishPost(id) {
-    $.ajax('/News/updatePublishNews', {
+    $.ajax('/Product/updateIsActiveProduct', {
         type: "GET",
-        data: { post_id: id, p: false },
+        data: { product_id: id, p: false },
         success: function (result) {
             successAlert("Güncelleme başarılı!");
             getMyPosts();

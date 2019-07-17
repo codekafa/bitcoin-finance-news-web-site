@@ -128,7 +128,18 @@ namespace BTC.Panel.Controllers
         [HttpPost]
         public JsonResult editProduct(EditProductModel editProduct)
         {
-            return Json(true);
+            ResponseModel result = new ResponseModel();
+            try
+            {
+                result = _proM.EditProduct(editProduct);
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                result.IsSuccess = false;
+            }
+           
+            return Json(result);
         }
 
     }

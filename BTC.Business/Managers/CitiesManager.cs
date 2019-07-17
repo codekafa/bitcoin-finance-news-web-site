@@ -20,7 +20,7 @@ namespace BTC.Business.Managers
 
         public List<Cities> GetAllCities()
         {
-            return _cityRepo.GetAll();
+            return _cityRepo.GetAll().OrderBy(x=> x.Name).ToList();
         }
 
         public Cities GetCityByID(int city_id)
